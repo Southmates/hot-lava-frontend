@@ -1,0 +1,16 @@
+.main {
+  background-color: $color-orange;
+
+  h1,h3 {
+    font-family: "komet", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: clamp(50px, 11vw, 120px);
+  }
+
+  a {
+    font-family: "komet", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+}

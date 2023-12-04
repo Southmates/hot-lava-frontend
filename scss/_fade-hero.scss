@@ -1,0 +1,17 @@
+.fade-hero-section {
+  height: 100vh;
+  width: 100vw;
+  //background-color: $color-orange;
+  display: flex;
+  align-items: center;
+
+  .title {
+    margin-left: 10vw;
+    margin-top: 15vh;
+    color: $color-white;
+
+    span {
+      display: block;
+    }
+  }
+}

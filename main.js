@@ -4,7 +4,7 @@ import Lenis from '@studio-freight/lenis'
 import MouseFollower from "mouse-follower"
 
 import './style.scss'
-import './cursor.scss'
+//import './cursor.scss'
 
 gsap.registerPlugin(ScrollTrigger)
 
