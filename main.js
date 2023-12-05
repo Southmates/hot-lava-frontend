@@ -37,8 +37,8 @@ const setBlankMenu = () => {
   workLink.classList.remove("active")
   contactLink.classList.remove("active")
 
-  /* mobileNav.classList.add("hidden")
-  mobileNavOpen = false */
+  mobileNav.classList.add("hidden")
+  mobileNavOpen = false
 }
 const setAboutMenu = () => {
   aboutLink.classList.add("active")
@@ -127,7 +127,7 @@ gsap.to(sectionItems, {
     trigger: membersSection,
     pin: true,
     scrub: 2,
-    snap: 1 / (sectionItems.length - 1),
+    //snap: 1 / (sectionItems.length - 1),
     end: "+=0" + membersSection.offsetWidth
   }
 })
