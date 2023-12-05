@@ -1,10 +1,15 @@
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: fixed;
   width: 80%;
   margin: 5vh 10vw 0 10vw;
+  z-index: 1000;
 
   @media (max-width: 580px) {
-    margin: 5vh 8vw 0 8vw;
+    margin: 1vh 4vw 0 4vw;
+    width: 90%;
   }
 
   img {
@@ -12,5 +17,27 @@
       transform: scale(.8);
     }
   }
-  
+
+  button {
+    background-color: #ffffff00;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .mobile-nav {
+
+    @media (min-width: 780px) {
+      display: none;
+    }
+  }
+
+  .show {
+    display: block;
+  }
+  .hidden {
+    display: none;
+  }
 }

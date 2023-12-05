@@ -2,6 +2,8 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/dist/ScrollTrigger"
 import Lenis from '@studio-freight/lenis'
 import MouseFollower from "mouse-follower"
+import Swiper from "swiper"
+import { register } from 'swiper/element/bundle';
 
 import './style.scss'
 //import './cursor.scss'
@@ -19,34 +21,62 @@ function raf(time) {
 
 requestAnimationFrame(raf)
 
-// LENIS ANCHOR
+// LENIS ANCHOR NAVIGATION
 const aboutLink = document.querySelector(".about-link")
 const workLink = document.querySelector(".work-link")
 const contactLink = document.querySelector(".contact-link")
 const aboutEl = document.querySelector("#about-us")
 const workEl = document.querySelector("#our-work")
 const contactEl = document.querySelector("#contact")
+const mobileNavBtn = document.querySelector(".mobile-nav")
+const mobileNav = document.querySelector(".mobile")
+let mobileNavOpen = false
 
-aboutLink.addEventListener("click", () => {
-  lenis.scrollTo(aboutEl)
+const setBlankMenu = () => {
+  aboutLink.classList.remove("active")
+  workLink.classList.remove("active")
+  contactLink.classList.remove("active")
 
+  /* mobileNav.classList.add("hidden")
+  mobileNavOpen = false */
+}
+const setAboutMenu = () => {
   aboutLink.classList.add("active")
   workLink.classList.remove("active")
   contactLink.classList.remove("active")
-})
-workLink.addEventListener("click", () => {
-  lenis.scrollTo(workEl)
 
-  workLink.classList.add("active");
+  /* mobileNav.classList.add("hidden")
+  mobileNavOpen = false */
+}
+const setWorkMenu = () => {
+  workLink.classList.add("active")
   aboutLink.classList.remove("active")
   contactLink.classList.remove("active")
-})
-contactLink.addEventListener("click", () => {
-  lenis.scrollTo(contactEl)
 
-  contactLink.classList.add("active");
+  /* mobileNav.classList.add("hidden")
+  mobileNavOpen = false */
+}
+const setContactMenu = () => {
+  contactLink.classList.add("active")
   aboutLink.classList.remove("active")
   workLink.classList.remove("active")
+  
+  /* mobileNav.classList.add("hidden")
+  mobileNavOpen = false */
+}
+
+aboutLink.addEventListener("click", () => {lenis.scrollTo(aboutEl), setAboutMenu()})
+workLink.addEventListener("click", () => {lenis.scrollTo(workEl), setWorkMenu()})
+contactLink.addEventListener("click", () => {lenis.scrollTo(contactEl), setContactMenu()})
+
+mobileNavBtn.addEventListener("click", () => {
+  if(mobileNavOpen) {
+    mobileNav.classList.add("hidden")
+    mobileNavOpen = false
+  } else {
+    mobileNav.classList.remove("hidden")
+    mobileNavOpen = true
+  }
 })
 
 // GSAP BACKGROUND COLOR CHANGES
@@ -61,28 +91,28 @@ ScrollTrigger.create( {
   trigger: fadeHero,
   start: 'top top',
   end: 'bottom top',
-  onEnter: () => gsap.to(container, {backgroundColor:"#EE512F", duration: 1, ease:"ease.in"}),
-  onLeave: () => gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.out"}),
-  onLeaveBack: () => gsap.to(container, {backgroundColor:"#EE512F", duration: 1, ease:"ease.in"}),
-  onEnterBack: () => gsap.to(container, {backgroundColor:"#EE512F", duration: 1, ease:"ease.in"})
+  onEnter: () => gsap.to(container, {backgroundColor:"#EE512F", duration: 1, ease:"ease.in"}, setBlankMenu()),
+  onLeave: () => gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.out"}, setAboutMenu()),
+  onLeaveBack: () => gsap.to(container, {backgroundColor:"#EE512F", duration: 1, ease:"ease.in"}, setBlankMenu()),
+  onEnterBack: () => gsap.to(container, {backgroundColor:"#EE512F", duration: 1, ease:"ease.in"}, setBlankMenu())
 })
 ScrollTrigger.create( {
   trigger: about,
   start: 'top top',
-  end: '+=500%',
-  onEnter: () => gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.in"}),
-  onLeave: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.out"}),
-  onLeaveBack: () => gsap.to(container, {backgroundColor:"#EE512F", duration: 1, ease:"ease.in"}),
-  onEnterBack: () => gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.in"})
+  end: '+=490%',
+  onEnter: () => gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.in"}, setAboutMenu()),
+  onLeave: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.out"}, setWorkMenu()),
+  onLeaveBack: () => gsap.to(container, {backgroundColor:"#EE512F", duration: 1, ease:"ease.in"}, setBlankMenu()),
+  onEnterBack: () => gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.in"}, setAboutMenu())
 })
 ScrollTrigger.create( {
   trigger: howWeWork,
-  start: '+=40%',
-  end: '+=1520%',
-  onEnter: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.in"}),
-  onLeave: () => gsap.to(container, {backgroundColor:"#FCA720", duration: 1, ease:"ease.out"}),
-  onLeaveBack: () => gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.in"}),
-  onEnterBack: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.in"})
+  start: '+=10%',
+  end: '+=1720%',
+  onEnter: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.in"}, setWorkMenu()),
+  onLeave: () => gsap.to(container, {backgroundColor:"#FCA720", duration: 1, ease:"ease.out"}, setContactMenu()),
+  onLeaveBack: () => gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.in"}, setAboutMenu()),
+  onEnterBack: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.in"}, setWorkMenu())
 })
 
 // GSAP HORIZONTAL SCROLL
@@ -91,14 +121,14 @@ const membersSection = document.querySelector(".members")
 let sectionItems = gsap.utils.toArray(".member-item")
 
 gsap.to(sectionItems, {
-  xPercent: -100 * (sectionItems.length - 1),
+  xPercent: -155 * (sectionItems.length - 1),
   ease: "sine.out",
   scrollTrigger: {
     trigger: membersSection,
     pin: true,
     scrub: 2,
     snap: 1 / (sectionItems.length - 1),
-    end: "+=" + membersSection.offsetWidth
+    end: "+=0" + membersSection.offsetWidth
   }
 })
 
@@ -117,7 +147,35 @@ gsap.to(howWeWorkItems, {
   }
 })
 
+// WORKS MODAL
+const firstWork = document.querySelector(".first-item")
+const firstModal = document.querySelector(".first-modal")
+const closeModalBtn = document.querySelector(".close-modal")
 
+firstWork.addEventListener("click", () => {
+  firstModal.classList.remove("hidden")
+  closeModalBtn.classList.remove("hidden")
+  lenis.stop()
+})
+
+closeModalBtn.addEventListener("click", () => {
+  firstModal.classList.add("hidden")
+  closeModalBtn.classList.add("hidden")
+  lenis.start()
+})
+
+// SWIPER SETTER
+
+var swiper = new Swiper('.swiper-container', {
+  loop: true,
+  mousewheel: true,
+  slidesPerView: 3,
+  spaceBetween: 100,
+  speed: 800,
+  loopAddBlankSlides: true,
+  centeredSlides: true,
+  centerInsufficientSlides: true
+});
 
 // BLOB CURSOR FOLLOWER SETUP ANS STATE MANAGEMENT
 MouseFollower.registerGSAP(gsap);
