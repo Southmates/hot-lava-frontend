@@ -208,12 +208,108 @@
           margin-left: 29vw;
         }
 
-        .work-item {
+        .work-item-fred {
           border-radius: 5% 5% 5% 5% / 8% 8% 8% 8%;
           height: 70vh;
           width: 60vw;
   
-          background: url("/hero-bg.jpg");
+          background: url("/fredriks/pasta.jpg");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+  
+          &:hover {
+            cursor: pointer;
+          }
+
+          .name {
+            margin-top: 10rem;
+            p {
+              margin-top: 62vh;
+              margin-left: 2vw;
+              color: $color-white;
+              font-size: clamp(20px, 5vw, 45px);
+            }
+          }
+        }
+        .work-item-mei {
+          border-radius: 5% 5% 5% 5% / 8% 8% 8% 8%;
+          height: 70vh;
+          width: 60vw;
+  
+          background: url("/meijer/burger.jpg");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+  
+          &:hover {
+            cursor: pointer;
+          }
+
+          .name {
+            margin-top: 10rem;
+            p {
+              margin-top: 62vh;
+              margin-left: 2vw;
+              color: $color-white;
+              font-size: clamp(20px, 5vw, 45px);
+            }
+          }
+        }
+        .work-item-thyme {
+          border-radius: 5% 5% 5% 5% / 8% 8% 8% 8%;
+          height: 70vh;
+          width: 60vw;
+  
+          background: url("/thyme/salmon.jpg");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+  
+          &:hover {
+            cursor: pointer;
+          }
+
+          .name {
+            margin-top: 10rem;
+            p {
+              margin-top: 62vh;
+              margin-left: 2vw;
+              color: $color-white;
+              font-size: clamp(20px, 5vw, 45px);
+            }
+          }
+        }
+        .work-item-brand {
+          border-radius: 5% 5% 5% 5% / 8% 8% 8% 8%;
+          height: 70vh;
+          width: 60vw;
+  
+          background: url("/meijer/sizzle.jpg");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+  
+          &:hover {
+            cursor: pointer;
+          }
+
+          .name {
+            margin-top: 10rem;
+            p {
+              margin-top: 62vh;
+              margin-left: 2vw;
+              color: $color-white;
+              font-size: clamp(20px, 5vw, 45px);
+            }
+          }
+        }
+        .work-item-wig {
+          border-radius: 5% 5% 5% 5% / 8% 8% 8% 8%;
+          height: 70vh;
+          width: 60vw;
+  
+          background: url("/wiggles/dole-jokes.jpg");
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover;
@@ -255,7 +351,7 @@
               height: 70vh;
               width: 60vw;
 
-              background: url("/hero-bg.jpg");
+              background: url("/dance.jpg");
               background-position: center;
               background-repeat: no-repeat;
               background-size: cover;
