@@ -4,14 +4,14 @@
     position: fixed;
     left: -5%;
     right: 0;
-    bottom: 50%;
+    bottom: 46%;
     width: 200vw;
     color: #FFFFFF;
     font-weight: 900;
     transform: rotate(-90deg);
     font-family: 'Montserrat', sans-serif;
     font-weight: 900;
-    // font-size: clamp(50px, 11vw, 120px);
+    font-size: clamp(10px, 6vw, 16px);
     z-index: 998;
 
     @media (max-width: 780px) {

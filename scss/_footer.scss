@@ -27,7 +27,7 @@
 
     .contact-info {
       width: 80%;
-      color: $color-darkBlue;
+      color: $color-orange;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -106,7 +106,7 @@
             width: 5rem;
             height: 5rem;
             border-radius: 50%;
-            border: 1px solid $color-darkMustard;
+            border: 1px solid $color-orange;
             transition-duration: 1s;
 
             @media (max-width: 480px) {

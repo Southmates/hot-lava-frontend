@@ -1,19 +1,17 @@
 .how-we-work {
-  //background-color: $color-darkBlue;
   width: fit-content;
 
   .our-way-wrapper {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10vw;
-    overflow-x: hidden;
-
+    // margin-bottom: 150vh;
 
     .main-slide {
+      height: 100vh;
       width: 80vw;
-      margin: 4vh 0 4vh 10vw;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -23,13 +21,14 @@
       @media (max-width: 980px) {
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: start;
       }
 
       .about-phrase {
         margin-top: 5vh;
         h3 {
           color: $color-orange;
+          margin-left: 2vw;
 
           @media (max-width: 1200px) {
             font-size: clamp(45px, 9vw, 110px);
@@ -40,10 +39,35 @@
           @media (max-width: 480px) {
             font-size: clamp(60px, 12vw, 140px);
           }
-          
+      
           span {
+            &:nth-child(1) {
+              margin-left: -2vw;
+              line-height: 0.2;
+            }
+            &:nth-child(2) {
+              line-height: 1;
+            }
+      
             display: block;
           }
+        }
+        h3 {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 900;
+          margin-left: 2vw;
+        }
+    
+        span {
+          &:nth-child(1) {
+            margin-left: -2vw;
+            line-height: 0;
+          }
+          &:nth-child(2) {
+            line-height: 1;
+          }
+    
+          display: block;
         }
       }
       .about-agency {
@@ -70,27 +94,28 @@
         }
       }
     }
+
     .secondary-slides {
-      width: 90vw;
-      margin: 4vh 0 4vh 12vw;
+      height: 100vh;
+      width: 80vw;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: end;
-      gap: 2rem;
 
-      @media (max-width: 980px) {
+      @media (max-width: 1480px) {
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: start;
       }
 
       .about-phrase {
         margin-top: 5vh;
         h3 {
+          margin-left: 1vw;
           color: $color-orange;
           
-          font-size: clamp(80px, 16vw, 160px);
+          font-size: clamp(40px, 16vw, 140px);
 
           @media (max-width: 1480px) {
             font-size: clamp(45px, 9vw, 110px);
@@ -106,6 +131,15 @@
           }
           
           span {
+            &:nth-child(1) {
+              font-size: clamp(14px, 8vw, 28px);
+              margin-left: -1vw;
+              line-height: 0.5;
+            }
+            &:nth-child(2) {
+              line-height: 1;
+            }
+      
             display: block;
           }
         }
@@ -113,19 +147,11 @@
       .about-agency {
         position: absolute;
         color: $color-grey;
-        left: 42vw;
-        width: 34vw;
+        left: 50vw;
+        width: 40vw;
         margin-bottom: 8vw;
 
         @media (max-width: 1480px) {
-          top: 46vh;
-          left: 44vw;
-        }
-        @media (max-width: 980px) {
-          left: 58vw;
-          width: 30%;
-        }
-        @media (max-width: 780px) {
           position: relative;
           top: 0;
           left: 0;
@@ -142,9 +168,9 @@
           font-style: normal;
           font-size: clamp(8px, 3vw, 28px);
 
-          @media (max-width: 980px) {
+          /* @media (max-width: 980px) {
             font-size: clamp(6px, 2vw, 20px);
-          }
+          } */
           @media (max-width: 780px) {
             font-size: clamp(12px, 4vw, 40px);
           }
@@ -156,14 +182,8 @@
     }
   }
 
-  .principles-slider-wrapper {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-  }
-
   .our-work-wrapper {
+    margin-top: 120vh;
     width: 100vw;
     color: $color-orange;
     font-family: "komet", sans-serif;

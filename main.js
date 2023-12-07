@@ -116,8 +116,8 @@ ScrollTrigger.create( {
 })
 ScrollTrigger.create( {
   trigger: about,
-  start: 'top top',
-  end: '+=490%',
+  start: 'top +=40%',
+  end: 'bottom top',
   onEnter: () => gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.in"}, setAboutMenu()),
   onLeave: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.out"}, setOurWayMenu()),
   onLeaveBack: () => gsap.to(container, {backgroundColor:"#EE512F", duration: 1, ease:"ease.in"}, setBlankMenu()),
@@ -126,7 +126,7 @@ ScrollTrigger.create( {
 ScrollTrigger.create( {
   trigger: howWeWork,
   start: '+=10%',
-  end: '+=1720%',
+  end: '+=1000%',
   onEnter: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.in"}, setWorkMenu()),
   onLeave: () => gsap.to(container, {backgroundColor:"#FCA720", duration: 1, ease:"ease.out"}, setContactMenu()),
   onLeaveBack: () => gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.in"}, setAboutMenu()),
@@ -151,7 +151,7 @@ gsap.to(sectionItems, {
 })
 
 // HOW WE WORK
-const howWeWorkSection = document.querySelector(".our-way-wrapper")
+/* const howWeWorkSection = document.querySelector(".our-way-wrapper")
 let howWeWorkItems = gsap.utils.toArray(".how-we-work-item")
 
 gsap.to(howWeWorkItems, {
@@ -163,7 +163,7 @@ gsap.to(howWeWorkItems, {
     scrub: 2,
     end: "+=" + howWeWorkSection.offsetWidth
   }
-})
+}) */
 
 // WORKS MODAL
 const firstWork = document.querySelector(".first-item")

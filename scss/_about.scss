@@ -1,36 +1,21 @@
 .about-section {
-  //background-color: $color-lightBlue;
   width: 100vw;
   color: $color-aquaGreen;
-  
-  .phrase {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
+  margin-bottom: 150vh;
 
-    .title {
-      margin-left: 10vw;
-      margin-top: 15vh;
-  
-      span {
-        display: block;
-      }
-    }
-  }
   .team {
     height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
+    align-items: center;
 
     .title {
       width: 80%;
       margin-bottom: 4vw;
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
-      align-items: end;
+      align-items: center;
 
       @media (max-width: 580px) {
         width: 85%;
@@ -43,8 +28,25 @@
       }
 
       .about-team {
-
         width: 85vw;
+
+        h3 {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 900;
+          margin-left: 2vw;
+        }
+    
+        span {
+          &:nth-child(1) {
+            margin-left: -2vw;
+            line-height: 0;
+          }
+          &:nth-child(2) {
+            line-height: 1;
+          }
+    
+          display: block;
+        }
 
         @media (max-width: 480px) {
           font-size: clamp(60px, 12vw, 140px);
@@ -63,10 +65,15 @@
         }
 
         p {
-          font-family: "komet", sans-serif;
+          font-family: 'Montserrat', sans-serif;
           font-weight: 400;
           font-style: normal;
           font-size: clamp(9px, 3vw, 32px);
+
+          span {
+            display: block;
+            font-size: clamp(9px, 3vw, 22px);
+          }
 
           @media (max-width: 980px) {
             font-size: clamp(15px, 4vw, 47px);
@@ -118,7 +125,6 @@
         display: flex;
         justify-content: center;
         mix-blend-mode: multiply;
-        opacity: .6;
         transform: scale(1.4, 1.4);
         //background: #d3d3d3;
         background: #0E7A86;
@@ -126,7 +132,7 @@
       
       .about {
         position: absolute;
-        top: 50%;
+        top: 45%;
         left: 15%;
         font-family: "komet", sans-serif;
         font-style: normal;
@@ -203,7 +209,6 @@
         display: flex;
         justify-content: center;
         mix-blend-mode: multiply;
-        opacity: .6;
         transform: scale(1.4, 1.4);
         // background: lightgray;
         background: #0E7A86;
@@ -211,7 +216,7 @@
       
       .about {
         position: absolute;
-        top: 50%;
+        top: 45%;
         left: 15%;
         font-family: "komet", sans-serif;
         font-style: normal;
