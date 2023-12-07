@@ -223,6 +223,20 @@ const doleVideoThird = document.querySelector(".work-slide-item-dole-third .vide
 const byeSlideFirst = document.querySelector(".work-slide-item-bye-first")
 const byeVideoFirst = document.querySelector(".work-slide-item-bye-first .video")
 
+let videoPlaying = null;
+
+const onPlay = function() {
+  if (videoPlaying && videoPlaying != this) {
+    videoPlaying.pause()
+  }
+  videoPlaying = this
+}
+
+const videos = document.getElementsByClassName("video")
+for (let i = 0; i < videos.length; i++) {
+  videos[i].addEventListener("play", onPlay)
+} 
+
 fredSlideFirst.addEventListener("click", () => {fredVideoFirst.classList.remove("video-hidden")})
 fredSlideSecond.addEventListener("click", () => {fredVideoSecond.classList.remove("video-hidden")})
 fredSlideThird.addEventListener("click", () => {fredVideoThird.classList.remove("video-hidden")})
@@ -286,6 +300,9 @@ closeModalBtn.addEventListener("click", () => {
   fifthModal.classList.add("hidden")
   seventhModal.classList.add("hidden")
   closeModalBtn.classList.add("hidden")
+
+  
+
   lenis.start()
 })
 
