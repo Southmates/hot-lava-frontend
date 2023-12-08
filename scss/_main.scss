@@ -1,16 +1,28 @@
 .main {
   background-color: $color-orange;
 
-  h1,h3 {
+  h1, h3 {
     font-family: "komet", sans-serif;
     font-weight: 900;
     font-style: normal;
-    font-size: clamp(50px, 11vw, 120px);
+    font-size: clamp(50px, 7vw, 110px);
+    line-height: 1.1;
+    margin: 0;
   }
 
   a {
     font-family: "komet", sans-serif;
     font-weight: 900;
     font-style: normal;
+  }
+}
+
+h3 { 
+  span {
+    display: block;
+    
+    &:nth-child(1) { 
+      line-height: 0.85;
+    }
   }
 }

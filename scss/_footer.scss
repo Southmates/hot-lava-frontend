@@ -2,6 +2,10 @@
   //background-color: $color-mustard;
   width: 100vw;
 
+  p {
+    color: $color-orange;
+  }
+
   .title {
     height: 100vh;
     display: flex;
@@ -41,24 +45,21 @@
       }
 
       .contact-phrase {
-        p {
-          font-family: "komet", sans-serif;
-          font-weight: 900;
-          font-style: normal;
-          font-size: clamp(30px, 12vw, 80px);
-
-          @media (max-width: 800px) {
-            font-size: clamp(40px, 14vw, 90px);
-          }
-          @media (max-width: 480px) {
-            font-size: clamp(50px, 16vw, 100px);
-          }
+        p { 
+          font-size: clamp(50px, 12vw, 80px);
+          font-weight: 900; 
+          line-height: 1.1; 
           
           span {
             display: block;
+
+            &:nth-child(1) { 
+              line-height: 0.85;
+            }
           }
         }
       }
+      
       .contact-links {
         width: 40%;
         margin-bottom: 6vw;

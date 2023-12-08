@@ -224,19 +224,19 @@ const doleVideoThird = document.querySelector(".work-slide-item-dole-third .vide
 const byeSlideFirst = document.querySelector(".work-slide-item-bye-first")
 const byeVideoFirst = document.querySelector(".work-slide-item-bye-first .video")
 
-let videoPlaying = null;
+// let videoPlaying = null;
 
-const onPlay = function() {
-  if (videoPlaying && videoPlaying != this) {
-    videoPlaying.pause()
-  }
-  videoPlaying = this
-}
+// const onPlay = function() {
+//   if (videoPlaying && videoPlaying != this) {
+//     videoPlaying.pause()
+//   }
+//   videoPlaying = this
+// }
 
-const videos = document.getElementsByClassName("video")
-for (let i = 0; i < videos.length; i++) {
-  videos[i].addEventListener("play", onPlay)
-} 
+// const videos = document.getElementsByClassName("video")
+// for (let i = 0; i < videos.length; i++) {
+//   videos[i].addEventListener("play", onPlay)
+// } 
 
 
 fredSlideFirst.addEventListener("click", () => {fredVideoFirst.classList.remove("video-hidden")})
@@ -314,12 +314,12 @@ var swiper = new Swiper('.swiper-container', {
   //loop: true,
   mousewheel: true,
   slidesPerView: 3,
-  spaceBetween: 100,
+  spaceBetween: 1,
   speed: 800,
   loopAddBlankSlides: true,
   centeredSlides: true,
   centerInsufficientSlides: true,
-  autoplayDisableOnInteraction: false,
+  // autoplayDisableOnInteraction: false,
 });
 
 // BLOB CURSOR FOLLOWER SETUP ANS STATE MANAGEMENT
