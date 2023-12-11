@@ -1,8 +1,11 @@
 import gsap from "gsap"
 import ScrollTrigger from "gsap/dist/ScrollTrigger"
-import Lenis from '@studio-freight/lenis'
-import MouseFollower from "mouse-follower"
-import Swiper from "swiper" 
+import Lenis from '@studio-freight/lenis' 
+
+// Swiper 
+ 
+import customCursor from './js/cursor.js';
+import videoMuting from './js/videomuting.js';
 
 import './style.scss'
 
@@ -17,97 +20,111 @@ function raf(time) {
   requestAnimationFrame(raf)
 }
 
-requestAnimationFrame(raf)
+requestAnimationFrame(raf) 
 
-// LENIS ANCHOR NAVIGATION
-const aboutLink = document.querySelector(".about-link")
-const ourWayLink = document.querySelector(".our-way-link")
-const workLink = document.querySelector(".work-link")
-const contactLink = document.querySelector(".contact-link")
-const aboutEl = document.querySelector("#about-us")
-const ourWayEl = document.querySelector("#our-way")
-const workEl = document.querySelector("#work")
-const contactEl = document.querySelector("#contact")
-const mobileNavBtn = document.querySelector(".mobile-nav")
-const mobileNav = document.querySelector(".mobile")
-let mobileNavOpen = false
+  // LENIS ANCHOR NAVIGATION
+  const logoLink = document.querySelector(".logo")
+  const aboutLink = document.querySelector(".about-link")
+  const ourWayLink = document.querySelector(".our-way-link")
+  const workLink = document.querySelector(".work-link")
+  const contactLink = document.querySelector(".contact-link")
+ 
+  const aboutEl = document.querySelector("#about-us")
+  const ourWayEl = document.querySelector("#our-way")
+  const workEl = document.querySelector("#work")
+  const contactEl = document.querySelector("#contact")
+  const mobileNavBtn = document.querySelector(".mobile-nav")
+  const mobileNav = document.querySelector(".mobile")
+  let mobileNavOpen = false
 
-const setBlankMenu = () => {
-  aboutLink.classList.remove("active")
-  ourWayLink.classList.remove("active")
-  workLink.classList.remove("active")
-  contactLink.classList.remove("active")
+  const setBlankMenu = () => {
+    aboutLink.classList.remove("active")
+    ourWayLink.classList.remove("active")
+    workLink.classList.remove("active")
+    contactLink.classList.remove("active")
 
-  mobileNav.classList.add("hidden")
-  mobileNavOpen = false
-}
-
-const setAboutMenu = () => {
-  aboutLink.classList.add("active")
-  ourWayLink.classList.remove("active")
-  workLink.classList.remove("active")
-  contactLink.classList.remove("active")
-
-  mobileNav.classList.add("hidden")
-  mobileNavOpen = false
-}
-
-const setOurWayMenu = () => {
-  aboutLink.classList.remove("active")
-  ourWayLink.classList.add("active")
-  workLink.classList.remove("active")
-  contactLink.classList.remove("active")
-
-  mobileNav.classList.add("hidden")
-  mobileNavOpen = false
-}
-
-const setWorkMenu = () => {
-  workLink.classList.add("active")
-  ourWayLink.classList.remove("active")
-  aboutLink.classList.remove("active")
-  contactLink.classList.remove("active")
-
-  mobileNav.classList.add("hidden")
-  mobileNavOpen = false
-}
-
-const setContactMenu = () => {
-  contactLink.classList.add("active")
-  aboutLink.classList.remove("active")
-  ourWayLink.classList.remove("active")
-  workLink.classList.remove("active")
-  
-  mobileNav.classList.add("hidden")
-  mobileNavOpen = false
-}
-
-aboutLink.addEventListener("click", () => {lenis.scrollTo(aboutEl), setAboutMenu()})
-ourWayLink.addEventListener("click", () => {lenis.scrollTo(ourWayEl), setOurWayMenu()})
-workLink.addEventListener("click", () => {lenis.scrollTo(workEl), setWorkMenu()})
-contactLink.addEventListener("click", () => {lenis.scrollTo(contactEl), setContactMenu()})
-
-mobileNavBtn.addEventListener("click", () => {
-  if(mobileNavOpen) {
     mobileNav.classList.add("hidden")
     mobileNavOpen = false
-  } else {
-    mobileNav.classList.remove("hidden")
-    mobileNavOpen = true
   }
-})
+
+  const setAboutMenu = () => {
+    aboutLink.classList.add("active")
+    ourWayLink.classList.remove("active")
+    workLink.classList.remove("active")
+    contactLink.classList.remove("active")
+
+    mobileNav.classList.add("hidden")
+    mobileNavOpen = false
+  }
+
+  const setOurWayMenu = () => {
+    aboutLink.classList.remove("active")
+    ourWayLink.classList.add("active")
+    workLink.classList.remove("active")
+    contactLink.classList.remove("active")
+
+    mobileNav.classList.add("hidden")
+    mobileNavOpen = false
+  }
+
+  const setWorkMenu = () => {
+    workLink.classList.add("active")
+    ourWayLink.classList.remove("active")
+    aboutLink.classList.remove("active")
+    contactLink.classList.remove("active")
+
+    mobileNav.classList.add("hidden")
+    mobileNavOpen = false
+  }
+
+  const setContactMenu = () => {
+    contactLink.classList.add("active")
+    aboutLink.classList.remove("active")
+    ourWayLink.classList.remove("active")
+    workLink.classList.remove("active")
+    
+    mobileNav.classList.add("hidden")
+    mobileNavOpen = false
+  }
+
+  aboutLink.addEventListener("click", () => {lenis.scrollTo(aboutEl), setAboutMenu()})
+  ourWayLink.addEventListener("click", () => {lenis.scrollTo(ourWayEl), setOurWayMenu()})
+  workLink.addEventListener("click", () => {lenis.scrollTo(workEl), setWorkMenu()})
+  contactLink.addEventListener("click", () => {lenis.scrollTo(contactEl), setContactMenu()})
+
+  // logoLink.addEventListener("click", () => lenis.scrollTo(heroEl))
+  // logoLink.addEventListener("click", () => window.scrollTo(0, 0))
+
+  mobileNavBtn.addEventListener("click", () => {
+    if(mobileNavOpen) {
+      mobileNav.classList.add("hidden")
+      mobileNavOpen = false
+    } else {
+      mobileNav.classList.remove("hidden")
+      mobileNavOpen = true
+    }
+  })
+
+
 
 // GSAP BACKGROUND COLOR CHANGES
 const container = document.querySelector(".main")
 const fadeHero = document.querySelector(".intro")
 const about = document.querySelector(".about")
-const howWeWork = document.querySelector(".how-we-work")
-const card = document.querySelector(".team-card")
+const howWeWork = document.querySelector(".how-we-work") 
+const work = document.querySelector(".work")
+const contact = document.querySelector(".contact")
 
-// const hero = document.querySelector(".hero")
+const hero = document.querySelector(".hero")
 // const ourWay = document.querySelector(".our-way-wrapper")
-// const work = document.querySelector(".our-work-wrapper")
-// const contact = document.querySelector(".contact")
+
+ScrollTrigger.create( {
+  trigger: hero,
+  start: 'top top',
+  end: 'bottom top',
+  onEnter: () => gsap.to(container, {backgroundColor:"#EE512F", duration: 1, ease:"ease.in"}, setBlankMenu()), 
+  onEnterBack: () => gsap.to(container, {backgroundColor:"#EE512F", duration: 1, ease:"ease.in"}, setBlankMenu())
+})
 
 ScrollTrigger.create( {
   trigger: fadeHero,
@@ -123,41 +140,46 @@ ScrollTrigger.create( {
   trigger: about,
   start: 'top +=40%',
   end: 'bottom top',
+  // markers: true,
   onEnter: () => gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.in"}, setAboutMenu()),
-  onLeave: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.out"}, setOurWayMenu()),
-  onLeaveBack: () => gsap.to(container, {backgroundColor:"#EE512F", duration: 1, ease:"ease.in"}, setBlankMenu()),
+  // onLeave: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.out"}, setOurWayMenu()),
+  // onLeaveBack: () => gsap.to(container, {backgroundColor:"#EE512F", duration: 1, ease:"ease.in"}, setBlankMenu()),
   onEnterBack: () => gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.in"}, setAboutMenu())
 })
 
 ScrollTrigger.create( {
   trigger: howWeWork,
-  start: '+=1%',
-  end: '+=1000%',
-  onEnter: () => {
-     gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.in"}, setWorkMenu())
-     gsap.to('.team__card', {backgroundColor:"#1C374D", duration: .5, ease:"ease.in"})
-  },
-  onLeave: () => {
-    gsap.to(container, {backgroundColor:"#FCA720", duration: 1, ease:"ease.out"}, setContactMenu())
-    gsap.to('.team__card', {backgroundColor:"#FCA720", duration: .5, ease:"ease.out"})
-  },
-  onLeaveBack: () => {
-    gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.in"}, setAboutMenu())
-    gsap.to('.team__card', {backgroundColor:"#108896", duration: .5, ease:"ease.out"})
-  },
-  onEnterBack: () => {
-    gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.in"}, setWorkMenu())
-    gsap.to('.team__card', {backgroundColor:"#1C374D", duration: .5, ease:"ease.in"})
-  }
+  start: 'top +=75%', 
+  end: 'bottom top',
+  onEnter: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.in"}, setOurWayMenu()),
+  onLeave: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.out"}, setWorkMenu()),
+  onLeaveBack: () => gsap.to(container, {backgroundColor:"#108896", duration: 1, ease:"ease.in"}, setAboutMenu()),
+  onEnterBack: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.in"}, setOurWayMenu())
 })
 
-// GSAP HORIZONTAL SCROLL
-//MEMBERS
+ScrollTrigger.create( {
+  trigger: work,
+  start: 'top 50%',
+  end: 'bottom 20%', 
+  onEnter: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.in"}, setWorkMenu()),
+  onLeave: () => gsap.to(container, {backgroundColor:"#E69C24", duration: 1, ease:"ease.out"}, setContactMenu()), 
+  onEnterBack: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.in"}, setWorkMenu())
+})
+
+ScrollTrigger.create( {
+  trigger: '#contact',
+  start: 'top 20%',
+  end: 'bottom bottom',
+  onEnter: () => gsap.to(container, {backgroundColor:"#E69C24", duration: 1, ease:"ease.in"}, setContactMenu()), 
+  onLeaveBack: () => gsap.to(container, {backgroundColor:"#1C374D", duration: 1, ease:"ease.out"}, setWorkMenu()),
+})
+
+// GSAP HORIZONTAL SCROLL // MEMBERS
 const membersSection = document.querySelector(".team")
 let sectionItems = gsap.utils.toArray(".team__card")
 
 gsap.to(sectionItems, {
-  xPercent: -110 * (sectionItems.length - 1),
+  xPercent: -95 * (sectionItems.length - 1),
   ease: "sine.out",
   scrollTrigger: {
     trigger: membersSection,
@@ -168,121 +190,9 @@ gsap.to(sectionItems, {
   }
 })
 
+// Modal
 
-// WORKS MODAL
-const firstWork = document.querySelector(".first-item")
-const firstModal = document.querySelector(".first-modal")
-const secondWork = document.querySelector(".second-item")
-const secondModal = document.querySelector(".second-modal")
-const thirdWork = document.querySelector(".third-item")
-const thirdModal = document.querySelector(".third-modal")
-const fourthWork = document.querySelector(".fourth-item")
-const fourthModal = document.querySelector(".fourth-modal")
-const fifthWork = document.querySelector(".fifth-item")
-const fifthModal = document.querySelector(".fifth-modal")
-const sixthWork = document.querySelector(".sixth-item")
-const sixthModal = document.querySelector(".sixth-modal")
-const seventhModal = document.querySelector(".seventh-modal")
-const closeModalBtn = document.querySelector(".close-modal")
-
-//TEST ANIM
-const fredSlideFirst = document.querySelector(".work-slide-item-fred-first")
-const fredSlideSecond = document.querySelector(".work-slide-item-fred-second")
-const fredSlideThird = document.querySelector(".work-slide-item-fred-third")
-const fredVideoFirst = document.querySelector(".work-slide-item-fred-first .video")
-const fredVideoSecond = document.querySelector(".work-slide-item-fred-second .video")
-const fredVideoThird = document.querySelector(".work-slide-item-fred-third .video")
-
-const meiSlideFirst = document.querySelector(".work-slide-item-mei-first")
-const meiSlideSecond = document.querySelector(".work-slide-item-mei-second")
-const meiSlideThird = document.querySelector(".work-slide-item-mei-third")
-const meiSlideFourth = document.querySelector(".work-slide-item-mei-fourth")
-const meiSlideFifth = document.querySelector(".work-slide-item-mei-fifth")
-const meiVideoFirst = document.querySelector(".work-slide-item-mei-first .video")
-const meiVideoSecond = document.querySelector(".work-slide-item-mei-second .video")
-const meiVideoThird = document.querySelector(".work-slide-item-mei-third .video")
-const meiVideoFourth = document.querySelector(".work-slide-item-mei-fourth .video")
-const meiVideoFifth = document.querySelector(".work-slide-item-mei-fifth .video")
-
-const thymeSlideFirst = document.querySelector(".work-slide-item-thyme-first")
-const thymeSlideSecond = document.querySelector(".work-slide-item-thyme-second")
-const thymeSlideThird = document.querySelector(".work-slide-item-thyme-third")
-const thymeVideoFirst = document.querySelector(".work-slide-item-thyme-first .video")
-const thymeVideoSecond = document.querySelector(".work-slide-item-thyme-second .video")
-const thymeVideoThird = document.querySelector(".work-slide-item-thyme-third .video")
-
-const wigSlideFirst = document.querySelector(".work-slide-item-wig-first")
-const wigSlideSecond = document.querySelector(".work-slide-item-wig-second")
-const wigSlideThird = document.querySelector(".work-slide-item-wig-third")
-const wigVideoFirst = document.querySelector(".work-slide-item-wig-first .video")
-const wigVideoSecond = document.querySelector(".work-slide-item-wig-second .video")
-const wigVideoThird = document.querySelector(".work-slide-item-wig-third .video")
-
-const doleSlideFirst = document.querySelector(".work-slide-item-dole-first")
-const doleSlideSecond = document.querySelector(".work-slide-item-dole-second")
-const doleSlideThird = document.querySelector(".work-slide-item-dole-third")
-const doleVideoFirst = document.querySelector(".work-slide-item-dole-first .video")
-const doleVideoSecond = document.querySelector(".work-slide-item-dole-second .video")
-const doleVideoThird = document.querySelector(".work-slide-item-dole-third .video")
-
-const byeSlideFirst = document.querySelector(".work-slide-item-bye-first")
-const byeVideoFirst = document.querySelector(".work-slide-item-bye-first .video")
-
-
-fredSlideFirst.addEventListener("click", () => {fredVideoFirst.classList.remove("video-hidden")})
-fredSlideSecond.addEventListener("click", () => {fredVideoSecond.classList.remove("video-hidden")})
-fredSlideThird.addEventListener("click", () => {fredVideoThird.classList.remove("video-hidden")})
-
-meiSlideFirst.addEventListener("click", () => {meiVideoFirst.classList.remove("video-hidden")})
-meiSlideSecond.addEventListener("click", () => {meiVideoSecond.classList.remove("video-hidden")})
-meiSlideThird.addEventListener("click", () => {meiVideoThird.classList.remove("video-hidden")})
-meiSlideFourth.addEventListener("click", () => {meiVideoFourth.classList.remove("video-hidden")})
-meiSlideFifth.addEventListener("click", () => {meiVideoFifth.classList.remove("video-hidden")})
-
-thymeSlideFirst.addEventListener("click", () => {thymeVideoFirst.classList.remove("video-hidden")})
-thymeSlideSecond.addEventListener("click", () => {thymeVideoSecond.classList.remove("video-hidden")})
-thymeSlideThird.addEventListener("click", () => {thymeVideoThird.classList.remove("video-hidden")})
-
-wigSlideFirst.addEventListener("click", () => {wigVideoFirst.classList.remove("video-hidden")})
-wigSlideSecond.addEventListener("click", () => {wigVideoSecond.classList.remove("video-hidden")})
-wigSlideThird.addEventListener("click", () => {wigVideoThird.classList.remove("video-hidden")})
-
-doleSlideFirst.addEventListener("click", () => {doleVideoFirst.classList.remove("video-hidden")})
-doleSlideSecond.addEventListener("click", () => {doleVideoSecond.classList.remove("video-hidden")})
-doleSlideThird.addEventListener("click", () => {doleVideoThird.classList.remove("video-hidden")})
-
-byeSlideFirst.addEventListener("click", () => {byeVideoFirst.classList.remove("video-hidden")})
-
-firstWork.addEventListener("click", () => {
-  firstModal.classList.remove("hidden")
-  closeModalBtn.classList.remove("hidden")
-  lenis.stop()
-})
-secondWork.addEventListener("click", () => {
-  secondModal.classList.remove("hidden")
-  closeModalBtn.classList.remove("hidden")
-  lenis.stop()
-})
-
-thirdWork.addEventListener("click", () => {
-  thirdModal.classList.remove("hidden")
-  closeModalBtn.classList.remove("hidden")
-  lenis.stop()
-})
-
-fifthWork.addEventListener("click", () => {
-  fifthModal.classList.remove("hidden")
-  closeModalBtn.classList.remove("hidden")
-  lenis.stop()
-})
-
-sixthWork.addEventListener("click", () => {
-  sixthModal.classList.remove("hidden")
-  closeModalBtn.classList.remove("hidden")
-  lenis.stop()
-})
-
-fourthWork.addEventListener("click", () => {
+openModal.addEventListener("click", () => {
   seventhModal.classList.remove("hidden")
   closeModalBtn.classList.remove("hidden")
   lenis.stop()
@@ -300,86 +210,9 @@ closeModalBtn.addEventListener("click", () => {
   
   lenis.start()
 })
+ 
+// Custom Cursor
+customCursor();
 
-// SWIPER SETTER
-var swiper = new Swiper('.swiper-container', {
-  //loop: true,
-  mousewheel: true,
-  slidesPerView: 3,
-  spaceBetween: 1,
-  speed: 800,
-  loopAddBlankSlides: true,
-  centeredSlides: true,
-  centerInsufficientSlides: true,
-  // autoplayDisableOnInteraction: false,
-});
-
-// BLOB CURSOR FOLLOWER SETUP ANS STATE MANAGEMENT
-MouseFollower.registerGSAP(gsap);
-
-const cursor = new MouseFollower({
-  el: null,
-  container: document.body,
-  className: 'mf-cursor',
-  innerClassName: 'mf-cursor-inner',
-  textClassName: 'mf-cursor-text',
-  mediaClassName: 'mf-cursor-media',
-  mediaBoxClassName: 'mf-cursor-media-box',
-  iconSvgClassName: 'mf-svgsprite',
-  iconSvgNamePrefix: '-',
-  iconSvgSrc: '',
-  dataAttr: 'cursor',
-  hiddenState: '-hidden',
-  textState: '-text',
-  iconState: '-icon',
-  activeState: '-active',
-  mediaState: '-media',
-  stateDetection: {
-      '-pointer': 'a,button',
-      '-hidden': 'iframe'
-  },
-  visible: true,
-  visibleOnState: false,
-  speed: 0.55,
-  ease: 'expo.out',
-  overwrite: true,
-  skewing: 0,
-  skewingText: 2,
-  skewingIcon: 2,
-  skewingMedia: 2,
-  skewingDelta: 0.001,
-  skewingDeltaMax: 0.15,
-  stickDelta: 0.15,
-  showTimeout: 20,
-  hideOnLeave: true,
-  hideTimeout: 300,
-  hideMediaTimeout: 300
-});
-
-
-
-// VIDEO MUTING
-
-// assume only one video is playing at a time
-var videoPlaying = null;
-
-const onPlay = function () {
-  if (videoPlaying && videoPlaying != this) {
-    videoPlaying.pause();
-  }
-  videoPlaying = this;
-};
-
-// init event handler
-const videos = document.querySelectorAll(".video video");
-for (let i = 0; i < videos.length; i++) {
-  videos[i].addEventListener("play", onPlay);
-}
-
-let closebtn = document.querySelector(".js-close");
-closebtn.addEventListener("click", function (e) {
-  // console.log(e.target);
-  document.querySelectorAll("video").forEach((v) => {
-    v.pause();
-  });
-});
+// Mute video when playing other or closing modal
+videoMuting();

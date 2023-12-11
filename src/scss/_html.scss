@@ -49,6 +49,16 @@ h3 {
   letter-spacing: -0.01em;
 }
 
+h3 {
+  span {
+    display: block;
+
+    &:nth-child(1) {
+      line-height: 0.85;
+    }
+  }
+}
+
 p {
   font-weight: 400;
   color: $color-white;

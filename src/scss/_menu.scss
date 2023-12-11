@@ -2,7 +2,7 @@
 
   .desktop {
     position: fixed;
-    right: calc(5% - 18px);
+    right: calc(5% - 40px);
     width: 40px;
     z-index: 998;
     height: 100vh;
@@ -12,7 +12,7 @@
     }
 
     .active {
-      opacity: .15;
+      opacity: .25;
     }
 
     ul {
@@ -26,7 +26,7 @@
       position: absolute;
       width: 100vh;
       bottom: 0;
-      left: 15px;
+      left: 18px;
       transform-origin: 0;
 
       li {

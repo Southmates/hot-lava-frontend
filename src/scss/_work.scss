@@ -1,0 +1,139 @@
+.work,
+.our-work-wrapper {
+  color: $color-orange;
+
+  .section-title {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      font-size: clamp(100px, 24vw, 220px);
+      font-weight: 900;
+      color: $color-orange;
+    }
+  }
+
+
+  // .modal
+
+  .hidden {
+    display: none;
+  }
+}
+
+.work__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.work__container {
+  width: 90%;
+  height: 100vh;
+  margin: 0 auto;
+  max-width: var(--wrapper);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &:nth-child(even) {
+    align-items: end;
+  }
+
+  &:nth-child(odd) {
+    align-items: start;
+  }
+
+}
+
+.work__item {
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  border-radius: 32px;
+  overflow: hidden;
+
+  transition: .35s;
+  cursor: pointer;
+
+  @media (min-width:$landscape) {
+    width: 65vw;
+    max-width: 960px;
+  }
+
+  &:hover {
+    background: #000;
+
+    .name p {
+      color: $color-white;
+    }
+
+    >img {
+      transform: scale(1);
+      opacity: .8;
+    }
+
+  }
+
+  .name {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+
+    p {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+
+      font-size: clamp(20px, 5vw, 45px);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: $color-orange;
+      transition: .35s;
+    }
+  }
+
+  >img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .35s;
+    transform: scale(1.05);
+    transition-timing-function: ease-in-out;
+  }
+}
+
+// .work-slide {
+//   background-color: #000;
+//   border-radius: 16px;
+//   overflow: hidden;
+// }
+
+// .work-slide-img {
+//   background-color: transparent !important;
+//   border-radius: 0 !important;
+
+//   img {
+//     width: auto;
+//     height: 100%;
+
+//     border-radius: 16px;
+//     overflow: hidden;
+//   }
+
+//   &--landscape {
+//     img {
+//       width: 100%;
+//       height: auto;
+//     }
+//   }
+// }

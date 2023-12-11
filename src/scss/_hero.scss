@@ -55,7 +55,7 @@
       line-height: 1;
       text-align: right;
       color: $color-orange;
-      transform: translateY(55%);
+      transform: translateY(60%);
 
       @media (min-width:480px) {
         font-size: clamp(400px, 100vh, 900px);

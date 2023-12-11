@@ -1,19 +1,26 @@
 .team {
   width: fit-content;
-
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 8vw;
 
+  height: 100vh;
+  padding-top: 10vh;
+
   &__card {
     position: relative;
     overflow: hidden;
-    width: clamp(820px, 150vw, 960px);
+    width: clamp(900px, 75vw, 1080px);
+    min-width: 900px;
     height: 65vh;
 
     background: $color-lightBlue;
     border-radius: 100vh;
+
+    &:first-child {
+      margin-left: 10vw;
+    }
 
     img {
       width: 100%;
@@ -21,6 +28,7 @@
       mix-blend-mode: multiply;
       opacity: .85;
       z-index: 1;
+      object-fit: cover;
     }
   }
 

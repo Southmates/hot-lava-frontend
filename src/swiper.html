@@ -260,32 +260,9 @@
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script> -->
 
-    <script>
-      // assume only one video is playing at a time
-      var videoPlaying = null;
+    <script type="module" src="/swiper.js"></script>
 
-      const onPlay = function () {
-        if (videoPlaying && videoPlaying != this) {
-          videoPlaying.pause();
-        }
-        videoPlaying = this;
-      };
-
-      // init event handler
-      const videos = document.querySelectorAll(".card video");
-      for (let i = 0; i < videos.length; i++) {
-        videos[i].addEventListener("play", onPlay);
-      }
-
-      let closebtn = document.querySelector(".js-close");
-      closebtn.addEventListener("click", function (e) {
-        // console.log(e.target);
-        document.querySelectorAll("video").forEach((v) => {
-          v.pause();
-        });
-      });
-    </script>
   </body>
 </html>
