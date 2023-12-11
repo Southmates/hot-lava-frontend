@@ -10,7 +10,7 @@ function videoMuting() {
   };
 
   // init event handler
-  const videos = document.querySelectorAll(".video video");
+  const videos = document.querySelectorAll(".card video");
   for (let i = 0; i < videos.length; i++) {
     videos[i].addEventListener("play", onPlay);
   }
