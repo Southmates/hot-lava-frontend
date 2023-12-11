@@ -201,7 +201,7 @@ function handleScrolHorizontal() {
 var state = "";
 function checkMobile() {
   var newState = state;
-  if (innerWidth > 1024) {
+  if (innerWidth > 1023) {
     newState = "large";
   } else {
     newState = "mobile";
