@@ -10,6 +10,12 @@
   align-items: center;
   overflow: hidden;
 
+  .slogan {
+    position: absolute;
+    right: 5%;
+    bottom: 3%;
+  }
+
   &__title {
     pointer-events: none;
 

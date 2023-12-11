@@ -1,5 +1,4 @@
  .intro {
-
    .wrapper {
      padding: 10vh 0;
 
@@ -7,6 +6,10 @@
        padding: 20vh 0;
      }
    }
+
+   .section__slide:nth-child(2) {
+      padding: 40vh 0 5vh 0;
+    }
 
    .phrase {
 

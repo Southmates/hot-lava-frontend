@@ -6,7 +6,7 @@ function videoMuting() {
   if (videoPlaying && videoPlaying != this) {
     videoPlaying.pause();
   }
-  videoPlaying = this;
+    videoPlaying = this;
   };
 
   // init event handler
