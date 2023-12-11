@@ -10,15 +10,14 @@ import './style.scss'
 gsap.registerPlugin(ScrollTrigger)
 
 // Virtual smooth scroll (Lenis)
-const lenis = new Lenis()
+const lenis = new Lenis();
 
 function raf(time) {
   lenis.raf(time)
   ScrollTrigger.update()
   requestAnimationFrame(raf)
 }
-
-requestAnimationFrame(raf) 
+requestAnimationFrame(raf);
 
 // Handle anchor menu (Lenis scrollTo) + background colors + link status (active)
 function handleNav(){
