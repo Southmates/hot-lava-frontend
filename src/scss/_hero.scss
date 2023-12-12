@@ -5,10 +5,20 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  overflow: hidden;
 
   display: flex;
   align-items: center;
   overflow: hidden;
+
+  iframe {
+    border: none;
+    position: absolute;
+  }
+  /* video {
+    border: none;
+    position: absolute;
+  } */
 
   .slogan {
     position: absolute;
