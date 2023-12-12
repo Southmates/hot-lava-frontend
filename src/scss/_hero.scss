@@ -10,10 +10,10 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-
-  iframe {
-    border: none;
+  
+  video {
     position: absolute;
+    z-index: 1;
   }
 
   .slogan {
@@ -23,7 +23,10 @@
   }
 
   &__title {
+    // position: absolute;
+    position: relative;
     pointer-events: none;
+    z-index: 999;
 
     small {
       display: block;
