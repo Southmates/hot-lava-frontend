@@ -256,6 +256,50 @@ function handleModal() {
     lenis.start();
   }
 }
+
+// Assign random slogan
+const sloganContainer = document.querySelector(".slogan p")
+let slogans = [
+  "*You’re going to like it here.", 
+  "*Always non-toxic.", 
+  "*Served fresh daily.",
+  "*Ideas may be hot to the touch.",
+  "*Jerk-free zone.",
+  "*Cannot be duplicated.",
+  "*There’s no limit.",
+  "*Creative discretion is not advised.",
+  "*Do not try this at home.",
+  "*We go with the flow."
+]
+
+function randomSlogan() {
+  let randomValue
+  randomValue = slogans[(Math.floor(Math.random() * slogans.length))]
+
+  sloganContainer.append(randomValue)
+}
+randomSlogan()
+
+// GSAP titles animations
+const title = document.querySelector(".title-intro")
+
+gsap.set(title, {opacity: 0})
+gsap.to(title, {
+  scrollTrigger: title,
+  markers: true,
+  opacity: 1,
+  duration: 3
+})
+
+/* ScrollTrigger.create( {
+  trigger: title,
+  start: 'top top',
+  end: 'bottom top',
+  markers: true,
+  onEnter: () => gsap.fromTo(title, { opacity: 0 }, { opacity: 1, duration: 5 }),
+  onLeave: () => gsap.fromTo(title, { opacity: 1 }, { opacity: 0, duration: 5 })
+}) */
+
  
 
 // Call functions 
