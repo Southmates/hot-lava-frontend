@@ -3,8 +3,12 @@ import ScrollTrigger from "gsap/dist/ScrollTrigger"
 import Lenis from '@studio-freight/lenis' 
 import customCursor from './js/cursor.js';
 import videoMuting from './js/videomuting.js';
+import "splitting/dist/splitting.css";
+import "splitting/dist/splitting-cells.css";
+import Splitting from "splitting";
+Splitting();
 import { register } from 'swiper/element/bundle';
-register();
+register()
 // CSS Styles
 import './style.scss'
 
@@ -18,7 +22,7 @@ function raf(time) {
   ScrollTrigger.update()
   requestAnimationFrame(raf)
 }
-requestAnimationFrame(raf);
+requestAnimationFrame(raf)
 
 // Handle anchor menu (Lenis scrollTo) + background colors + link status (active)
 function handleNav(){
@@ -281,26 +285,101 @@ function randomSlogan() {
 randomSlogan()
 
 // GSAP titles animations
-const title = document.querySelector(".title-intro")
+const titleIntroFirst = [...document.querySelectorAll('.title-intro[data-splitting][data-effect1]')]
+const titleIntroSecond = [...document.querySelectorAll('.title-second[data-splitting][data-effect2]')]
+const phraseIntro = [...document.querySelectorAll('.paragraph-intro[data-splitting][data-effect3]')]
 
-gsap.set(title, {opacity: 0})
-gsap.to(title, {
-  scrollTrigger: title,
-  markers: true,
-  opacity: 1,
-  duration: 3
-})
+titleIntroFirst.forEach(title => {
+        
+  const chars = title.querySelectorAll('.char');
 
-/* ScrollTrigger.create( {
-  trigger: title,
-  start: 'top top',
-  end: 'bottom top',
-  markers: true,
-  onEnter: () => gsap.fromTo(title, { opacity: 0 }, { opacity: 1, duration: 5 }),
-  onLeave: () => gsap.fromTo(title, { opacity: 1 }, { opacity: 0, duration: 5 })
-}) */
+  gsap.fromTo(chars, { 
+      'will-change': 'opacity, transform', 
+      opacity: 0, 
+      yPercent: 120, 
+      scaleY: 2.3, 
+      scaleX: 0.7, 
+      transformOrigin: '50% 0%' 
+  }, 
+  {
+      duration: 1,
+      ease: 'back.inOut(2)',
+      opacity: 1,
+      yPercent: 0,
+      scaleY: 1,
+      scaleX: 1,
+      stagger: 0.03,
+      scrollTrigger: {
+          trigger: title,
+          start: 'center bottom+=50%',
+          end: 'bottom top+=40%',
+          scrub: true
+          // duration: 2
+      }
+  });
 
- 
+});
+
+titleIntroSecond.forEach(title => {
+        
+  const chars = title.querySelectorAll('.char');
+  
+  chars.forEach(char => gsap.set(char.parentNode, { perspective: 1000 })); 
+  
+  gsap.fromTo(chars, { 
+      'will-change': 'opacity, transform', 
+      opacity: 0.2,
+      z: -800
+  }, 
+  {
+      ease: 'back.out(1.2)',
+      opacity: 1,
+      z: 0,
+      stagger: 0.04,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'bottom top',
+          // scrub: true,
+          duration: 2
+      }
+  });
+
+});
+
+phraseIntro.forEach(title => {
+        
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
+  });
+
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
+  }, 
+  {
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.05,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom-=20%',
+          end: 'center top+=20%',
+          // scrub: true,
+          duration: 2
+      }
+  });
+
+});
+
 
 // Call functions 
 handleNav();
