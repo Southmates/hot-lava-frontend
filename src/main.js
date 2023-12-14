@@ -315,6 +315,76 @@ function setStartEnd() {
 }
 setStartEnd()
 
+// Hero
+const heroWelcome = [...document.querySelectorAll('.hero__title[data-splitting][data-effect17]')]
+
+heroWelcome.forEach(title => {
+        
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
+  });
+
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
+  }, 
+  {
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.18,
+      delay: .5,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'center top',
+      }
+  });
+
+});
+
+// Copyright
+const copyright = [...document.querySelectorAll('.copyright__text[data-splitting][data-effect18]')]
+
+copyright.forEach(title => {
+        
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
+  });
+
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
+  }, 
+  {
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.15,
+      delay: .5,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'center top',
+      }
+  });
+
+});
+
 // Intro
 const titleIntroFirst = [...document.querySelectorAll('.title-intro[data-splitting][data-effect1]')]
 const titleIntroSecond = [...document.querySelectorAll('.title-second[data-splitting][data-effect2]')]
@@ -421,6 +491,8 @@ phraseIntro.forEach(title => {
 // About
 const aboutGreeting = [...document.querySelectorAll('.section__h3[data-splitting][data-effect4]')]
 const aboutPhrase = [...document.querySelectorAll('.section__p[data-splitting][data-effect5]')]
+const kristi = [...document.querySelectorAll('.team__bio[data-splitting][data-effect19]')]
+const phil = [...document.querySelectorAll('.team__bio[data-splitting][data-effect20]')]
 
 aboutGreeting.forEach(title => {
         
@@ -485,6 +557,72 @@ aboutPhrase.forEach(title => {
   });
 
 });
+kristi.forEach(title => {
+        
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
+  });
+
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
+  }, 
+  {
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.05,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom+=20%',
+          end: 'center top+=20%',
+          // scrub: true,
+          delay: 3,
+          duration: 2,
+      }
+  });
+
+});
+phil.forEach(title => {
+        
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
+  });
+
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
+  }, 
+  {
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.05,
+      scrollTrigger: {
+          trigger: title,
+          start: '+=10%',
+          end: 'center top+=20%',
+          // scrub: true,
+          markers: true
+      }
+  });
+
+});
+
 
 // How we work
 const howTitle = [...document.querySelectorAll('.section__h3[data-splitting][data-effect6]')]

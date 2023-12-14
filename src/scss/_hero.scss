@@ -37,7 +37,7 @@
   }
 
   &__title {
-    // position: absolute;
+    position: absolute;
     position: relative;
     pointer-events: none;
     z-index: 999;
@@ -56,9 +56,9 @@
       line-height: 0.9;
     }
 
-    span {
-      display: block;
-    }
+    // span {
+    //   display: block;
+    // }
   }
 
   // --> Orange text on hero
