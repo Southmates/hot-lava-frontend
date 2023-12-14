@@ -301,56 +301,65 @@ const titleIntroSecond = [...document.querySelectorAll('.title-second[data-split
 const phraseIntro = [...document.querySelectorAll('.paragraph-intro[data-splitting][data-effect3]')]
 
 titleIntroFirst.forEach(title => {
-
-  const chars = title.querySelectorAll('.char');
-
-  gsap.fromTo(chars, { 
-      'will-change': 'opacity, transform', 
-      opacity: 0, 
-      yPercent: 2, 
-      scaleY: 1.2, 
-      scaleX: 0.9, 
-      transformOrigin: '50% 0%' 
-  }, 
-  {
-      duration: 3,
-      ease: 'back.inOut(2)',
-      opacity: 1,
-      yPercent: 0,
-      scaleY: 1,
-      scaleX: 1,
-      stagger: 0.03,
+        
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
       scrollTrigger: {
           trigger: title,
-          start: 'center bottom+=50%',
-          end: 'bottom top+=40%',
-          // scrub: true
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
+  });
+
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
+  }, 
+  {
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.1,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom-=20%',
+          end: 'center top+=20%',
+          // scrub: true,
       }
   });
 
 });
 titleIntroSecond.forEach(title => {
         
-  const chars = title.querySelectorAll('.char');
-  
-  chars.forEach(char => gsap.set(char.parentNode, { perspective: 1000 })); 
-  
-  gsap.fromTo(chars, { 
-      'will-change': 'opacity, transform', 
-      opacity: 0.2,
-      z: -20
-  }, 
-  {
-      ease: 'back.out(1.2)',
-      opacity: 1,
-      z: 0,
-      stagger: 0.04,
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
       scrollTrigger: {
           trigger: title,
           start: 'top bottom',
-          end: 'bottom top',
+          end: 'top top',
           // scrub: true,
-          duration: 2
+      }
+  });
+
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
+  }, 
+  {
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.18,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom-=20%',
+          end: 'center top+=20%',
+          // scrub: true,
+          // delay: 3,
+          // duration: 2,
       }
   });
 
@@ -395,33 +404,33 @@ const aboutPhrase = [...document.querySelectorAll('.section__p[data-splitting][d
 
 aboutGreeting.forEach(title => {
         
-  const chars = title.querySelectorAll('.char');
-  
-  chars.forEach(char => gsap.set(char.parentNode, { perspective: 1000 })); 
-  
-  gsap.fromTo(chars, {
-    'will-change': 'opacity, transform', 
-    transformOrigin: '50% 100%',
-    opacity: 0,
-    rotationX: 40
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
+  });
+
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
   }, 
   {
-    ease: 'power4',
-    opacity: 1,
-    stagger:  {
-      each: 0.03,
-      from: 'random'
-    },
-    rotationX: 0,
-    duration: 3,
-    scrollTrigger: {
-      trigger: title,
-      start: 'center bottom',
-      end: 'bottom top+=20%',
-      // scrub: true,
-    }
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.15,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom-=20%',
+          end: 'center top+=20%',
+      }
   });
-  
+
 });
 aboutPhrase.forEach(title => {
         
@@ -467,59 +476,63 @@ const thirdSlideTitle = [...document.querySelectorAll('.section__h3[data-splitti
 const thirdSlideInfo = [...document.querySelectorAll('.section__p[data-splitting][data-effect12]')]
 
 howTitle.forEach(title => {
+        
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
+  });
 
-  const chars = title.querySelectorAll('.char');
-
-  gsap.fromTo(chars, { 
-    'will-change': 'opacity, transform', 
-    opacity: 0, 
-    yPercent: 3, 
-    scaleY: 1.2, 
-    scaleX: 0.9, 
-    transformOrigin: '50% 0%' 
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
   }, 
   {
-    duration: 3,
-    ease: 'back.inOut(2)',
-    opacity: 1,
-    yPercent: 0,
-    scaleY: 1,
-    scaleX: 1,
-    stagger: 0.03,
-    scrollTrigger: {
-      trigger: title,
-      start: 'center bottom+=50%',
-      end: 'bottom top+=40%',
-      // scrub: true
-    }
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.18,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top+=120%',
+          end: 'top+=400%',
+      }
   });
+
 });
 firstSlideTitle.forEach(title => {
         
-  const chars = title.querySelectorAll('.char');
-  wrapElements(chars, 'span', 'char-wrap');
-
-  gsap.fromTo(chars, { 
-    'will-change': 'transform', 
-    transformOrigin: '0% 50%',
-    xPercent: 20,
-    opacity: 0
-  }, 
-  {
-    duration: 3,
-    ease: 'expo',
-    xPercent: 0,
-    opacity: 1,
-    stagger: 0.042,
-    scrollTrigger: {
-        trigger: title,
-        start: 'top+=120%',
-        end: 'top+=400%',
-        //markers: true,
-        //toggleActions: "play resume resume reset",
-    }
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
   });
 
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
+  }, 
+  {
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.2,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top+=120%',
+          end: 'top+=400%',
+      }
+  });
 });
 firstSlideInfo.forEach(title => {
         
@@ -537,7 +550,7 @@ firstSlideInfo.forEach(title => {
 
   gsap.fromTo(title.querySelectorAll('.word'), {
       'will-change': 'opacity',
-      opacity: 0
+      opacity: 0.1
   }, 
   {
       ease: 'none',
@@ -547,39 +560,38 @@ firstSlideInfo.forEach(title => {
           trigger: title,
           start: 'top+=120%',
           end: 'top+=400%',
-          // scrub: true,
-          delay: 3,
-          duration: 2,
       }
   });
 
 });
 secondSlideTitle.forEach(title => {
         
-  const chars = title.querySelectorAll('.char');
-  wrapElements(chars, 'span', 'char-wrap');
-
-  gsap.fromTo(chars, { 
-    'will-change': 'transform', 
-    transformOrigin: '0% 50%',
-    xPercent: 20,
-    opacity: 0
-  }, 
-  {
-    duration: 3,
-    ease: 'expo',
-    xPercent: 0,
-    opacity: 1,
-    stagger: 0.042,
-    scrollTrigger: {
-        trigger: title,
-        start: 'top+=120%',
-        end: 'top+=400%',
-        //markers: true,
-        //toggleActions: "play resume resume reset",
-    }
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
   });
 
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
+  }, 
+  {
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.22,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top+=120%',
+          end: 'top+=400%',
+      }
+  });
 });
 secondSlideInfo.forEach(title => {
         
@@ -597,7 +609,7 @@ secondSlideInfo.forEach(title => {
 
   gsap.fromTo(title.querySelectorAll('.word'), {
       'will-change': 'opacity',
-      opacity: 0
+      opacity: 0.1
   }, 
   {
       ease: 'none',
@@ -607,39 +619,38 @@ secondSlideInfo.forEach(title => {
           trigger: title,
           start: 'top+=120%',
           end: 'top+=400%',
-          // scrub: true,
-          delay: 3,
-          duration: 2,
       }
   });
 
 });
 thirdSlideTitle.forEach(title => {
         
-  const chars = title.querySelectorAll('.char');
-  wrapElements(chars, 'span', 'char-wrap');
-
-  gsap.fromTo(chars, { 
-    'will-change': 'transform', 
-    transformOrigin: '0% 50%',
-    xPercent: 20,
-    opacity: 0
-  }, 
-  {
-    duration: 3,
-    ease: 'expo',
-    xPercent: 0,
-    opacity: 1,
-    stagger: 0.042,
-    scrollTrigger: {
-        trigger: title,
-        start: 'top+=120%',
-        end: 'top+=400%',
-        //markers: true,
-        //toggleActions: "play resume resume reset",
-    }
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
   });
 
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
+  }, 
+  {
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.25,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top+=120%',
+          end: 'top+=400%',
+      }
+  });
 });
 thirdSlideInfo.forEach(title => {
         
@@ -657,7 +668,7 @@ thirdSlideInfo.forEach(title => {
 
   gsap.fromTo(title.querySelectorAll('.word'), {
       'will-change': 'opacity',
-      opacity: 0
+      opacity: 0.1
   }, 
   {
       ease: 'none',
@@ -667,9 +678,104 @@ thirdSlideInfo.forEach(title => {
           trigger: title,
           start: 'top+=120%',
           end: 'top+=400%',
-          // scrub: true,
-          delay: 3,
-          duration: 2,
+      }
+  });
+
+});
+
+// Our work
+const ourWorkTitle = [...document.querySelectorAll('.section__h3[data-splitting][data-effect13]')]
+
+ourWorkTitle.forEach(title => {
+        
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
+  });
+
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
+  }, 
+  {
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.2,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top+=120%',
+          end: 'top+=400%',
+      }
+  });
+});
+
+// Contact
+const contactTitle = [...document.querySelectorAll('.contact-title[data-splitting][data-effect14]')]
+// const contactPhrase = [...document.querySelectorAll('.section__p[data-splitting][data-effect15]')]
+const contactInfo = [...document.querySelectorAll('.section__p[data-splitting][data-effect16]')]
+
+contactTitle.forEach(title => {
+        
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
+  });
+
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
+  }, 
+  {
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.2,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top+=120%',
+          end: 'top+=400%',
+      }
+  });
+});
+contactInfo.forEach(title => {
+        
+  gsap.fromTo(title, {
+      transformOrigin: '0% 50%',
+  }, {
+      ease: 'none',
+      scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true,
+      }
+  });
+
+  gsap.fromTo(title.querySelectorAll('.word'), {
+      'will-change': 'opacity',
+      opacity: 0.1
+  }, 
+  {
+      ease: 'none',
+      opacity: 1,
+      stagger: 0.8,
+      scrollTrigger: {
+          trigger: title,
+          start: 'top+=120%',
+          end: 'top+=400%',
       }
   });
 
