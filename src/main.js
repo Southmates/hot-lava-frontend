@@ -285,17 +285,24 @@ function randomSlogan() {
   sloganContainer.append(randomValue)
 }
 
-// GSAP titles animations
+// Function to set video source
 
-// Function to wrap and apply overflow to chars
-/* const wrapElements = (elems, wrapType, wrapClass) => {
-  elems.forEach(char => {
-      const wrapEl = document.createElement(wrapType);
-      wrapEl.classList = wrapClass;
-      char.parentNode.appendChild(wrapEl);
-      wrapEl.appendChild(char);
-  });
-} */
+const video = document.querySelector(".hero .wrapper video")
+let videoSource = document.createElement('source')
+
+videoSource.setAttribute('type', 'video/mp4')
+
+function handleVideoSource() {
+  if(innerWidth > 480) {
+    videoSource.setAttribute('src', 'https://player.vimeo.com/progressive_redirect/playback/891441750/rendition/1080p/file.mp4?loc=external&signature=fda31ffe3b21ba36b3a3aa3b65e4746b7a94eda1389a7ab609de05b7d73a8079')
+  } else {
+    videoSource.setAttribute('src', 'https://player.vimeo.com/progressive_redirect/playback/891441750/rendition/540p/file.mp4?loc=external&signature=d93949a51886c059f163ef7f5780a6ce113c39ca9152aee94a4989038997c855')
+  }
+
+  video.appendChild(videoSource)
+}
+
+// GSAP titles animations
 
 // Check mobile to set start and end of trigger
 let elStart
@@ -942,6 +949,9 @@ contactInfo.forEach(title => {
 
 // Call functions 
 handleNav();
+
+// Set video
+handleVideoSource();
 
 // Choose random slogan
 randomSlogan()
