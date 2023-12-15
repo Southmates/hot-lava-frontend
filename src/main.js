@@ -311,7 +311,6 @@ function setStartEnd() {
     if(state === "large") {
       elStart = 'top+=120%'
       elEnd = 'top+=400%'
-      elStartPhil= '+=100%'
     } else {
       return
     }
@@ -618,10 +617,8 @@ phil.forEach(title => {
       stagger: 0.05,
       scrollTrigger: {
           trigger: title,
-          start: 'top bottom-=20%',
+          start: `${state === "large" ? '+=100%' : 'top bottom-=20%'}`,
           end: 'center top+=20%',
-          // scrub: true,
-          // markers: true
       }
   });
 
