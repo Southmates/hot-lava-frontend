@@ -1,6 +1,16 @@
 swiper-container {
   width: 100%;
   height: 100%;
+
+  --swiper-pagination-color: #EE512F;
+  --swiper-pagination-bullet-size: 16px;
+  --swiper-pagination-bullet-width: 16px;
+  --swiper-pagination-bullet-height: 16px;
+  --swiper-pagination-bullet-inactive-color: #FFFFFF;
+  --swiper-pagination-bullet-inactive-opacity: 0.5;
+  --swiper-pagination-bullet-opacity: 1;
+  --swiper-pagination-bullet-horizontal-gap: 4px;
+  --swiper-pagination-bullet-vertical-gap: 6px;
 }
 
 swiper-slide {
@@ -17,6 +27,14 @@ swiper-slide {
 swiper-slide.slide-img {
   width: 90%;
   max-width: 30vw;
+  
+  @media (max-width: 1023px) {
+    max-width: 84vw;
+  }
+}
+
+.swiper-pagination .swiper-pagination-bullet-active {
+  background-color: black;
 }
 
 .swiper-pagination-bullet-active {
@@ -37,13 +55,17 @@ swiper-slide.slide-img {
 
 .card {
   position: relative;
-  width: 100%;
+  width: 100vw;
 
   video {
     display: block;
     overflow: hidden;
     border-radius: 24px;
     width: 100%;
+
+    @media (max-width: 1023px) {
+      border-radius: 12px;
+    }
   }
 
   img {
@@ -54,8 +76,8 @@ swiper-slide.slide-img {
     width: 100%;
     height: auto;
     margin: auto;
-
   }
+
 }
 
 .card--vertical {
