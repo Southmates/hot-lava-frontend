@@ -73,6 +73,10 @@ swiper-slide.slide-img {
     overflow: hidden;
     border-radius: 24px;
 
+    @media (max-width: 1023px) {
+      border-radius: 12px;
+    }
+
     width: 100%;
     height: auto;
     margin: auto;
