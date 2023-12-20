@@ -25,21 +25,22 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: start;
-  gap: 32px;
+  gap: 16px;
 
-  width: 90%;
+  width: 94%;
   margin: 0 auto;
   padding: 10vh 0;
 
   @media (min-width: $change-layout) {
-    width: 95%;
     flex-direction: row;
+    gap: 32px;
+    width: 95%;
   }
 }
 
 .section__p {
   max-width: 480px;
-  font-size: clamp(21px, 2.1vw, 25px);
+  font-size: clamp(21px, 3vw, 25px);
   line-height: 1.45;
   letter-spacing: -0.01em;
   margin: 1.5rem 0 0 0;
@@ -48,7 +49,7 @@
     display: block;
     margin-top: 1rem;
 
-    font-size: 19px;
+    font-size: 18px;
     opacity: .8;
     letter-spacing: -0.015em;
   }

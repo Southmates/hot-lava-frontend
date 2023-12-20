@@ -1,6 +1,11 @@
 .slogan {
+  position: absolute;
+  z-index: 999;
+  right: 5%;
+  bottom: 3%;
+
   p {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     letter-spacing: -0.0225em;
     text-align: right;

@@ -63,17 +63,17 @@
 
   // Menu mobile, burger menu
   .mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10vh;
+
     position: fixed;
     z-index: 9992;
     height: 100vh;
     width: 100%;
     padding: 0 10% 15% 10%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 5vh;
 
     background-color: $color-orange;
 
@@ -85,37 +85,30 @@
       display: flex;
       flex-direction: row;
       justify-content: end;
-      margin-top: 5.7vh;
-      width: 111%;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 60px;
+      height: 60px;
 
-      button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1.6rem 1.6rem;
-        border-radius: 50%;
-        background-color: #FFFFFF;
-        border: none;
-      }
-
-      @media (max-width: 580px) {
-        margin-top: 1.5vh;
-        width: 103.5%;
-      }
-  
       @media (min-width: 780px) {
         display: none;
+      }
+
+      svg {
+        path {
+          fill: #fff;
+        }
       }
     }
 
     .nav {
-      padding: 12vh 0 0 0;
+      padding: 0 0 0 0;
 
       ul {
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
-        // margin-top: 25vh; 
+        gap: 0;
         margin: 0;
         padding: 0;
 
@@ -123,10 +116,12 @@
           list-style-type: none;
 
           a {
-            color: #FFFFFF;
+            display: block;
+            padding: .5rem 0;
+
             text-decoration: none;
             letter-spacing: -.015rem;
-            padding: 1rem 0;
+            color: #FFFFFF;
             transition-duration: 1s;
 
             font-size: clamp(36px, 6vw, 48px);
@@ -137,60 +132,42 @@
     }
 
     .contact {
+      position: absolute;
+      bottom: 60px;
+
+      width: 80%;
+      height: fit-content;
+      margin-top: 0;
       padding: 0;
-      margin-top: 5vh;
+
 
       p {
         display: block;
         margin-bottom: 1rem;
 
         font-weight: 400;
-        font-size: 21px;
+        font-size: clamp(18px, 3vw, 21px);
         letter-spacing: -0.01em;
         color: $color-white;
       }
     }
 
-    /* .socials {
-      width: fit-content;
-
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 30px;
-
-      a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 5rem;
-        height: 5rem;
-        border-radius: 50%;
-        border: 1px solid $color-white;
-        transition-duration: 1s;
-
-        @media (max-width: 480px) {
-          width: 4rem;
-          height: 4rem;
-        }
-
-        &:hover {
-          cursor: pointer;
-          background-color: $color-white;
-          transition-duration: 1s;
-        }
-
-        svg {
-          path {
-            stroke: #fff
-          }
-        }
-      }
-    } */
   }
 
   .hidden {
     display: none;
   }
+}
+
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  border-radius: 999px;
+  border: none;
 }
