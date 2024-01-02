@@ -419,7 +419,7 @@ function randomSlogan() {
 // GSAP animations
 // Hero
 const logo = document.querySelector(".logo");
-const burguer = document.querySelector(".burguer");
+const burguer = document.querySelector(".burguer-btn");
 const heroWelcome = [
   ...document.querySelectorAll(".hero__title[data-splitting][data-effect17]"),
 ];
