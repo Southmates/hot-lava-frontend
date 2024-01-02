@@ -3,6 +3,7 @@ import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
 import customCursor from "./js/cursor.js";
 import videoMuting from "./js/videomuting.js";
+import Ukiyo from "ukiyojs";
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
 import Splitting from "splitting";
@@ -415,20 +416,18 @@ function randomSlogan() {
 //   video.appendChild(videoSource);
 // }
 
-// GSAP titles animations
-// Check mobile to set start and end of trigger
-
+// GSAP animations
 // Hero
 const heroWelcome = [
   ...document.querySelectorAll(".hero__title[data-splitting][data-effect17]"),
 ];
 
 heroWelcome.forEach((title) => {
-  gsap.fromTo(
+  /* gsap.fromTo(
     title,
     {
       transformOrigin: "0% 50%",
-    },
+    },s
     {
       ease: "none",
       scrollTrigger: {
@@ -438,7 +437,7 @@ heroWelcome.forEach((title) => {
         scrub: true,
       },
     }
-  );
+  ); */
 
   gsap.fromTo(
     title.querySelectorAll(".word"),
@@ -459,6 +458,42 @@ heroWelcome.forEach((title) => {
     }
   );
 });
+// Main titles
+const titles = document.querySelectorAll(".title")
+
+titles.forEach((title) => {
+  gsap.fromTo(
+    title,
+    {
+      "will-change": "opacity",
+      opacity: 0.1,
+      x: -10
+    },
+    {
+      ease: "none",
+      opacity: 1,
+      x: 0,
+      stagger: 0.18,
+      delay: 0.2,
+      scrollTrigger: {
+        trigger: title,
+        start: "top bottom",
+        end: "center top",
+      },
+    }
+  );
+})
+
+// Images parallax
+const images_prllx = document.querySelectorAll(".parallax");
+images_prllx.forEach(image => {
+  new Ukiyo(image, {
+    speed: 3,
+    scale: 1.1,
+    wrapperClass: "parallax-wrapper"
+  });
+});
+
 
 // Call functions
 handleNav();
