@@ -418,10 +418,33 @@ function randomSlogan() {
 
 // GSAP animations
 // Hero
+const logo = document.querySelector(".logo");
 const heroWelcome = [
   ...document.querySelectorAll(".hero__title[data-splitting][data-effect17]"),
 ];
+const copyright = document.querySelector(".copyright__text");
+const slogan = document.querySelector(".slogan");
 
+// Logo
+gsap.fromTo(
+  logo,
+  {
+    "will-change": "opacity",
+    opacity: 0,
+    y: -30
+  },
+  {
+    ease: "power1.inOut",
+    opacity: 1,
+    y: 0,
+    scrollTrigger: {
+      trigger: logo,
+      start: "top bottom",
+      end: "center top",
+    },
+  }
+);
+// Hero Title
 heroWelcome.forEach((title) => {
   /* gsap.fromTo(
     title,
@@ -459,7 +482,7 @@ heroWelcome.forEach((title) => {
   );
 });
 // Main titles
-const titles = document.querySelectorAll(".title")
+const titles = document.querySelectorAll(".title");
 
 titles.forEach((title) => {
   gsap.fromTo(
@@ -482,7 +505,47 @@ titles.forEach((title) => {
       },
     }
   );
-})
+});
+// Copyright
+gsap.fromTo(
+  copyright,
+  {
+    "will-change": "opacity",
+    opacity: 0,
+    y: -30
+  },
+  {
+    ease: "power1.inOut",
+    opacity: 1,
+    delay: 0.8,
+    y: 0,
+    scrollTrigger: {
+      trigger: copyright,
+      start: "top bottom",
+      end: "center top",
+    },
+  }
+);
+// Slogan
+gsap.fromTo(
+  slogan,
+  {
+    "will-change": "opacity",
+    opacity: 0,
+    y: -30
+  },
+  {
+    ease: "power1.inOut",
+    opacity: 1,
+    delay: 0.8,
+    y: 0,
+    scrollTrigger: {
+      trigger: slogan,
+      start: "top bottom",
+      end: "center top",
+    },
+  }
+);
 
 // Images parallax
 const images_prllx = document.querySelectorAll(".parallax");
