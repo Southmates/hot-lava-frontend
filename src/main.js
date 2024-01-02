@@ -419,6 +419,7 @@ function randomSlogan() {
 // GSAP animations
 // Hero
 const logo = document.querySelector(".logo");
+const burguer = document.querySelector(".burguer");
 const heroWelcome = [
   ...document.querySelectorAll(".hero__title[data-splitting][data-effect17]"),
 ];
@@ -439,6 +440,25 @@ gsap.fromTo(
     y: 0,
     scrollTrigger: {
       trigger: logo,
+      start: "top bottom",
+      end: "center top",
+    },
+  }
+);
+// Burguer
+gsap.fromTo(
+  burguer,
+  {
+    "will-change": "opacity",
+    opacity: 0,
+    y: -30
+  },
+  {
+    ease: "power1.inOut",
+    opacity: 1,
+    y: 0,
+    scrollTrigger: {
+      trigger: burguer,
       start: "top bottom",
       end: "center top",
     },
