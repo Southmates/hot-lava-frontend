@@ -197,7 +197,7 @@ function handleNav() {
         { backgroundColor: "#108896", duration: 1, ease: "ease.in" },
         setAboutMenu()
       );
-      gsap.to(".team__card picture", {
+      gsap.to(".team__card .team__pic", {
         backgroundColor: "#108896",
         duration: 1,
         ease: "ease.in",
@@ -215,7 +215,7 @@ function handleNav() {
         { backgroundColor: "#1C374D", duration: 1, ease: "ease.in" },
         setOurWayMenu()
       );
-      gsap.to(".team__card picture", {
+      gsap.to(".team__card .team__pic", {
         backgroundColor: "#1C374D",
         duration: 1,
         ease: "ease.in",
@@ -233,7 +233,7 @@ function handleNav() {
         { backgroundColor: "#108896", duration: 1, ease: "ease.in" },
         setAboutMenu()
       );
-      gsap.to(".team__card picture", {
+      gsap.to(".team__card .team__pic", {
         backgroundColor: "#108896",
         duration: 1,
         ease: "ease.in",
@@ -423,10 +423,10 @@ const burguer = document.querySelector(".burguer-btn");
 const heroWelcome = [
   ...document.querySelectorAll(".hero__title[data-splitting][data-effect17]"),
 ];
-const bioImages = document.querySelectorAll(".bio-pic")
+const bioImages = document.querySelectorAll(".team__blend");
 const copyright = document.querySelector(".copyright__text");
 const slogan = document.querySelector(".slogan");
-const lastWord = document.querySelector(".last-brand")
+const lastWord = document.querySelector(".last-brand");
 
 // Logo
 gsap.fromTo(
@@ -434,7 +434,7 @@ gsap.fromTo(
   {
     "will-change": "opacity",
     opacity: 0,
-    y: -30
+    y: -30,
   },
   {
     ease: "power1.inOut",
@@ -453,7 +453,7 @@ gsap.fromTo(
   {
     "will-change": "opacity",
     opacity: 0,
-    y: -30
+    y: -30,
   },
   {
     ease: "power1.inOut",
@@ -468,7 +468,6 @@ gsap.fromTo(
 );
 // Hero Title
 heroWelcome.forEach((title) => {
-
   gsap.fromTo(
     title.querySelectorAll(".word"),
     {
@@ -497,7 +496,7 @@ titles.forEach((title) => {
     {
       "will-change": "opacity",
       opacity: 0.1,
-      x: -10
+      x: -10,
     },
     {
       ease: "none",
@@ -520,7 +519,7 @@ bioImages.forEach((image) => {
     image,
     {
       "will-change": "opacity",
-      x: +120
+      x: +120,
     },
     {
       ease: "none",
@@ -529,11 +528,11 @@ bioImages.forEach((image) => {
         trigger: image,
         start: "top bottom",
         end: "center top",
-        scrub: true
+        scrub: true,
       },
     }
   );
-})
+});
 
 // Copyright
 gsap.fromTo(
@@ -541,7 +540,7 @@ gsap.fromTo(
   {
     "will-change": "opacity",
     opacity: 0,
-    y: -30
+    y: -30,
   },
   {
     ease: "power1.inOut",
@@ -561,7 +560,7 @@ gsap.fromTo(
   {
     "will-change": "opacity",
     opacity: 0,
-    y: -30
+    y: -30,
   },
   {
     ease: "power1.inOut",
@@ -581,7 +580,7 @@ gsap.fromTo(
   {
     "will-change": "opacity",
     opacity: 0,
-    y: +60
+    y: +60,
   },
   {
     ease: "power1.inOut",
@@ -598,13 +597,12 @@ gsap.fromTo(
 
 // Images parallax
 const images_prllx = document.querySelectorAll(".parallax");
-images_prllx.forEach(image => {
-  new Ukiyo(image, { 
+images_prllx.forEach((image) => {
+  new Ukiyo(image, {
     speed: 3,
     scale: 1.1,
   });
 });
-
 
 // Call functions
 handleNav();
