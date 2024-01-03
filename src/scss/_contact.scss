@@ -80,18 +80,18 @@
     justify-content: center;
 
     >div {
-      font-size: clamp(180px, 48vw, 375px);
+      font-size: clamp(180px, 36vw, 375px);
       font-weight: 900;
       line-height: .8;
       color: $color-orange;
       text-wrap: nowrap;
       white-space: nowrap;
 
-      transform: translateY(0%);
+      transform: translateY(10%);
       pointer-events: none;
 
       @media (min-width: $change-layout) {
-        transform: translateY(25%);
+        transform: translateY(20%);
       }
     }
   }

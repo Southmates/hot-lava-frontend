@@ -77,16 +77,19 @@
     height: 50%;
     bottom: 0;
     left: 0;
-    transition: .35s;
-    background: linear-gradient(0deg, rgba(238, 81, 47, 0), rgba(28, 55, 77, 0));
+    animation: shadowBottomFade .3s ease-out forwards;
   }
 
   &:hover {
-    background: #000;
-    transition: 1s;
 
     &::after {
-      animation: shadowBottom .2s ease-in forwards;
+      animation: shadowBottom .3s ease-in forwards;
+    }
+
+    @keyframes shadowBottomFade {
+      to {
+        background: #00000000;
+      }
     }
 
     @keyframes shadowBottom {
