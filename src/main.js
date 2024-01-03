@@ -423,6 +423,7 @@ const burguer = document.querySelector(".burguer-btn");
 const heroWelcome = [
   ...document.querySelectorAll(".hero__title[data-splitting][data-effect17]"),
 ];
+const bioImages = document.querySelectorAll(".bio-pic")
 const copyright = document.querySelector(".copyright__text");
 const slogan = document.querySelector(".slogan");
 const lastWord = document.querySelector(".last-brand")
@@ -467,21 +468,6 @@ gsap.fromTo(
 );
 // Hero Title
 heroWelcome.forEach((title) => {
-  /* gsap.fromTo(
-    title,
-    {
-      transformOrigin: "0% 50%",
-    },s
-    {
-      ease: "none",
-      scrollTrigger: {
-        trigger: title,
-        start: "top bottom",
-        end: "top top",
-        scrub: true,
-      },
-    }
-  ); */
 
   gsap.fromTo(
     title.querySelectorAll(".word"),
@@ -527,6 +513,28 @@ titles.forEach((title) => {
     }
   );
 });
+
+// Bio images
+bioImages.forEach((image) => {
+  gsap.fromTo(
+    image,
+    {
+      "will-change": "opacity",
+      x: +120
+    },
+    {
+      ease: "none",
+      x: 0,
+      scrollTrigger: {
+        trigger: image,
+        start: "top bottom",
+        end: "center top",
+        scrub: true
+      },
+    }
+  );
+})
+
 // Copyright
 gsap.fromTo(
   copyright,
