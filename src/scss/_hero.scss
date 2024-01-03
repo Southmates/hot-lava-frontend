@@ -44,7 +44,7 @@
   }
 
   .cover-out {
-    animation: coverOut 1s ease-out forwards;
+    animation: coverOut 1s ease-in forwards;
   }
 
   @keyframes coverOut {
