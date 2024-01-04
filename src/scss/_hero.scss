@@ -41,10 +41,8 @@
     overflow: hidden;
     background-color: red;
     pointer-events: none;
-  }
-
-  .cover-out {
     animation: coverOut .7s ease-out forwards;
+    animation-delay: 4s;
   }
 
   @keyframes coverOut {
