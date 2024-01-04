@@ -15,7 +15,7 @@
   </div> 
   {{!-- <!-- Videobackground on loop from Vimeo --> --}}
   <div class="red-cover"></div>
-  <div class="videofull hide">
+  <div class="videofull">
     <div id="heroVideo" class="videofull__wrapper parallax"></div>
   </div>
   <script src="https://player.vimeo.com/api/player.js"></script>
@@ -33,8 +33,8 @@
     const heroPlayer = new Vimeo.Player('heroVideo', heroPlayerOptions);
     // Checks that video loaded in buffer
     heroPlayer.on('bufferend', function(){
-      document.querySelector(".videofull").classList.remove("hide");
-      document.querySelector(".videofull").classList.add("show");
+      // document.querySelector(".videofull").classList.remove("hide");
+      // document.querySelector(".videofull").classList.add("show");
     });
   </script> 
 
