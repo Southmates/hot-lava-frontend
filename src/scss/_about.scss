@@ -74,7 +74,7 @@
 
     object-fit: cover;
     overflow: hidden;
-    aspect-ratio: 4/3;
+    aspect-ratio: 3/2;
 
     @media (min-width:$change-layout) {
       // width: clamp(900px, 75vw, 1080px);
@@ -108,7 +108,7 @@
 
 .team__bio {
   position: absolute;
-  bottom: 0;
+  bottom: 30%;
   left: 8%;
   width: fit-content;
   height: fit-content;
@@ -133,9 +133,13 @@
     margin-top: 1.5rem;
     // margin-top: 16px;
 
-    font-size: clamp(21px, 3vw, 23px);
+    font-size: clamp(18px, 3vw, 20px);
     line-height: 1.425;
     // color: $color-aquaGreen;
     color: $color-white;
+
+    @media (min-width:$change-layout) {
+      font-size: clamp(23px, 3vw, 23px);
+    }
   }
 }

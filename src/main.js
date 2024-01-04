@@ -514,25 +514,27 @@ titles.forEach((title) => {
 });
 
 // Bio images
-bioImages.forEach((image) => {
-  gsap.fromTo(
-    image,
-    {
-      "will-change": "opacity",
-      x: +120,
-    },
-    {
-      ease: "none",
-      x: 0,
-      scrollTrigger: {
-        trigger: image,
-        start: "top bottom",
-        end: "center top",
-        scrub: true,
+if (innerWidth >= 1024) {
+  bioImages.forEach((image) => {
+    gsap.fromTo(
+      image,
+      {
+        "will-change": "opacity",
+        x: +120,
       },
-    }
-  );
-});
+      {
+        ease: "none",
+        x: 0,
+        scrollTrigger: {
+          trigger: image,
+          start: "top bottom",
+          end: "center top",
+          scrub: true,
+        },
+      }
+    );
+  });
+}
 
 // Copyright
 gsap.fromTo(
