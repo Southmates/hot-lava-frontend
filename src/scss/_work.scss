@@ -87,8 +87,13 @@
     }
 
     @keyframes shadowBottomFade {
+      from {
+        opacity: 1;
+        background: linear-gradient(0deg, rgba(238, 81, 47, .275), rgba(28, 55, 77, 0));
+      }
       to {
-        background: #00000000;
+        opacity: 0;
+        background: linear-gradient(0deg, rgba(0, 0, 0, .0), rgba(0, 0, 0, 0));
       }
     }
 
