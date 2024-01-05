@@ -514,7 +514,7 @@ titles.forEach((title) => {
 });
 
 // Bio images
-if (innerWidth >= 1024) {
+/* if (innerWidth >= 1024) {
   bioImages.forEach((image) => {
     gsap.fromTo(
       image,
@@ -534,7 +534,7 @@ if (innerWidth >= 1024) {
       }
     );
   });
-}
+} */
 
 // Copyright
 gsap.fromTo(
