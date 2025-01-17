@@ -309,7 +309,7 @@ function handleNav() {
     trigger: shop,
     start: "top 50%",
     end: "bottom 30%",
-    markers: true,
+    // markers: true,
     onEnter: () =>
       gsap.to(
         container,
