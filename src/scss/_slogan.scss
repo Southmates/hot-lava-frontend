@@ -1,19 +1,19 @@
 .slogan {
   position: absolute;
   z-index: 999;
-  right: 5%;
+  right: 0;
   bottom: 3%;
 
   p {
-    font-size: 18px;
+    font-size: 13px;
     font-weight: 400;
     letter-spacing: -0.0225em;
     text-align: right;
 
-    opacity: .8;
+    opacity: .5;
 
     @media (min-width: $change-layout) {
-      font-size: 19px;
+      font-size: 14.5px;
     }
   }
 }
