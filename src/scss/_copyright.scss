@@ -41,8 +41,10 @@
 
   p {
     font-size: 12px;
-    font-weight: 900;
+    font-family: $main-font;
+    text-transform: none;
     letter-spacing: 0.01em;
     margin: 0;
+    opacity: .5;
   }
 }

@@ -1,34 +1,26 @@
 @font-face {
   font-family: 'graphiksuper';
-  src: url('./fonts/graphiksuper-webfont.woff2') format('woff2'),
-    url('./fonts/graphiksuper-webfont.woff') format('woff');
+  src: url('./public/fonts/graphiksuper-webfont.woff2') format('woff2'),
+    url('./public/fonts/graphiksuper-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'graphiksemibold';
-  src: url('graphiksemibold-webfont.woff2') format('woff2'),
-    url('graphiksemibold-webfont.woff') format('woff');
+  src: url('./public/fonts/graphiksemibold-webfont.woff2') format('woff2'),
+    url('./public/fonts/graphiksemibold-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'graphik_regularregular';
-  src: url('./fonts/graphikregular-webfont.woff2') format('woff2'),
-    url('./fonts/graphikregular-webfont.woff') format('woff');
+  src: url('./public/fonts/graphikregular-webfont.woff2') format('woff2'),
+    url('./public/fonts/graphikregular-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
-
-// @font-face {
-//   font-family: 'graphiklight';
-//   src: url('./fonts/graphiklight-webfont.woff2') format('woff2'),
-//     url('./fonts/graphiklight-webfont.woff') format('woff');
-//   font-weight: normal;
-//   font-style: normal;
-// }
 
 @import "./scss/vars";
 
