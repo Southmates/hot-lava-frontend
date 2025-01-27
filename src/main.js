@@ -718,3 +718,11 @@ customCursor();
 
 // Mute video when playing other or closing modal *
 videoMuting();
+
+gsap.to("#asterisk", {
+  duration: 3,
+  rotation: 360,
+  transformOrigin: "50% 50%",
+  ease: "power2.out",
+  repeat: -1,
+});
