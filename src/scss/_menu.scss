@@ -35,9 +35,9 @@
 
         a {
           padding: 1rem;
-
+          font-family: $main-font-title;
           font-size: clamp(16px, 2vw, 18px);
-          font-weight: 900;
+          font-weight: 400;
           letter-spacing: .05rem;
           color: #FFFFFF;
           text-decoration: none;

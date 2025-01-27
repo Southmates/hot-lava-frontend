@@ -8,4 +8,13 @@
     color: $color-orange;
     text-align: center;
   }
+
+  .wrapper {
+    text-align: center;
+
+    .shopify-buy-frame--productSet {
+      width: 90%;
+      margin: auto;
+    }
+  }
 }

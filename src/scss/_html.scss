@@ -36,9 +36,17 @@ h3,
 h4,
 h5,
 h6,
-p {
-  font-family: var(--font-main), sans-serif;
+.contact__phrase p,
+.contact .brand {
+  font-family: $main-font-title;
   font-style: normal;
+}
+
+.section__p,
+.slogan p,
+.contact__links p {
+  font-family: $main-font;
+  font-weight: normal;
 }
 
 h1,

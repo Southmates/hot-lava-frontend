@@ -1,3 +1,35 @@
+@font-face {
+  font-family: 'graphiksuper';
+  src: url('./graphiksuper-webfont.woff2') format('woff2'),
+    url('./graphiksuper-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'graphiksemibold';
+  src: url('graphiksemibold-webfont.woff2') format('woff2'),
+    url('graphiksemibold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'graphik_regularregular';
+  src: url('./graphikregular-webfont.woff2') format('woff2'),
+    url('./graphikregular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// @font-face {
+//   font-family: 'graphiklight';
+//   src: url('./graphiklight-webfont.woff2') format('woff2'),
+//     url('./graphiklight-webfont.woff') format('woff');
+//   font-weight: normal;
+//   font-style: normal;
+// }
+
 @import "./scss/vars";
 
 // For all html tags

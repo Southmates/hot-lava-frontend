@@ -14,7 +14,11 @@ $landscape: 480px;
 $tablet-l: 1023px;
 $change-layout: 1024px;
 
+$main-font: "graphik_regularregular";
+$main-font-bold: "graphiksemibold";
+$main-font-title: "graphiksuper";
+
 :root {
-    --font-main: "komet", sans-serif;
+    --font-main: "graphik_regularregular", sans-serif;
     --wrapper: 1800px;
 }

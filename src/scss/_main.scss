@@ -6,8 +6,8 @@
     position: relative;
     margin: 0;
 
-    font-family: "komet", sans-serif;
-    font-weight: 900;
+    font-family: $main-font-title, sans-serif;
+    font-weight: 400;
     font-style: normal;
     font-size: clamp(42px, 6vw, 96px);
     line-height: 1.1;
@@ -56,6 +56,11 @@
     font-size: 18px;
     opacity: .5;
     letter-spacing: -0.015em;
+  }
+
+  strong {
+    font-family: $main-font-bold;
+    font-weight: normal;
   }
 }
 
