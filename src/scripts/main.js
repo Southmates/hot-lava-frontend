@@ -258,30 +258,30 @@ gsap.fromTo(
 );
 
 // Main titles
-const titles = document.querySelectorAll(".title");
+// const titles = document.querySelectorAll(".title");
 
-titles.forEach((title) => {
-  gsap.fromTo(
-    title,
-    {
-      "will-change": "opacity",
-      opacity: 0.1,
-      x: -10,
-    },
-    {
-      ease: "none",
-      opacity: 1,
-      x: 0,
-      stagger: 0.18,
-      delay: 0.2,
-      scrollTrigger: {
-        trigger: title,
-        start: "top bottom",
-        end: "center top",
-      },
-    }
-  );
-}); 
+// titles.forEach((title) => {
+//   gsap.fromTo(
+//     title,
+//     {
+//       "will-change": "opacity",
+//       opacity: 0.1,
+//       x: -10,
+//     },
+//     {
+//       ease: "none",
+//       opacity: 1,
+//       x: 0,
+//       stagger: 0.18,
+//       delay: 0.2,
+//       scrollTrigger: {
+//         trigger: title,
+//         start: "top bottom",
+//         end: "center top",
+//       },
+//     }
+//   );
+// }); 
 
 // Copyright
 gsap.fromTo(
