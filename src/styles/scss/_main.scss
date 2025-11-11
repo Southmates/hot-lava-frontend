@@ -5,12 +5,8 @@
   h3 {
     position: relative;
     margin: 0;
-
-    font-family: $main-font-title, sans-serif;
-    font-weight: 900;
-    font-style: normal;
-    font-size: clamp(42px, 6vw, 96px);
-    line-height: 1.1;
+   
+    // font-size: clamp(42px, 6vw, 96px); 
   }
 }
 
@@ -24,44 +20,16 @@
   }
 }
 
-.section__slide {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: start;
-  gap: 16px;
-
-  width: 94%;
+.container { 
+  width: 90%;
   margin: 0 auto;
   padding: 10vh 0;
-
-  @media (min-width: $change-layout) {
-    flex-direction: row;
-    gap: 32px;
-    width: 95%;
-  }
+ 
 }
 
 .section__p {
-  max-width: 480px;
-  font-size: clamp(21px, 3vw, 23px);
-  line-height: 1.35;
-  letter-spacing: -0.01em;
-  margin: 1.5rem 0 0 0;
-
-  small {
-    display: block;
-    margin-top: 1.5rem;
-
-    font-size: 18px;
-    opacity: .5;
-    letter-spacing: -0.015em;
-  }
-
-  strong {
-    font-family: $main-font-bold;
-    font-weight: normal;
-  }
+  max-width: 480px; 
+  margin: 1.5rem 0 0 0; 
 }
 
 .asterisk {
@@ -85,17 +53,4 @@
   flex-direction: column;
   justify-content: center;
   // align-items: flex-end;
-}
-
-.noise {
-  z-index: 2;
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-
-  pointer-events: none;
-  opacity: .05;
-}
+} 

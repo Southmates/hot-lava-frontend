@@ -1,12 +1,8 @@
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
-import customCursor from "./cursor.js";
-import videoMuting from "./videomuting.js";
-import "splitting/dist/splitting.css";
-import "splitting/dist/splitting-cells.css";
-import Splitting from "splitting";
-Splitting();
+import customCursor from "./cursor.js";  
+
 import { register } from "swiper/element/bundle";
 register();
 
@@ -151,11 +147,7 @@ function handleNav() {
   // const shop = document.querySelector(".shop");
   // const contact = document.querySelector(".contact");
   // const hero = document.querySelector(".hero");
- 
-}
-
- 
- 
+} 
 
 // Handle modal, stop/start Lenis
 function handleModal() {
@@ -196,11 +188,8 @@ function handleModal() {
 // Hero
 const logo = document.querySelector(".logo");
 const burguer = document.querySelector(".burguer-btn");
-const heroWelcome = [
-  ...document.querySelectorAll(".hero__title[data-splitting][data-effect17]"),
-];
-const heroLogo = document.querySelectorAll(".logo-container");
-const bioImages = document.querySelectorAll(".team__blend");
+ 
+const heroLogo = document.querySelectorAll(".logo-container"); 
 const copyright = document.querySelector(".copyright__text");
 const slogan = document.querySelector(".slogan");
 const navbar = document.querySelector(".navbar");
@@ -245,30 +234,7 @@ gsap.fromTo(
     },
   }
 );
-
-// Hero Title
-heroWelcome.forEach((title) => {
-  gsap.fromTo(
-    title.querySelectorAll(".word"),
-    {
-      "will-change": "opacity",
-      opacity: 0,
-      y: 30,
-    },
-    {
-      ease: "power1.out",
-      opacity: 1,
-      stagger: 0.1,
-      y: 0,
-      delay: 0.75,
-      scrollTrigger: {
-        trigger: title,
-        start: "top bottom",
-        end: "center top",
-      },
-    }
-  );
-});
+ 
 
 // Logo Hero
 gsap.fromTo(
@@ -357,28 +323,7 @@ gsap.fromTo(
       end: "center top",
     },
   }
-);
-
-// Slogan
-gsap.fromTo(
-  slogan,
-  {
-    "will-change": "opacity",
-    opacity: 0,
-    y: 30,
-  },
-  {
-    ease: "power1.inOut",
-    opacity: 1,
-    delay: 1.5,
-    y: 0,
-    scrollTrigger: {
-      trigger: slogan,
-      start: "top bottom",
-      end: "center top",
-    },
-  }
-);
+); 
 
 // Last brand
 gsap.fromTo(
@@ -401,23 +346,14 @@ gsap.fromTo(
   }
 );
 
-
 // Call functions
 handleNav();
-
-// Set video
-// handleVideoSource();
-
-// Choose random slogan
-randomSlogan();
-
+ 
 // handleScrolHorizontal();
 handleModal();
 
 // Custom Cursor *
 customCursor();
-
-// Mute video when playing other or closing modal *
-videoMuting();
+ 
 
  
