@@ -32,8 +32,10 @@
     // background-position: center;
     // background-repeat: no-repeat;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+
+    padding-top: 10%;
 
     img {
       width: 100%;
@@ -107,7 +109,7 @@
     }
   }
   .logo { 
-    top: 0%;
+    top: 5%;
     left: 4%;
   }
 }
