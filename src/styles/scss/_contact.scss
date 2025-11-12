@@ -1,6 +1,9 @@
+@use './vars' as *;
+
 .contact {
   position: relative;
-  overflow: hidden; 
+  overflow: hidden;
+  padding-top: 20vh;  
   background-color: #102d41;
 
   .container {

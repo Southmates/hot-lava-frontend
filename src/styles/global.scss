@@ -1,30 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
-@import "./scss/vars";
+// Migrar todos los @import locales a @use
+@use './scss/vars' as *;
 
 // For all html tags
-@import "./scss/html";
+@use './scss/html' as *;
 
 // Layout components
-@import "./scss/menu";
-@import "./scss/copyright";
-@import "./scss/header";
-// @import "./scss/slogan";
-@import "./scss/modal";
-@import "./scss/videofull";
+@use './scss/menu' as *;
+@use './scss/copyright' as *;
+@use './scss/header' as *; 
+@use './scss/modal' as *;
+@use './scss/videofull' as *;
 
 // External components
-@import "./scss/lenis";
-@import "./scss/cursor";
-@import "./scss/swiper";
+@use './scss/lenis' as *;
+@use './scss/cursor' as *;
+@use './scss/swiper' as *;
 
 // Main Section + Generic styles
-@import "./scss/main";
+@use './scss/main' as *;
 
 // Sections
-@import "./scss/hero";
-@import "./scss/intro";
-@import "./scss/about"; 
-@import "./scss/works";
-@import "./scss/shop";
-@import "./scss/contact";
+@use './scss/hero' as *;
+@use './scss/intro' as *;
+@use './scss/about' as *; 
+@use './scss/works' as *;
+@use './scss/shop' as *;
+@use './scss/contact' as *;
+// La URL externa de Google Fonts puede quedarse con @import
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');

@@ -1,3 +1,6 @@
+@use './vars' as *;
+@use "sass:color";
+
 .mf-cursor {
   $root: &;
 
@@ -31,7 +34,7 @@
   }
 
   &.-inverse {
-    color: invert(#fff);
+    color: color.invert(#fff);  
   }
 
   &.-exclusion {
@@ -39,7 +42,7 @@
       mix-blend-mode: exclusion;
 
       &:before {
-        background: invert(#fff);
+        background: color.invert(#fff);
       }
     }
   }
