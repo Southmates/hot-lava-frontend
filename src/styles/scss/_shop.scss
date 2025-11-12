@@ -1,20 +1,31 @@
 .shop {
-  padding-top: 10vh;
+  background-color: var(--color-darkBlue);
 
-  h2 {
-    padding: 5rem 0;
-    font-weight: 800;
-    font-size: clamp(2rem, 5vh, 3rem);
-    color: $color-orange;
-    text-align: center;
+
+  &__hero {
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .wrapper {
-    text-align: center;
+    text-align: center;  
+    padding:0 4rem; 
 
     .shopify-buy-frame--productSet {
       width: 90%;
       margin: auto;
     }
   }
+}
+
+ 
+.shopify-buy-frame iframe {
+  max-height: 1420px;
+  margin-bottom: 20vh;
 }
