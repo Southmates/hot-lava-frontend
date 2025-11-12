@@ -12,16 +12,16 @@
       
       <div class="row">          
         <div class="contact__links">
-          <p>
+          <p class="paragraph contact__paragraph">
             Hot Lava! We'd love to show you what we can do. For inquiries, contact
-          </p>
-          <p>
-            <a
+            <strong onclick="window.location.href='mailto:info@hotlavaagency.com'">info@hotlavaagency.com</strong>
+          </p> 
+            <!-- <a
               href="mailto:info@hotlavaagency.com"
               target="_blank"
               rel="noopener noreferrer"
-            >info@<strong>hotlavaagency.com</strong></a>
-          </p>
+            ></a> -->
+          
           <div class="contact__social">
             <a
               href="https://www.linkedin.com/company/hot-lava/"
@@ -91,5 +91,23 @@
     if (title) {
       initSplitText(title, { type: 'words' });
     }
+    // Initialize SplitText for paragraph (lines)
+    const paragraph = document.querySelector('.contact .paragraph') as HTMLElement;
+    if (paragraph) {
+      initSplitText(paragraph, { type: 'lines' });
+    }
   });
 </script>
+
+<style type="text/scss">
+  .contact__paragraph strong {
+    cursor: pointer; 
+    display: block;
+    transition: 0.35s; 
+    
+    &:hover {
+      color: #fff !important;
+    }
+  }
+  
+</style>
