@@ -37,15 +37,18 @@
   // gap: 10vh;
   // margin: 0 auto;
  
-  width: 100%;
+  width: 90%;
   text-align: right;
+  display: flex;
+  justify-content: end;
+  align-items: flex-start;
+  padding-top: 10vh;
 }
 
 .team__card {
   position: relative; 
-  width: 100%;
-  display: flex;
-  flex-direction: row-reverse;
+  width: fit-content; 
+
 
   picture {
     display: block;
@@ -55,9 +58,9 @@
     width: min(65vw, 480px);
     height: 100%; 
 
-    @media (min-width: $change-layout) {
-      transform: translateX(-10vw);
-    }
+    // @media (min-width: $change-layout) {
+    //   transform: translateX(-10vw);
+    // }
 
     img {
       width: 100%;

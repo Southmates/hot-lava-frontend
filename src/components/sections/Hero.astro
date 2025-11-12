@@ -23,8 +23,14 @@
 
 <script>
   import { initParallax } from '../../scripts/utils/parallax.js';
+  import { initUkiyo } from '../../scripts/utils/ukiyo.js';
 
   initParallax('.hero .logo--vertical', {
     speed: 1.5  
+  });
+
+  initUkiyo('.hero .video img', {
+    scale: 1.25,
+    speed: 1.1
   });
 </script>

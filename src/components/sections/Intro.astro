@@ -52,6 +52,7 @@
   import { initSplitText } from '../../scripts/utils/splittext.js';
   import { waitForFonts } from '../../scripts/utils/fonts-ready.js';
   import { initParallax } from '../../scripts/utils/parallax.js';
+  import { initUkiyo } from '../../scripts/utils/ukiyo.js';
 
   // Wait for fonts to be ready before initializing SplitText
   waitForFonts(() => {
@@ -86,5 +87,15 @@
 
   initParallax('.intro-third .paragraph', {
     speed: 0.75  
+  });
+
+  initUkiyo('.intro-first .image-phrase img', {
+    scale: 1.25,
+    speed: 1
+  });
+
+  initUkiyo('.intro-second .image-ideas img', {
+    scale: 1.25,
+    speed: 1
   });
 </script>
