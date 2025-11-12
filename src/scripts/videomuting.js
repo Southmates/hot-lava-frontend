@@ -16,11 +16,6 @@ function videoMuting() {
       
       let iframe = allIframesOnScene[i];
       let player = new Vimeo.Player(iframe);
-      
-          player.on('pause', function() {
-          console.log('paused');
-        });
-      
       player.pause();
     }
   });
