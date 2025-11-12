@@ -30,11 +30,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-}
 
-.section__p {
-  max-width: 480px;  
-}
+  p {
+    max-width: 480px; 
+  }
+} 
 
 .asterisk {
   display: block;
