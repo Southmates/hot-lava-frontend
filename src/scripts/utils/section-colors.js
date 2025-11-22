@@ -22,9 +22,9 @@ export function initSectionColors(options = {}) {
       //   direction: 'to bottom'
       // },
       '#about-us': '#103B60', // #0F8896 turquoise
-      '#work': '#103B60', // darkBlue
-      '#products': '#EC532C', // orange
-      '.contact, footer': '#103B60', // dark blue del footer
+      '#work': '#103B60', //rgb(48, 146, 216) darkBlue
+      '#products': '#103B60', // #103B60 darkBlue
+      '.contact, footer': '#082946', // #082946 dark blue del footer
     },
     transitionDuration: 0,
     defaultColor: 'transparent',
