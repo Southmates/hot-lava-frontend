@@ -48,8 +48,21 @@
       </div> 
     </div>
   </section>
+  <section class="intro__section intro__section--fourth" id="intro-fourth">
+    <div class="wrapper"> 
+      <div class="container">
+        <h3 class="title">
+          <span class="asterisk">*</span>The best ideas 
+          <br />know no bounds.      
+        </h3> 
+        <p class="paragraph">They flood our thoughts, ignite our emotions and build enough momentum to change the way we act. Ideas that flow are what the modern marketer needs to thrive.</p>
+      </div> 
+    </div>  
+  </section>
   <img src="/images/asterisk-lines.svg" alt="Hot Lava" class="asterisk-lines">
 </section>
+
+
 
 <script>
   import { initSplitText } from '../../scripts/utils/splittext.js';
@@ -60,44 +73,44 @@
   // Wait for fonts and critical images to be ready before initializing SplitText
   waitForAssets(() => {
     // Initialize SplitText for all titles in Intro sections (words)
-    const titles = document.querySelectorAll('.intro h3.title');
+    const titles = document.querySelectorAll('.intro__section h3.title');
     titles.forEach((title) => {
       initSplitText(title as HTMLElement, { type: 'words' });
     });
 
     // Initialize SplitText for all paragraphs in Intro sections (lines)
-    const paragraphs = document.querySelectorAll('.intro .paragraph');
+    const paragraphs = document.querySelectorAll('.intro__section .paragraph');
     paragraphs.forEach((paragraph) => {
       initSplitText(paragraph as HTMLElement, { type: 'lines' });
     });
   });
  
-  initParallax('.intro-first h3.title', {
+  initParallax('.intro__section--first h3.title', {
     speed: 1  
   });
 
-  initParallax('.intro-second h3.title', {
+  initParallax('.intro__section--second h3.title', {
     speed: 0.75  
   });
 
-  initParallax('.intro-second .paragraph-intro', {
+  initParallax('.intro__section--second .paragraph-intro', {
     speed: 0.75  
   });
   
-  initParallax('.intro-third h3.title', {
+  initParallax('.intro__section--third h3.title', {
     speed: 0.75  
   });
 
-  initParallax('.intro-third .paragraph', {
+  initParallax('.intro__section--third .paragraph', {
     speed: 0.75  
   });
 
-  initUkiyo('.intro-first .image-phrase img', {
+  initUkiyo('.intro__section--first .image-phrase img', {
     scale: 1.25,
     speed: 1
   });
 
-  initUkiyo('.intro-second .image-ideas img', {
+  initUkiyo('.intro__section--second .image-ideas img', {
     scale: 1.25,
     speed: 1
   });

@@ -14,8 +14,9 @@ export function initSectionColors(options = {}) {
     sectionColors: {
       '#hero': '#ef3910', //#dc2800 orange 
       '#intro-first': '#ef3910', // #ef3910 yellow (primera sección intro)
-      '#intro-second': '#ef3910', //  #0F8896 aquaGreen (segunda sección intro)
-      '#intro-third': '#ffa600', // #ffa600 orange (tercera sección intro)
+      '#intro-second': '#ef3910', //  #ef3910 aquaGreen (segunda sección intro)
+      '#intro-third': '#ef3910', // #ef3910 orange (tercera sección intro)
+      '#intro-fourth': '#ffa600', // #ffa600 orange (cuarta sección intro)
       // '#about-us': {
       //   type: 'gradient',
       //   colors: ['#0F8896', '#C7E6D5'], // turquoise a aquaGreen
@@ -23,7 +24,7 @@ export function initSectionColors(options = {}) {
       // },
       '#about-us': '#0F8896', // #067a89 turquoise
       '#work': '#103B60', // #3092d8 darkBlue
-      '#products': '#2A5C5C', // #2A5C5C darkGreen
+      '#shop': '#2A5C5C', // #2A5C5C darkGreen
       '.contact, footer': '#2A5C5C', // #082946 dark blue del footer
     },
     transitionDuration: 0,

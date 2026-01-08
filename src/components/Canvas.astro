@@ -38,7 +38,8 @@
       return;
     }
     
-    console.log("Initializing WebGL canvas...");
+    // console.log("Initializing WebGL canvas...");
+
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     
@@ -48,7 +49,8 @@
     renderer.domElement.style.height = '100%';
     renderer.domElement.style.display = 'block';
     gradientCanvas.appendChild(renderer.domElement);
-    console.log("Canvas element added to DOM:", renderer.domElement);
+   
+    // console.log("Canvas element added to DOM:", renderer.domElement);
 
     const fluidTarget1 = new THREE.WebGLRenderTarget(
       window.innerWidth,
@@ -198,7 +200,8 @@
     });
 
     animate();
-    console.log("WebGL canvas initialized successfully");
+   
+    // console.log("WebGL canvas initialized successfully");
   }
 
   // Wait for DOM to be ready

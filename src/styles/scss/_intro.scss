@@ -53,6 +53,13 @@
     min-height: 90vh;
   }
 }
+.intro__section--fourth {
+  .container {  
+    min-height: 0vh;
+  }
+}
+
+// Images at intro section
 
 .image-phrase {
   position: absolute; 
@@ -90,6 +97,8 @@
 
 }
 
+// Asterisk lines at intro section
+
 .asterisk-lines-container {
   position: relative;
   overflow: hidden; 
@@ -97,8 +106,8 @@
 
 .asterisk-lines {
   position: absolute;
-  bottom: -1%;
-  left: -15%;
+  bottom: 15%;
+  left: -25%;
   width:min(75vw, 1080px);
   height: auto;
   aspect-ratio: 1/1;
