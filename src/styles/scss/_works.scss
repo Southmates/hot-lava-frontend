@@ -99,6 +99,52 @@
   }
 }
 
+// Logos carousel.
+
+.carousel-brands {
+  width: 100%;
+  padding-top: 10vh;
+  overflow: hidden;
+}
+
+.brands-row {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 3rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.brands-track {
+  display: flex;
+  width: fit-content;
+  will-change: transform;
+}
+
+.brands { 
+  display: flex;
+  align-items: center;
+  gap: 8rem;
+  flex-shrink: 0;
+  padding: 0 4rem;
+
+  @media (max-width: 1023px) {
+    gap: 4rem;
+    padding: 0 2rem;
+  }
+
+  img {
+    max-width: 150px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+}
+
 .logos {
   padding-top: 10vh !important;
   justify-content: flex-start; 
@@ -111,28 +157,14 @@
   }
 }
 
-.brands { 
-  width: 100%;
-  padding-top: 10vh;
-
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 2rem;
-  row-gap: 4rem;
-  align-items: center; 
-
-  @media (max-width: 1023px) {
-    width: 80%;
-    margin: 0 auto;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  img {
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    justify-self: center;
-  }
-  
+.lines-works {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  right: 0; 
+  opacity: 0.5;  
+  z-index: 1;
+  width: 50vw;
+  height: auto;
+  mix-blend-mode: screen;
 }
