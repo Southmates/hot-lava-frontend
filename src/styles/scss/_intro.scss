@@ -27,6 +27,9 @@
 
 .intro-first {
   // background: linear-gradient(to bottom, var(--color-orange), var(--color-yellow));
+  .container {
+    align-items: flex-end;
+  }
 }
 
 .intro-second {
@@ -65,7 +68,7 @@
 .image-phrase {
   position: absolute; 
   top: 20%;
-  right: 5%;
+  left: 0%;
   width: 47vw;
   height: auto;
   aspect-ratio: 4/3;
