@@ -15,13 +15,18 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 1rem; 
+  gap: 0rem; 
      
   min-height: 100vh;
   max-width: 70vw;
   width: 100%;
   margin: 0 auto;
   padding: 15vh 0; 
+
+  // Cuando hay un item con hover, los demás tienen opacidad reducida
+  &:has(.work__item:hover) .work__item:not(:hover) .name {
+    opacity: 0.5;
+  }
 } 
 
 .work{ 
@@ -37,7 +42,8 @@
   display: flex;
   align-content: baseline;
   align-items: baseline;
-  gap: 1rem;
+  gap: 1rem; 
+  padding: 1rem 0;
   
   position: relative;
   width: 100%; 
@@ -47,7 +53,6 @@
   background-size: cover;
 
   overflow: hidden;
- 
   cursor: pointer; 
 
   span {
@@ -55,6 +60,7 @@
     width: 250px;
     font-size: 14px;
     text-align: right;
+    opacity: 0.5;
   }
 
   >* {
@@ -64,7 +70,9 @@
   .name { 
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 2; 
+    opacity: 1;
+    transition: opacity .35s ease;
 
     p { 
       width: 100%;
@@ -74,10 +82,12 @@
       font-weight: 900;
       line-height: 1.15;
       bottom: 0rem;
-      left: 2rem;  
-      transition: .35s;
- 
+      left: 2rem;   
     }
+  }
+
+  &:hover .name {
+    opacity: 1;
   }
   
   img { 
