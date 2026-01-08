@@ -1,6 +1,13 @@
-.shop {
-  // background-color: var(--color-darkBlue);
+@use './vars' as *;
 
+.shop { 
+  background:var(--color-shop) url('/shop/bg.png') no-repeat top center;
+  background-size: contain;
+
+  @media (min-width: $change-layout) {
+    background-size: cover;
+    min-height: 1300px;
+  }
 
   &__hero {
     width: 100%;

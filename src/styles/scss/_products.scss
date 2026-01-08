@@ -10,9 +10,14 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 0rem;
-  min-height: unset;
-  padding: 10vh 0;
+  
   width: 100%;
+  min-height: unset;
+  padding: 400px 0 0 0;
+
+  @media (min-width: $change-layout) {
+    padding: 700px 0 0 0;
+  }
 
   @media (max-width: $tablet-l) {
     grid-template-columns: repeat(3, 1fr);
@@ -22,6 +27,9 @@
   @media (max-width: $landscape) {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
+  }
+  @media (min-height: 900px) {
+    padding: 960px 0 0 0;
   }
 }
 
