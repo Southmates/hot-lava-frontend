@@ -42,11 +42,13 @@ window.lenis = lenis;
 
 // Navigation handler with anchor scrolling and menu state
 function handleNav() {
+  const homeLink = document.querySelector(".home-link");
   const aboutLink = document.querySelector(".about-link");
   const ourWayLink = document.querySelector(".how-we-work-link");
   const shopLink = document.querySelector(".shop-link");
   const contactLink = document.querySelector(".contact-link");
 
+  const homeEl = document.querySelector("#home");
   const aboutEl = document.querySelector("#about-us");
   const ourWayEl = document.querySelector("#work");
   const shopEl = document.querySelector("#shop");
@@ -55,6 +57,15 @@ function handleNav() {
   const mobileNavBtn = document.querySelector(".burger");
   const mobileNavBtnClose = document.querySelector(".close");
   const mobileNav = document.querySelector(".mobile");
+
+  const setHomeMenu = () => {
+    shopLink.classList.remove("active");
+    aboutLink.classList.remove("active");
+    ourWayLink.classList.remove("active");
+    contactLink.classList.remove("active");
+    mobileNav.classList.add("hidden");
+    mobileNavOpen = false;
+  };
 
   const setAboutMenu = () => {
     shopLink.classList.remove("active");
@@ -93,6 +104,14 @@ function handleNav() {
   };
 
   // Anchor navigation with smooth scroll
+  if (homeLink && homeEl) {
+    homeLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      lenis.scrollTo(homeEl, { offset: 0, duration: 1.2 });
+      setHomeMenu();
+    });
+  }
+
   if (aboutLink && aboutEl) {
     aboutLink.addEventListener("click", (e) => {
       e.preventDefault();
