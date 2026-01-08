@@ -123,8 +123,12 @@
 }
 
 .logo--vertical { 
+  position: absolute;
+  bottom: 50%;
+  left: 1.5rem;
   width: 100%;
   max-width: 120px;
+  z-index: -1;
 
   img {
     width: 100%;

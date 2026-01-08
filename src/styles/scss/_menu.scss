@@ -33,16 +33,16 @@
 
     ul {
       display: flex;
+      flex-direction: row; 
       justify-content: flex-start;
       align-items: center;
-      flex-direction: row-reverse;
       margin: 0;
-      transform: rotate(-90deg);
+      transform: rotate(90deg);
       position: absolute;
       width: 100vh;
-      bottom: -10vh;
-      left: 2rem;
-      transform-origin: 0;
+      top: 0vh;
+      left: 1.5rem;
+      transform-origin: 0 100%;
 
       li {
         list-style-type: none;
@@ -52,9 +52,10 @@
           font-family: $main-font-title;
           font-size: clamp(16px, 2vw, 18px);
           font-weight: 800;
-          letter-spacing: .05rem;
+          letter-spacing: -.01rem;
           color: #FFFFFF;
           text-decoration: none;
+          text-transform: uppercase;
 
           transition-duration: opacity .35s;
 
