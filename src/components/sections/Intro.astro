@@ -2,50 +2,53 @@
 // Intro.astro
 ---
 
-<section class="intro intro-first" id="intro-first">
-  <div class="wrapper">
-    <div class="image-phrase">
-      <img src="/images/phrase.jpg" alt="Hot Lava is our phrase for epiphany." data-critical="true" loading="eager">
-    </div>
-    <div class="container">
-      <h3 class="title">
-        <span class="asterisk">*</span>Hot Lava is our phrase for epiphany. We had one and that’s why we’re here...
-      </h3> 
-    </div>
-  </div>
-</section>
-<section class="intro intro-second" id="intro-second">
-  <div class="wrapper"> 
-    <div class="container">
-      <h3 class="title">
-        <span class="asterisk">*</span>
-        Ideas need to
-        <br />flow more freely.
-      </h3>
-      <div class="row">
-        <div class="image-ideas">
-          <img src="/images/flow.jpg" alt="Ideas need to flow more freely." data-critical="true" loading="eager">
-        </div> 
-        <p class="paragraph paragraph-intro"> It’s never been more important. With the complexities of today’s marketing challenges, ideas need to flow freely to be effective across audiences, platforms and cultures.
-        </p>
+<section class="intro asterisk-lines-container" id="intro">
+  <section class="intro__section intro__section--first" id="intro-first">
+    <div class="wrapper">
+      <div class="image-phrase">
+        <img src="/images/phrase.jpg" alt="Hot Lava is our phrase for epiphany." data-critical="true" loading="eager">
+      </div>
+      <div class="container">
+        <h3 class="title">
+          <span class="asterisk">*</span>Hot Lava is our phrase for epiphany. We had one and that’s why we’re here...
+        </h3> 
       </div>
     </div>
-  </div>
-</section>
-<section class="intro intro-third" id="intro-third">
-  <div class="wrapper"> 
-    <div class="container">
-      <h3 class="title">
-        <span class="asterisk">*</span>Flow starts with
-        <br />the way we work.
-      </h3>
-      <p class="paragraph">We're a full-service advertising agency that gives
-        clients direct access to award-winning creators and doers. Our team is
-        simply an extension of yours – with personal service, an agile approach,
-        and effective, defining work.
-      </p>
-    </div> 
-  </div>
+  </section>
+  <section class="intro__section intro__section--second" id="intro-second">
+    <div class="wrapper"> 
+      <div class="container">
+        <h3 class="title">
+          <span class="asterisk">*</span>
+          Ideas need to
+          <br />flow more freely.
+        </h3>
+        <div class="intro__row">
+          <div class="image-ideas">
+            <img src="/images/flow.jpg" alt="Ideas need to flow more freely." data-critical="true" loading="eager">
+          </div> 
+          <p class="paragraph paragraph-intro"> It’s never been more important. With the complexities of today’s marketing challenges, ideas need to flow freely to be effective across audiences, platforms and cultures.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="intro__section intro__section--third" id="intro-third">
+    <div class="wrapper"> 
+      <div class="container">
+        <h3 class="title">
+          <span class="asterisk">*</span>Flow starts with
+          <br />the way we work.
+        </h3>
+        <p class="paragraph">We're a full-service advertising agency that gives
+          clients direct access to award-winning creators and doers. Our team is
+          simply an extension of yours – with personal service, an agile approach,
+          and effective, defining work.
+        </p>
+      </div> 
+    </div>
+  </section>
+  <img src="/images/asterisk-lines.svg" alt="Hot Lava" class="asterisk-lines">
 </section>
 
 <script>
