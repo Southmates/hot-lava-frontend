@@ -10,17 +10,23 @@
 
 .works__list {    
   position: relative;
-  min-height: 100vh;
-  padding: 10vh 0; 
+
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 1rem; 
   
-
-  max-width: 800px;
+   
+  min-height: 100vh;
+  max-width: 70vw;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10vh 0; 
 
 } 
 
-.work__container { 
+.work{ 
   display: flex;
   flex-direction: column;
   justify-content: center; 
@@ -30,6 +36,11 @@
 }
 
 .work__item {
+  display: flex;
+  align-content: baseline;
+  align-items: baseline;
+  gap: 1rem;
+  
   position: relative;
   width: 100%; 
 
@@ -41,6 +52,13 @@
  
   cursor: pointer; 
 
+  span {
+    display: inline-block;
+    width: 250px;
+    font-size: 14px;
+    text-align: right;
+  }
+
   >* {
     pointer-events: none;
   }
@@ -51,6 +69,9 @@
     z-index: 2;
 
     p { 
+      width: 100%;
+      max-width: unset;
+
       font-size: clamp(32px, 5vw, 48px);
       font-weight: 900;
       line-height: 1.15;
@@ -75,6 +96,11 @@
   justify-content: flex-start; 
   min-height: unset;
   padding-bottom: 20vh;
+
+  h5 {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .brands { 
