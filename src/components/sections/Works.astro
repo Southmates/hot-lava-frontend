@@ -1,5 +1,6 @@
 ---
 // Works.astro
+import BrandsCarousel from '../BrandsCarousel.astro';
 ---
 
 <section id="work" class="works">  
@@ -99,151 +100,18 @@
 
   <!-- Logos carousel. -->
   <div class="container logos">
-    <h5>
-      Our expertise flows across CPG, B2B and retail. 
-    </h5>
-
-    <div class="carousel-brands">
-      <!-- Fila superior: izquierda a derecha -->
-      <div class="brands-row brands-row--top">
-        <div class="brands-track brands-track--top">
-          <div class="brands"> 
-            <img src="./brands/Arrow.png" alt="Arrow">
-            <img src="./brands/Dehnco.png" alt="Dehnco">
-            <img src="./brands/Dole.png" alt="Dole">
-            <img src="./brands/EZ-corp.png" alt="EZ-corp">
-            <img src="./brands/Knudsen.png" alt="Knudsen">
-            <img src="./brands/P&G.png" alt="P&G">
-            <img src="./brands/REW.png" alt="REW">
-            <img src="./brands/SpartanNash.png" alt="SpartanNash">
-          </div>
-          <!-- Duplicado para loop infinito -->
-          <div class="brands"> 
-            <img src="./brands/Arrow.png" alt="Arrow">
-            <img src="./brands/Dehnco.png" alt="Dehnco">
-            <img src="./brands/Dole.png" alt="Dole">
-            <img src="./brands/EZ-corp.png" alt="EZ-corp">
-            <img src="./brands/Knudsen.png" alt="Knudsen">
-            <img src="./brands/P&G.png" alt="P&G">
-            <img src="./brands/REW.png" alt="REW">
-            <img src="./brands/SpartanNash.png" alt="SpartanNash">
-          </div>
-        </div>
-      </div>
-
-      <!-- Fila inferior: derecha a izquierda -->
-      <div class="brands-row brands-row--bottom">
-        <div class="brands-track brands-track--bottom">
-          <div class="brands"> 
-            <img src="./brands/Arrow.png" alt="Arrow">
-            <img src="./brands/Dehnco.png" alt="Dehnco">
-            <img src="./brands/Dole.png" alt="Dole">
-            <img src="./brands/EZ-corp.png" alt="EZ-corp">
-            <img src="./brands/Knudsen.png" alt="Knudsen">
-            <img src="./brands/P&G.png" alt="P&G">
-            <img src="./brands/REW.png" alt="REW">
-            <img src="./brands/SpartanNash.png" alt="SpartanNash">
-          </div>
-          <!-- Duplicado para loop infinito -->
-          <div class="brands"> 
-            <img src="./brands/Arrow.png" alt="Arrow">
-            <img src="./brands/Dehnco.png" alt="Dehnco">
-            <img src="./brands/Dole.png" alt="Dole">
-            <img src="./brands/EZ-corp.png" alt="EZ-corp">
-            <img src="./brands/Knudsen.png" alt="Knudsen">
-            <img src="./brands/P&G.png" alt="P&G">
-            <img src="./brands/REW.png" alt="REW">
-            <img src="./brands/SpartanNash.png" alt="SpartanNash">
-          </div>
-        </div>
-      </div>
-    </div>
+    <BrandsCarousel 
+      title="Our expertise flows across CPG, B2B and retail."
+      duration={40}
+    />
   </div>
 </section>
 
 <script>
   import { initParallax } from '../../scripts/utils/parallax.js';
-  import gsap from 'gsap';
 
   initParallax('.works .logo', {
     speed: 1  
   });
-
-  // Carrusel infinito de logos
-  function initBrandsCarousel() {
-    const topTrack = document.querySelector('.brands-track--top') as HTMLElement;
-    const bottomTrack = document.querySelector('.brands-track--bottom') as HTMLElement;
-
-    if (!topTrack || !bottomTrack) return;
-
-    // Esperar a que las imágenes se carguen para calcular correctamente el ancho
-    const images = document.querySelectorAll('.carousel-brands img');
-    let imagesLoaded = 0;
-    const totalImages = images.length;
-
-    if (totalImages === 0) {
-      // Si no hay imágenes, inicializar de inmediato
-      startCarousel();
-      return;
-    }
-
-    const checkAndStart = () => {
-      imagesLoaded++;
-      if (imagesLoaded === totalImages) {
-        startCarousel();
-      }
-    };
-
-    images.forEach((img) => {
-      if ((img as HTMLImageElement).complete) {
-        checkAndStart();
-      } else {
-        img.addEventListener('load', checkAndStart);
-        img.addEventListener('error', checkAndStart);
-      }
-    });
-
-    function startCarousel() {
-      // Calcular el ancho de un set de logos
-      const topBrands = topTrack.querySelector('.brands') as HTMLElement;
-      const bottomBrands = bottomTrack.querySelector('.brands') as HTMLElement;
-      
-      if (!topBrands || !bottomBrands) return;
-
-      const topWidth = topBrands.offsetWidth;
-      const bottomWidth = bottomBrands.offsetWidth;
-
-      // Fila superior: izquierda a derecha (se mueve hacia la izquierda)
-      gsap.fromTo(topTrack, 
-        { x: 0 },
-        {
-          x: -topWidth,
-          duration: 40,
-          ease: "none",
-          repeat: -1,
-        }
-      );
-
-      // Fila inferior: derecha a izquierda (se mueve hacia la derecha para efecto opuesto)
-      gsap.fromTo(bottomTrack,
-        { x: -bottomWidth },
-        {
-          x: 0,
-          duration: 40,
-          ease: "none",
-          repeat: -1,
-        }
-      );
-    }
-  }
-
-  // Inicializar cuando el DOM esté listo
-  if (typeof window !== 'undefined') {
-    if (document.readyState === 'complete') {
-      initBrandsCarousel();
-    } else {
-      window.addEventListener('load', initBrandsCarousel);
-    }
-  }
 </script>
  

@@ -1,0 +1,165 @@
+---
+// BrandsCarousel.astro
+// Componente reutilizable para carrusel infinito de logos en dos filas
+
+interface Props {
+  brands?: Array<{ src: string; alt: string }>;
+  duration?: number;
+  title?: string;
+}
+
+const {
+  brands = [
+    { src: "./brands/Arrow.png", alt: "Arrow" },
+    { src: "./brands/Dehnco.png", alt: "Dehnco" },
+    { src: "./brands/Dole.png", alt: "Dole" },
+    { src: "./brands/EZ-corp.png", alt: "EZ-corp" },
+    { src: "./brands/Knudsen.png", alt: "Knudsen" },
+    { src: "./brands/P&G.png", alt: "P&G" },
+    { src: "./brands/REW.png", alt: "REW" },
+    { src: "./brands/SpartanNash.png", alt: "SpartanNash" },
+  ],
+  duration = 40,
+  title = "Our expertise flows across CPG, B2B and retail.",
+} = Astro.props;
+---
+
+<div class="brands-carousel" data-duration={duration}>
+  {title && (
+    <h3 class="brands-carousel__title">{title}</h3>
+  )}
+
+  <div class="brands-carousel__container">
+    <!-- Fila superior: izquierda a derecha -->
+    <div class="brands-carousel__row brands-carousel__row--top">
+      <div class="brands-carousel__track brands-carousel__track--top">
+        <div class="brands-carousel__brands"> 
+          {brands.map((brand) => (
+            <img src={brand.src} alt={brand.alt} />
+          ))}
+        </div>
+        <!-- Duplicado para loop infinito -->
+        <div class="brands-carousel__brands"> 
+          {brands.map((brand) => (
+            <img src={brand.src} alt={brand.alt} />
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Fila inferior: derecha a izquierda -->
+    <div class="brands-carousel__row brands-carousel__row--bottom">
+      <div class="brands-carousel__track brands-carousel__track--bottom">
+        <div class="brands-carousel__brands"> 
+          {brands.map((brand) => (
+            <img src={brand.src} alt={brand.alt} />
+          ))}
+        </div>
+        <!-- Duplicado para loop infinito -->
+        <div class="brands-carousel__brands"> 
+          {brands.map((brand) => (
+            <img src={brand.src} alt={brand.alt} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import gsap from 'gsap';
+
+  /**
+   * Inicializa el carrusel infinito de logos
+   * @param duration - Duración de la animación en segundos (mayor = más lento)
+   */
+  function initBrandsCarousel(duration: number = 40) {
+    const topTrack = document.querySelector('.brands-carousel__track--top') as HTMLElement;
+    const bottomTrack = document.querySelector('.brands-carousel__track--bottom') as HTMLElement;
+
+    if (!topTrack || !bottomTrack) {
+      console.warn('BrandsCarousel: Tracks no encontrados');
+      return;
+    }
+
+    // Esperar a que las imágenes se carguen para calcular correctamente el ancho
+    const container = document.querySelector('.brands-carousel__container');
+    if (!container) return;
+
+    const images = container.querySelectorAll('img');
+    let imagesLoaded = 0;
+    const totalImages = images.length;
+
+    if (totalImages === 0) {
+      startCarousel();
+      return;
+    }
+
+    const checkAndStart = () => {
+      imagesLoaded++;
+      if (imagesLoaded === totalImages) {
+        startCarousel();
+      }
+    };
+
+    images.forEach((img) => {
+      if ((img as HTMLImageElement).complete) {
+        checkAndStart();
+      } else {
+        img.addEventListener('load', checkAndStart);
+        img.addEventListener('error', checkAndStart);
+      }
+    });
+
+    function startCarousel() {
+      // Calcular el ancho de un set de logos
+      const topBrands = topTrack.querySelector('.brands-carousel__brands') as HTMLElement;
+      const bottomBrands = bottomTrack.querySelector('.brands-carousel__brands') as HTMLElement;
+      
+      if (!topBrands || !bottomBrands) {
+        console.warn('BrandsCarousel: Brands no encontrados');
+        return;
+      }
+
+      const topWidth = topBrands.offsetWidth;
+      const bottomWidth = bottomBrands.offsetWidth;
+
+      // Fila superior: izquierda a derecha (se mueve hacia la izquierda)
+      gsap.fromTo(topTrack, 
+        { x: 0 },
+        {
+          x: -topWidth,
+          duration,
+          ease: "none",
+          repeat: -1,
+        }
+      );
+
+      // Fila inferior: derecha a izquierda (se mueve hacia la derecha para efecto opuesto)
+      gsap.fromTo(bottomTrack,
+        { x: -bottomWidth },
+        {
+          x: 0,
+          duration,
+          ease: "none",
+          repeat: -1,
+        }
+      );
+    }
+  }
+
+  // Inicializar cuando el DOM esté listo
+  if (typeof window !== 'undefined') {
+    const carouselElement = document.querySelector('.brands-carousel') as HTMLElement;
+    const carouselDuration = carouselElement?.dataset.duration 
+      ? parseInt(carouselElement.dataset.duration, 10) 
+      : 40;
+
+    if (document.readyState === 'complete') {
+      initBrandsCarousel(carouselDuration);
+    } else {
+      window.addEventListener('load', () => initBrandsCarousel(carouselDuration));
+    }
+  }
+</script>
+

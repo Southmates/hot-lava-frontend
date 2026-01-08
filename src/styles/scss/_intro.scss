@@ -26,19 +26,11 @@
 }
 
 .intro-first {
-  // background: linear-gradient(to bottom, var(--color-orange), var(--color-yellow));
+ 
   .container {
     align-items: flex-end;
   }
-}
-
-.intro-second {
-  // background: var(--color-turquoise);
-}
-
-.intro-third {
-  // background: var(--color-orange);
-}
+} 
 
 .intro-first{
   .title {
@@ -113,4 +105,8 @@
   height: auto;
   aspect-ratio: 1/1;
   z-index: 10;
+}
+
+.title {
+  font-size: clamp(40px, 5vw, 80px);
 }
