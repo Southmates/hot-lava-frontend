@@ -73,7 +73,20 @@
       object-fit: cover;
     }
   }
+}
 
+.team__name {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 10;
+  white-space: nowrap;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--color-white);
+  pointer-events: none; 
   // display: flex;
   // flex-direction: row-reverse;
   // align-items: flex-start;
