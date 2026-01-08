@@ -28,25 +28,46 @@
 .product__card {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1.2;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s ease;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
 //   &:hover {
 //     transform: scale(1.02);
 //   }
 
-  &--orange {
-    background-color: $color-orange;
+  &--1 {
+    background-image: url('/shop/01.png');
+    background-color: #ffffff; /* Fallback - adjust to match image bg */
   }
 
-  &--yellow {
-    background-color: $color-yellow;
+  &--2 {
+    background-image: url('/shop/02.png');
+    background-color: #ffffff; /* Fallback - adjust to match image bg */
   }
 
-  &--lightBlue {
-    background-color: $color-aquaGreen;
+  &--3 {
+    background-image: url('/shop/03.png');
+    background-color: #ffffff; /* Fallback - adjust to match image bg */
+  }
+
+  &--4 {
+    background-image: url('/shop/04.png');
+    background-color: #ffffff; /* Fallback - adjust to match image bg */
+  }
+
+  &--5 {
+    background-image: url('/shop/05.png');
+    background-color: #ffffff; /* Fallback - adjust to match image bg */
+  }
+
+  &--6 {
+    background-image: url('/shop/06.png');
+    background-color: #ffffff; /* Fallback - adjust to match image bg */
   }
 }
 
