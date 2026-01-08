@@ -14,10 +14,7 @@
     bottom: 33%; 
   }
 }
-
-.about {
-  // background: linear-gradient(to bottom, var(--color-turquoise), var(--color-aquaGreen));
-}
+ 
 
 .about__intro { 
   min-height: 50vh;
@@ -77,9 +74,9 @@
 
 .team__name {
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 0;
-  transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-65%) translateY(-50%);
   z-index: 10;
   white-space: nowrap;
   font-size: clamp(32px, 5vw, 48px);
