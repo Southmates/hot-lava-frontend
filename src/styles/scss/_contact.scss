@@ -90,3 +90,14 @@
     //   transform: translateY(12%) translateX(-2%);
     // }
   }
+
+
+.contact__paragraph strong {
+  cursor: pointer; 
+  display: block;
+  transition: 0.35s; 
+  
+  &:hover {
+    color: #fff !important;
+  }
+}
