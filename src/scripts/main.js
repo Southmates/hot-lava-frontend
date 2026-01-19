@@ -218,10 +218,149 @@ function handleHeaderVisibility() {
   });
 }
 
+// Update active menu state based on scroll position
+function handleActiveMenuState() {
+  const homeLink = document.querySelector(".home-link");
+  const aboutLink = document.querySelector(".about-link");
+  const ourWayLink = document.querySelector(".how-we-work-link");
+  const shopLink = document.querySelector(".shop-link");
+  const contactLink = document.querySelector(".contact-link");
+
+  const homeEl = document.querySelector("#home");
+  const aboutEl = document.querySelector("#about-us");
+  const ourWayEl = document.querySelector("#work");
+  const shopEl = document.querySelector("#shop");
+  const contactEl = document.querySelector("#contact");
+
+  if (!homeLink || !aboutLink || !ourWayLink || !shopLink || !contactLink) return;
+
+  const links = [
+    { link: homeLink, element: homeEl, id: 'home' },
+    { link: aboutLink, element: aboutEl, id: 'about' },
+    { link: ourWayLink, element: ourWayEl, id: 'work' },
+    { link: shopLink, element: shopEl, id: 'shop' },
+    { link: contactLink, element: contactEl, id: 'contact' },
+  ].filter(item => item.element); // Filtrar elementos que no existen
+
+  // Función para actualizar el estado activo
+  const updateActiveState = (activeId) => {
+    links.forEach(({ link, id }) => {
+      if (id === activeId) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  };
+
+  // Crear ScrollTriggers para cada sección
+  links.forEach(({ element, id }) => {
+    if (!element) return;
+
+    ScrollTrigger.create({
+      trigger: element,
+      start: "top 60%",
+      end: "bottom 40%",
+      onEnter: () => updateActiveState(id),
+      onEnterBack: () => updateActiveState(id),
+      onLeave: () => {
+        // Determinar qué sección es la siguiente
+        const currentScroll = window.scrollY || window.pageYOffset;
+        const viewportHeight = window.innerHeight;
+        const centerPoint = currentScroll + viewportHeight / 2;
+
+        // Encontrar la sección más cercana al centro del viewport
+        let closestSection = null;
+        let closestDistance = Infinity;
+
+        links.forEach(({ element: el, id: sectionId }) => {
+          if (!el) return;
+          const rect = el.getBoundingClientRect();
+          const elementTop = rect.top + currentScroll;
+          const elementCenter = elementTop + rect.height / 2;
+          const distance = Math.abs(centerPoint - elementCenter);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestSection = sectionId;
+          }
+        });
+
+        if (closestSection) {
+          updateActiveState(closestSection);
+        }
+      },
+      onLeaveBack: () => {
+        // Similar a onLeave pero para scroll hacia arriba
+        const currentScroll = window.scrollY || window.pageYOffset;
+        const viewportHeight = window.innerHeight;
+        const centerPoint = currentScroll + viewportHeight / 2;
+
+        let closestSection = null;
+        let closestDistance = Infinity;
+
+        links.forEach(({ element: el, id: sectionId }) => {
+          if (!el) return;
+          const rect = el.getBoundingClientRect();
+          const elementTop = rect.top + currentScroll;
+          const elementCenter = elementTop + rect.height / 2;
+          const distance = Math.abs(centerPoint - elementCenter);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestSection = sectionId;
+          }
+        });
+
+        if (closestSection) {
+          updateActiveState(closestSection);
+        }
+      },
+    });
+  });
+
+  // Estado inicial basado en la posición del scroll
+  const updateInitialState = () => {
+    const currentScroll = window.scrollY || window.pageYOffset;
+    const viewportHeight = window.innerHeight;
+    const centerPoint = currentScroll + viewportHeight / 2;
+
+    let closestSection = null;
+    let closestDistance = Infinity;
+
+    links.forEach(({ element: el, id: sectionId }) => {
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const elementTop = rect.top + currentScroll;
+      const elementCenter = elementTop + rect.height / 2;
+      const distance = Math.abs(centerPoint - elementCenter);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestSection = sectionId;
+      }
+    });
+
+    if (closestSection) {
+      updateActiveState(closestSection);
+    }
+  };
+
+  // Actualizar estado inicial después de que todo esté cargado
+  if (document.readyState === 'complete') {
+    setTimeout(updateInitialState, 100);
+  } else {
+    window.addEventListener('load', () => {
+      setTimeout(updateInitialState, 100);
+    });
+  }
+}
+
 // Initialize all functions
 handleNav();
 handleModal();
 handleHeaderVisibility();
+handleActiveMenuState();
 handleDynamicContentResize(lenis);
 // customCursor();
 
