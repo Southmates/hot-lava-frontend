@@ -1,15 +1,56 @@
 ---
 // Nav.astro
+
+const navItems = [
+  {
+    label: "Home",
+    href: "#home",
+    class: "home-link",
+  },
+  {
+    label: "About",
+    href: "#about",
+    mobileHref: "#about-us",
+    class: "about-link",
+    mobileLabel: "About",
+  },
+  {
+    label: "Work",
+    href: "#work",
+    class: "how-we-work-link",
+    mobileLabel: "Work",
+  },
+  {
+    label: "Shop",
+    href: "#shop",
+    class: "shop-link",
+    mobileLabel: "Shop",
+  },
+  {
+    label: "Contact",
+    href: "#contact",
+    class: "contact-link",
+    mobileLabel: "Contact",
+  },
+];
+
+const contactInfo = {
+  text: "Well, Hot Lava! We'd love to chat too.",
+  textAfterBreak: "For inquiries, contact:",
+  email: "info@hotlavaagency.com",
+};
 ---
 
 <nav class="menu" id="home">
   <div class="desktop">
     <ul class="navbar">
-      <li><a class="home-link" href="#home">Home</a></li> 
-      <li><a class="about-link" href="#about">About</a></li> 
-      <li><a class="how-we-work-link" href="#work">Works</a></li>
-      <li><a class="shop-link" href="#shop">Shop</a></li>
-      <li><a class="contact-link" href="#contact">Contact</a></li>
+      {navItems.map((item) => (
+        <li>
+          <a class={item.class} href={item.href}>
+            {item.label}
+          </a>
+        </li>
+      ))}
     </ul>
   </div>
 
@@ -30,15 +71,23 @@
     </div>
     <div class="nav">
       <ul>
-        <li><a class="about-link" href="#about-us">ABOUT</a></li>
-        <li><a class="how-we-work-link" href="#work">HOW WE WORK</a></li>
-        <li><a class="shop-link" href="#shop">SHOP</a></li>
-        <li><a class="contact-link" href="#contact">CONTACT</a></li>
+        {navItems
+          .filter((item) => !('mobile' in item) || item.mobile !== false)
+          .map((item) => (
+            <li>
+              <a class={item.class} href={item.mobileHref || item.href}>
+                {item.mobileLabel || item.label}
+              </a>
+            </li>
+          ))}
       </ul>
     </div>
     <div class="contact">
-      <p>Well, Hot Lava! We'd love to chat too. <br >For inquiries, contact:</p>
-      <a href="mailto:info@hotlavaagency.com">info@hotlavaagency.com</a>
+      <p>
+        {contactInfo.text} <br />
+        {contactInfo.textAfterBreak}
+      </p>
+      <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
     </div>
   </div>
 </nav>
