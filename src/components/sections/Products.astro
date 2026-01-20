@@ -5,6 +5,7 @@ interface Product {
   id: number;
   name: string;
   image: string;
+  hoverImage: string;
   url: string;
   darkBackground?: boolean;
 }
@@ -19,20 +20,23 @@ const defaultProducts: Product[] = [
     id: 1, 
     name: 'Flow Generator Lamp', 
     image: '/shop/01.png',
+    hoverImage: '/shop/01.webp',
     url: 'https://shop.hotlavaagency.com/products/hot-lava-boxed-lava-lamp',
-    darkBackground: false
+    darkBackground: true
   },
   { 
     id: 2, 
     name: 'Hot Sauce Original Trio', 
     image: '/shop/02.png',
+    hoverImage: '/shop/02.webp',
     url: 'https://shop.hotlavaagency.com/products/hot-lava-boxed-hot-sauces',
-    darkBackground: false
+    darkBackground: true
   },
   { 
     id: 3, 
     name: 'Lava Scented Candle', 
     image: '/shop/03.png',
+    hoverImage: '/shop/03.webp',
     url: 'https://shop.hotlavaagency.com/products/concrete-candle-lava-scent',
     darkBackground: true
   },
@@ -40,6 +44,7 @@ const defaultProducts: Product[] = [
     id: 4, 
     name: 'Volcanic Hoodie', 
     image: '/shop/04.png',
+    hoverImage: '/shop/04.webp',
     url: 'https://shop.hotlavaagency.com/products/hot-lava-hoodie',
     darkBackground: true
   },
@@ -47,15 +52,17 @@ const defaultProducts: Product[] = [
     id: 5, 
     name: 'Ember Key Charm', 
     image: '/shop/05.png',
+    hoverImage: '/shop/05.webp',
     url: 'https://shop.hotlavaagency.com/products/hot-lava-keychain',
-    darkBackground: false
+    darkBackground: true
   },
   { 
     id: 6, 
     name: 'Ember Thinking Cap', 
     image: '/shop/06.png',
+    hoverImage: '/shop/06.webp',
     url: 'https://shop.hotlavaagency.com/products/hot-lava-hat',
-    darkBackground: false
+    darkBackground: true
   },
 ];
 
@@ -75,6 +82,12 @@ const { products = defaultProducts } = Astro.props;
           rel="noopener noreferrer"
           class={`product__card product__card--${product.id} ${product.darkBackground ? 'product__card--dark' : ''}`}
         >
+          <img 
+            src={product.hoverImage} 
+            alt={product.name}
+            class="product__hover-image"
+            loading="lazy"
+          />
           <div class="product__content">
             <span class="product__name">{product.name}</span>
             <span class="product__view-text">View Product →</span>
