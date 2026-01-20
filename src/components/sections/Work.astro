@@ -6,6 +6,7 @@ interface WorkItem {
   brand: string;
   name: string;
   slide: string;
+  image: string;
 }
 
 interface Props {
@@ -17,13 +18,12 @@ interface Props {
 
 // Default works data - will be replaced by CMS data
 const defaultWorks: WorkItem[] = [
-  { brand: 'P&G', name: 'Collision', slide: 'Collision' },
-  { brand: 'P&G', name: 'First-Time Fresh', slide: 'First-Time Fresh' },
-  { brand: 'Dehnco', name: 'The Most Classic Design', slide: 'The Most Classic Design' },
-  { brand: 'Arrow Electronics', name: 'The Speed of Arrow', slide: 'The Speed of Arrow' },
-  { brand: 'Dole Packaged Foods', name: 'Dolemates', slide: 'Dolemates' },
-  { brand: 'Max Pawn Luxury', name: 'We Know Real', slide: 'We Know Real' },
-  { brand: 'EZ Pawn', name: "You Won't Believe It", slide: "You Won't Believe It" },
+  { brand: 'P&G', name: 'Collision', slide: 'Collision', image: '/work/p&g--collision.jpg' },
+  { brand: 'P&G', name: 'First-Time Fresh', slide: 'First-Time Fresh', image: '/work/p&g--first-time-fresh.jpg' },
+  { brand: 'Dehnco', name: 'The Most Classic Design', slide: 'The Most Classic Design', image: '/work/dehnco--the-most-classic-design.jpg' },
+  { brand: 'Arrow Electronics', name: 'The Speed of Arrow', slide: 'The Speed of Arrow', image: '/work/arrow--the-speed-of-arrow.jpg' },
+  { brand: 'Dole Packaged Foods', name: 'Dolemates', slide: 'Dolemates', image: '/work/dole--dolemates.jpg' },
+  { brand: 'Max Pawn Luxury', name: 'We Know Real', slide: 'We Know Real', image: '/work/max-pawn--luxury-we-know-real.jpg' }, 
 ];
 
 const {
@@ -52,6 +52,12 @@ const {
               <div class="name">
                 <p>{work.name}</p>
               </div>
+              <img 
+                src={work.image} 
+                alt={work.name}
+                class="work__image"
+                loading="lazy"
+              />
             </div>
           </div>
         ))}
@@ -77,4 +83,40 @@ const {
   initParallax('.works .logo', {
     speed: 1  
   });
+
+  // Position work images vertically aligned with their corresponding text
+  function positionWorkImages() {
+    const workItems = document.querySelectorAll('.work__item');
+    
+    workItems.forEach((item) => {
+      const image = item.querySelector('.work__image') as HTMLElement;
+      if (!image) return;
+
+      const updatePosition = () => {
+        const rect = item.getBoundingClientRect();
+        const centerY = rect.top + rect.height / 2;
+        image.style.top = `${centerY}px`;
+        image.style.transform = `translateY(-50%) translateX(40px)`;
+      };
+
+      // Update position on load and scroll
+      updatePosition();
+      window.addEventListener('scroll', updatePosition, { passive: true });
+      window.addEventListener('resize', updatePosition, { passive: true });
+
+      // Update on hover
+      item.addEventListener('mouseenter', () => {
+        updatePosition();
+        image.style.transform = `translateY(-50%) translateX(0)`;
+      });
+    });
+  }
+
+  if (typeof window !== 'undefined') {
+    if (document.readyState === 'complete') {
+      positionWorkImages();
+    } else {
+      window.addEventListener('load', positionWorkImages);
+    }
+  }
 </script>
