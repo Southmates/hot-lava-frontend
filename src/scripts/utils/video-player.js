@@ -16,7 +16,7 @@ export function createVideoPlayer() {
   // Convert Vimeo URL to embed format
   function getVimeoEmbedUrl(url) {
     const videoId = url?.match(/\/(\d+)/)?.[1];
-    return videoId ? `https://player.vimeo.com/video/${videoId}?autoplay=1&loop=0&muted=0&controls=0` : '';
+    return videoId ? `https://player.vimeo.com/video/${videoId}?autoplay=1&loop=0&muted=0&controls=0&byline=0&portrait=0&dnt=1` : '';
   }
 
   // Format time in MM:SS
