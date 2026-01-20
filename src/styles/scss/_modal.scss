@@ -123,6 +123,7 @@
 }
 
 .vimeo-player__title {
+  font-family: $main-font-title;
   font-size: clamp(24px, 3vw, 36px);
   font-weight: 900;
   color: #fff;
@@ -143,6 +144,7 @@
 }
 
 .vimeo-player__play-pause {
+  font-family: $main-font;
   background: transparent;
   border: 2px solid #fff;
   color: #fff;
@@ -182,6 +184,7 @@
 }
 
 .vimeo-player__time {
+  font-family: $main-font;
   font-size: 14px;
   color: #fff;
   font-weight: 400;
