@@ -174,19 +174,141 @@ function handleModal() {
   const closeModalBtn = document.querySelector(".js-close");
   const modalTarget = document.querySelector(".modal");
   const videoIframe = document.getElementById("work-video");
+  const videoTitle = document.getElementById("work-video-title");
+  const playPauseBtn = document.getElementById("work-video-play-pause");
+  const progressBar = document.getElementById("work-video-progress");
+  const timeDisplay = document.getElementById("work-video-time");
+  
+  let vimeoPlayer = null;
+  let progressInterval = null;
+  let currentWorkName = '';
 
   // Convert Vimeo URL to embed format
   function getVimeoEmbedUrl(url) {
     const videoId = url.match(/\/(\d+)/)?.[1];
     if (!videoId) return '';
-    return `https://player.vimeo.com/video/${videoId}?autoplay=1&loop=0&muted=0`;
+    return `https://player.vimeo.com/video/${videoId}?autoplay=0&loop=0&muted=0&controls=0`;
+  }
+
+  // Format time in MM:SS
+  function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  // Update progress bar and time
+  function updateProgress() {
+    if (!vimeoPlayer) return;
+    
+    vimeoPlayer.getCurrentTime().then((current) => {
+      vimeoPlayer.getDuration().then((duration) => {
+        const percent = (current / duration) * 100;
+        progressBar.style.width = `${percent}%`;
+        timeDisplay.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
+      });
+    });
+  }
+
+  // Initialize Vimeo player
+  function initVimeoPlayer() {
+    if (typeof Vimeo === 'undefined' || !videoIframe) {
+      // Retry if Vimeo API not loaded yet
+      setTimeout(() => {
+        if (typeof Vimeo !== 'undefined') {
+          initVimeoPlayer();
+        }
+      }, 100);
+      return;
+    }
+    
+    try {
+      vimeoPlayer = new Vimeo.Player(videoIframe);
+      
+      // Update title visibility based on play state
+      vimeoPlayer.on('play', () => {
+        modalTarget.classList.add('vimeo-player--playing');
+        if (playPauseBtn) playPauseBtn.textContent = 'PAUSE';
+        if (progressInterval) clearInterval(progressInterval);
+        progressInterval = setInterval(updateProgress, 100);
+      });
+      
+      vimeoPlayer.on('pause', () => {
+        modalTarget.classList.remove('vimeo-player--playing');
+        if (playPauseBtn) playPauseBtn.textContent = 'PLAY';
+        if (progressInterval) clearInterval(progressInterval);
+        updateProgress();
+      });
+      
+      vimeoPlayer.on('ended', () => {
+        modalTarget.classList.remove('vimeo-player--playing');
+        if (playPauseBtn) playPauseBtn.textContent = 'PLAY';
+        if (progressInterval) clearInterval(progressInterval);
+      });
+      
+      // Initial progress update
+      setTimeout(() => {
+        updateProgress();
+      }, 500);
+    } catch (error) {
+      console.warn('Vimeo Player initialization error:', error);
+    }
   }
 
   // Stop video playback
   function stopVideo() {
+    if (vimeoPlayer) {
+      vimeoPlayer.pause().catch(() => {});
+      vimeoPlayer = null;
+    }
+    if (progressInterval) {
+      clearInterval(progressInterval);
+      progressInterval = null;
+    }
     if (videoIframe) {
       videoIframe.src = '';
     }
+    modalTarget.classList.remove('vimeo-player--playing');
+    if (playPauseBtn) playPauseBtn.textContent = 'PLAY';
+    if (progressBar) progressBar.style.width = '0%';
+    if (timeDisplay) timeDisplay.textContent = '0:00 / 0:00';
+  }
+
+  // Play/Pause toggle
+  function togglePlayPause() {
+    if (!vimeoPlayer) return;
+    
+    vimeoPlayer.getPaused().then((paused) => {
+      if (paused) {
+        vimeoPlayer.play();
+      } else {
+        vimeoPlayer.pause();
+      }
+    });
+  }
+
+  // Seek video on progress bar click
+  function seekVideo(event) {
+    if (!vimeoPlayer) return;
+    
+    const track = event.currentTarget;
+    const rect = track.getBoundingClientRect();
+    const percent = (event.clientX - rect.left) / rect.width;
+    
+    vimeoPlayer.getDuration().then((duration) => {
+      vimeoPlayer.setCurrentTime(duration * percent);
+    });
+  }
+
+  // Setup progress bar click
+  const progressTrack = document.querySelector('.vimeo-player__progress-track');
+  if (progressTrack) {
+    progressTrack.addEventListener('click', seekVideo);
+  }
+
+  // Setup play/pause button
+  if (playPauseBtn) {
+    playPauseBtn.addEventListener('click', togglePlayPause);
   }
 
   // Open modal and stop scroll
@@ -200,10 +322,24 @@ function handleModal() {
         return;
       }
 
+      // Get work name for title
+      const nameElement = workItem.querySelector('.name p');
+      currentWorkName = nameElement ? nameElement.textContent : '';
+      if (videoTitle) {
+        videoTitle.textContent = currentWorkName;
+      }
+
       if (videoIframe) {
         const embedUrl = getVimeoEmbedUrl(videoUrl);
         if (embedUrl) {
           videoIframe.src = embedUrl;
+          
+          // Initialize player after iframe loads
+          videoIframe.onload = () => {
+            setTimeout(() => {
+              initVimeoPlayer();
+            }, 500);
+          };
         } else {
           return; // Invalid video URL, don't open modal
         }

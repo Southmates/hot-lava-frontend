@@ -111,9 +111,15 @@
     opacity: 1;
   }
 
-  // Items without video show image at 50% opacity
-  &:not(.js-work--has-video):hover .work__image {
-    opacity: 0.25;
+  // Items without video show image at 25% opacity and text with line-through
+  &:not(.js-work--has-video):hover {
+    .work__image {
+      opacity: 0.25;
+    }
+    
+    .name p {
+      text-decoration: line-through;
+    }
   }
 
   img:not(.work__image) { 
