@@ -37,8 +37,8 @@
   padding-top: 10vh; 
 
     @media (min-width: $change-layout) {
-      align-items: flex-end;
-      gap: 0;
+      align-items: center;
+      gap: 4rem;
     }
 }
 
@@ -46,9 +46,14 @@
   position: relative; 
   width: fit-content; 
 
+  &:nth-child(odd) {
+    @media (min-width: $change-layout) {
+      transform: translateX(75%);
+    }
+  }
   &:nth-child(even) {
     @media (min-width: $change-layout) {
-      transform: translateX(-100%);
+      transform: translateX(-50%);
     }
   }
 
