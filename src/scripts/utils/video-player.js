@@ -91,9 +91,14 @@ export function createVideoPlayer() {
       });
       
       vimeoPlayer.on('ended', () => {
+        // Return to first frame and pause to hide Vimeo endscreen suggestions
+        vimeoPlayer.setCurrentTime(0).then(() => {
+          vimeoPlayer.pause().catch(() => {});
+        });
         modalTarget?.classList.remove('vimeo-player--playing');
         if (playPauseBtn) playPauseBtn.textContent = 'PLAY';
         clearProgressInterval();
+        updateProgress();
       });
       
       vimeoPlayer.ready().then(() => {
