@@ -173,14 +173,49 @@ function handleModal() {
   const modalSliders = document.querySelectorAll(".work__slider");
   const closeModalBtn = document.querySelector(".js-close");
   const modalTarget = document.querySelector(".modal");
+  const videoIframe = document.getElementById("work-video");
+
+  // Convert Vimeo URL to embed format
+  function getVimeoEmbedUrl(url) {
+    const videoId = url.match(/\/(\d+)/)?.[1];
+    if (!videoId) return '';
+    return `https://player.vimeo.com/video/${videoId}?autoplay=1&loop=0&muted=0`;
+  }
+
+  // Stop video playback
+  function stopVideo() {
+    if (videoIframe) {
+      videoIframe.src = '';
+    }
+  }
 
   // Open modal and stop scroll
   worksTrigger.forEach((item) => {
-    item.addEventListener("click", (item) => {
+    item.addEventListener("click", (e) => {
+      const workItem = e.currentTarget;
+      const videoUrl = workItem.dataset.video;
+      
+      // Only open modal if there's a video URL
+      if (!videoUrl || videoUrl.trim() === '') {
+        return;
+      }
+
+      if (videoIframe) {
+        const embedUrl = getVimeoEmbedUrl(videoUrl);
+        if (embedUrl) {
+          videoIframe.src = embedUrl;
+        } else {
+          return; // Invalid video URL, don't open modal
+        }
+      }
+
       modalTarget.classList.add("is-active");
 
-      const targetSlide = item.target.dataset.slide;
-      document.querySelector(`[data-client=${targetSlide}]`).hidden = false;
+      const targetSlide = workItem.dataset.slide;
+      const targetClient = document.querySelector(`[data-client=${targetSlide}]`);
+      if (targetClient) {
+        targetClient.hidden = false;
+      }
 
       lenis.stop();
     });
@@ -191,7 +226,15 @@ function handleModal() {
     closeModalBtn.addEventListener("click", closeModal);
   }
 
+  // Close modal on ESC key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modalTarget.classList.contains("is-active")) {
+      closeModal();
+    }
+  });
+
   function closeModal() {
+    stopVideo();
     modalTarget.classList.remove("is-active");
     modalSliders.forEach((slider) => (slider.hidden = true));
     lenis.start();

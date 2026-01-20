@@ -7,6 +7,7 @@ interface WorkItem {
   name: string;
   slide: string;
   image: string;
+  videoUrl?: string;
 }
 
 interface Props {
@@ -18,12 +19,12 @@ interface Props {
 
 // Default works data - will be replaced by CMS data
 const defaultWorks: WorkItem[] = [
-  { brand: 'P&G', name: 'Collision', slide: 'Collision', image: '/work/p&g--collision.jpg' },
-  { brand: 'P&G', name: 'First-Time Fresh', slide: 'First-Time Fresh', image: '/work/p&g--first-time-fresh.jpg' },
-  { brand: 'Dehnco', name: 'The Most Classic Design', slide: 'The Most Classic Design', image: '/work/dehnco--the-most-classic-design.jpg' },
-  { brand: 'Arrow Electronics', name: 'The Speed of Arrow', slide: 'The Speed of Arrow', image: '/work/arrow--the-speed-of-arrow.jpg' },
-  { brand: 'Dole Packaged Foods', name: 'Dolemates', slide: 'Dolemates', image: '/work/dole--dolemates.jpg' },
-  { brand: 'Max Pawn Luxury', name: 'We Know Real', slide: 'We Know Real', image: '/work/max-pawn--luxury-we-know-real.jpg' }, 
+  { brand: 'P&G', name: 'Collision', slide: 'Collision', image: '/work/p&g--collision.jpg', videoUrl: '' },
+  { brand: 'P&G', name: 'First-Time Fresh', slide: 'First-Time Fresh', image: '/work/p&g--first-time-fresh.jpg', videoUrl: '' },
+  { brand: 'Dehnco', name: 'The Most Classic Design', slide: 'The Most Classic Design', image: '/work/dehnco--the-most-classic-design.jpg', videoUrl: 'https://vimeo.com/1088839478' },
+  { brand: 'Arrow Electronics', name: 'The Speed of Arrow', slide: 'The Speed of Arrow', image: '/work/arrow--the-speed-of-arrow.jpg', videoUrl: 'https://vimeo.com/1111855559' },
+  { brand: 'Dole Packaged Foods', name: 'Dolemates', slide: 'Dolemates', image: '/work/dole--dolemates.jpg', videoUrl: 'https://vimeo.com/1154846381' },
+  { brand: 'Max Pawn Luxury', name: 'We Know Real', slide: 'We Know Real', image: '/work/max-pawn--luxury-we-know-real.jpg', videoUrl: 'https://vimeo.com/1154847059' }, 
 ];
 
 const {
@@ -47,7 +48,11 @@ const {
       <div class="works__list">
         {works.map((work) => (
           <div class="work">
-            <div class="work__item js-work" data-slide={work.slide}>
+            <div 
+              class={`work__item js-work ${work.videoUrl ? 'js-work--has-video' : ''}`}
+              data-slide={work.slide}
+              data-video={work.videoUrl || ''}
+            >
               {work.brand && <span class="brand">{work.brand}</span>}
               <div class="name">
                 <p>{work.name}</p>
