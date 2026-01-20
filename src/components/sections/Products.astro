@@ -1,5 +1,65 @@
 ---
 // Products.astro
+
+interface Product {
+  id: number;
+  name: string;
+  image: string;
+  url: string;
+  darkBackground?: boolean;
+}
+
+interface Props {
+  products?: Product[];
+}
+
+// Default products data - will be replaced by CMS data
+const defaultProducts: Product[] = [
+  { 
+    id: 1, 
+    name: 'Flow Generator Lamp', 
+    image: '/shop/01.png',
+    url: 'https://shop.hotlavaagency.com/products/hot-lava-boxed-lava-lamp',
+    darkBackground: false
+  },
+  { 
+    id: 2, 
+    name: 'Hot Sauce Original Trio', 
+    image: '/shop/02.png',
+    url: 'https://shop.hotlavaagency.com/products/hot-lava-boxed-hot-sauces',
+    darkBackground: false
+  },
+  { 
+    id: 3, 
+    name: 'Lava Scented Candle', 
+    image: '/shop/03.png',
+    url: 'https://shop.hotlavaagency.com/products/concrete-candle-lava-scent',
+    darkBackground: true
+  },
+  { 
+    id: 4, 
+    name: 'Volcanic Hoodie', 
+    image: '/shop/04.png',
+    url: 'https://shop.hotlavaagency.com/products/hot-lava-hoodie',
+    darkBackground: true
+  },
+  { 
+    id: 5, 
+    name: 'Ember Key Charm', 
+    image: '/shop/05.png',
+    url: 'https://shop.hotlavaagency.com/products/hot-lava-keychain',
+    darkBackground: false
+  },
+  { 
+    id: 6, 
+    name: 'Ember Thinking Cap', 
+    image: '/shop/06.png',
+    url: 'https://shop.hotlavaagency.com/products/hot-lava-hat',
+    darkBackground: false
+  },
+];
+
+const { products = defaultProducts } = Astro.props;
 ---
 
 <section id="shop" class="products shop">
@@ -7,39 +67,20 @@
   </div> 
     
   <div class="wrapper">
-    <div class="container products__grid">
-      <!-- 6 productos con imágenes del shop -->
-      
-      <div class="product__card product__card--1">
-        <div class="product__content">
-          <!-- Contenido del producto -->
-        </div>
-      </div>      
-      <div class="product__card product__card--2">
-        <div class="product__content">
-          <!-- Contenido del producto -->
-        </div>
-      </div>
-      <div class="product__card product__card--3">
-        <div class="product__content">
-          <!-- Contenido del producto -->
-        </div>
-      </div>      
-      <div class="product__card product__card--4">
-        <div class="product__content">
-          <!-- Contenido del producto -->
-        </div>
-      </div>      
-      <div class="product__card product__card--5">
-        <div class="product__content">
-          <!-- Contenido del producto -->
-        </div>
-      </div>      
-      <div class="product__card product__card--6">
-        <div class="product__content">
-          <!-- Contenido del producto -->
-        </div>
-      </div> 
+    <div class="container products__grid"> 
+      {products.map((product) => (
+        <a 
+          href={product.url} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class={`product__card product__card--${product.id} ${product.darkBackground ? 'product__card--dark' : ''}`}
+        >
+          <div class="product__content">
+            <span class="product__name">{product.name}</span>
+            <span class="product__view-text">View Product →</span>
+          </div>
+        </a>
+      ))}
     </div>
   </div>
 </section>
