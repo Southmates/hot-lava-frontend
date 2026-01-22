@@ -21,11 +21,12 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 // Initialize Lenis smooth scroll
 export const lenis = new Lenis({
-  duration: 1.2,
+  duration: 2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   smooth: true,
   smoothTouch: false,
   touchMultiplier: 2,
+  autoRaf: false, // Disable auto RAF since we're using GSAP ticker
 });
 
 // Sync Lenis with ScrollTrigger
