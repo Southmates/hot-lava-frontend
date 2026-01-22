@@ -1,32 +1,36 @@
 @use './vars' as *;
 
 .shop { 
-  background:var(--color-shop) url('/shop/bg.png') no-repeat top center;
-  background-size: contain;
-
-  @media (min-width: $change-layout) {
-    background-size: cover;
-    min-height: 1300px;
-  }
-
-  @media (min-width:1680px) { 
-    min-height: 1600px;
-  }
+  position: relative;
+  background: var(--color-shop);
 
   &__hero {
+    position: sticky;
+    top: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: top center;
+
+      @media (min-width: $change-layout) {
+        object-fit: cover;
+      }
     }
   }
 
   .wrapper {
+    position: relative;
+    z-index: 2;
     text-align: center;  
-    padding:0 0; 
+    padding: 0 0; 
 
     .shopify-buy-frame--productSet {
       width: 90%;
