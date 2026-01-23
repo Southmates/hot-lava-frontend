@@ -110,6 +110,8 @@ const {
   import { waitForAssets } from '../../scripts/utils/images-ready.js';
   import { initParallax } from '../../scripts/utils/parallax.js';
   import { initUkiyo } from '../../scripts/utils/ukiyo.js';
+  import gsap from 'gsap';
+  import { SplitText } from 'gsap/SplitText';
 
   // Wait for fonts and critical images to be ready before initializing SplitText
   waitForAssets(() => {
@@ -119,11 +121,51 @@ const {
       initSplitText(title, { type: 'words' });
     }
 
-    // Initialize SplitText for paragraph (lines)
-    // const paragraph = document.querySelector('.about .paragraph') as HTMLElement;
-    // if (paragraph) {
-    //   initSplitText(paragraph, { type: 'lines' });
-    // }
+    // Initialize SplitText for bios with hover animation
+    const bios = document.querySelectorAll('.about .team__bio') as NodeListOf<HTMLElement>;
+    bios.forEach((bio) => {
+      const split = new SplitText(bio, {
+        type: 'lines',
+        linesClass: 'line',
+      });
+
+      const lines = split.lines;
+
+      // Set initial state
+      gsap.set(lines, {
+        opacity: 0,
+        y: 50,
+      });
+
+      // Get the parent card
+      const card = bio.closest('.team__card') as HTMLElement;
+      if (!card) return;
+
+      // Store split data on the card for cleanup
+      (card as any).__splitData = { split, lines };
+
+      // Animate on hover
+      card.addEventListener('mouseenter', () => {
+        gsap.to(lines, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.05,
+          ease: 'power2.out',
+        });
+      });
+
+      // Reverse on mouse leave
+      card.addEventListener('mouseleave', () => {
+        gsap.to(lines, {
+          opacity: 0,
+          y: 50,
+          duration: 0.5,
+          stagger: 0.03,
+          ease: 'power2.in',
+        });
+      });
+    });
   });
 
   initParallax('.about h3.title', {

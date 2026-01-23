@@ -88,9 +88,9 @@
     height: 100%;
     background-color: #072444;
     opacity: 0;
-    z-index: 1;
+    z-index: 3;
     pointer-events: none;
-    transition: all 0.3s ease;
+    transition: opacity 0.5s ease;
   }
 
   &:hover {
@@ -99,8 +99,6 @@
     }
 
     .team__bio {
-      opacity: 1;
-      transform: translateY(0);
       visibility: visible;
     }
   }
@@ -152,14 +150,17 @@
   position: absolute;
   bottom: 1.5rem;
   left: 0;
-  transform: translateY(10px);
   z-index: 15;
   padding: 1.5rem 2rem;
   max-width: min(80vw, 500px);
-  opacity: 0;
   visibility: hidden; 
-  transition: all 0.3s ease;
   color: var(--color-white);
   line-height: 1.5;
   pointer-events: none;
+  overflow: hidden;
+
+  .line {
+    display: block;
+    overflow: hidden;
+  }
 }
