@@ -1,20 +1,35 @@
+@use './vars' as *;
+
 .intro { 
   position: relative;
   z-index: 10;
-  padding: 20vh 0;
-  margin-top: 15vh;
-
   overflow-x: hidden;
   overflow-y: visible;
+  padding: 0;
+
+  @media (min-width: $change-layout) {
+    padding: 20vh 0;
+    margin-top: 15vh;
+  }
  
   .container {
     position: relative;
     z-index: 2;
+
+    @media (max-width: ($change-layout - 1px)) {
+      min-height: 70vh;
+    }
   }
 
   .paragraph-intro {
-    width: 100%; 
-    margin-top: 0rem;
+    width: 90%; 
+    margin: 0 auto;
+
+    @media (min-width: $change-layout) {
+      width: 100%; 
+      margin: 0;
+    }
+   
   }
 }
 
@@ -32,11 +47,25 @@
   flex-direction: column;
   justify-content: center;
   min-height: 75vh;
+
+  @media (max-width: ($change-layout - 1px)) {
+    min-height: 65vh;
+    justify-content: flex-start;
+    
+  }
+
+  .paragraph {
+    @media (max-width: ($change-layout - 1px)) {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
 }
 
 .intro__section--first {
-   .container {
-    align-items: flex-end;
+   .container { 
+    justify-content: flex-end; 
+    margin-bottom: 33vh; 
   } 
 
   .title {
@@ -56,18 +85,13 @@
   }
 }
 
-.intro__section--third {
-  .wrapper { 
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-  }
+.intro__section--third { 
 
   .container { 
     align-items: flex-end;
-    align-items: flex-start;
-    min-height: 90vh;
+    align-items: flex-start; 
     width: fit-content;
+    width: 100%;
     margin: 0;
   }
 }
@@ -88,7 +112,9 @@
   aspect-ratio: 3/2;
   
   @media (max-width: 1023px) {
+    top: 15%;
     width: 100%;
+    aspect-ratio: 1/1;
   }
 
   img {
@@ -108,6 +134,8 @@
 
   @media (max-width: 1023px) {
     width: 100%;
+    top: -10%;
+    aspect-ratio: 1/1;
   }
 
   img {
@@ -133,4 +161,10 @@
   height: auto;
   aspect-ratio: 1/1;
   z-index: 10;
+
+  @media (max-width: ($change-layout - 1px)) {
+    bottom: 7.5%;
+    left: -55%;
+    width: min(150vw, 1080px);
+  }
 }
