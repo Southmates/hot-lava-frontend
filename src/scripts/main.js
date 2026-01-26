@@ -19,6 +19,9 @@ window.onbeforeunload = function () {
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
+// #region agent log
+fetch('http://127.0.0.1:7242/ingest/b4e86b0f-0d07-4623-afa3-dd0be25c8cef',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'main.js:23',message:'Lenis initialization',data:{readyState:document.readyState},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+// #endregion
 // Initialize Lenis smooth scroll
 export const lenis = new Lenis({
   duration: 2,
@@ -356,6 +359,11 @@ function handleActiveMenuState() {
   }
 }
 
+// #region agent log
+let mainInitCount = 0;
+mainInitCount++;
+fetch('http://127.0.0.1:7242/ingest/b4e86b0f-0d07-4623-afa3-dd0be25c8cef',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'main.js:360',message:'main.js initialization',data:{initCount:mainInitCount,readyState:document.readyState},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+// #endregion
 // Initialize all functions
 handleNav();
 handleModal();
