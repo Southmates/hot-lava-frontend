@@ -41,6 +41,9 @@
   import gsap from "gsap";
   import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
   // Logo animation
   const logo = document.querySelector(".header .logo");
   if (logo) {

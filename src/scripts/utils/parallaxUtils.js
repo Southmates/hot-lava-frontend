@@ -1,6 +1,9 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
+
 /**
  * Utility to create parallax animations with GSAP
  * @param {string} sectionId - ID of the section (e.g: 'contacto', 'faq', 'footer')

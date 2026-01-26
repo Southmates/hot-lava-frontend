@@ -48,11 +48,11 @@ window.lenis = lenis;
 
 // Navigation handler with anchor scrolling and menu state
 function handleNav() {
-  const homeLink = document.querySelector(".home-link");
-  const aboutLink = document.querySelector(".about-link");
-  const ourWayLink = document.querySelector(".how-we-work-link");
-  const shopLink = document.querySelector(".shop-link");
-  const contactLink = document.querySelector(".contact-link");
+  const homeLinks = document.querySelectorAll(".home-link");
+  const aboutLinks = document.querySelectorAll(".about-link");
+  const ourWayLinks = document.querySelectorAll(".how-we-work-link");
+  const shopLinks = document.querySelectorAll(".shop-link");
+  const contactLinks = document.querySelectorAll(".contact-link");
 
   const homeEl = document.querySelector("#home");
   const aboutEl = document.querySelector("#about-us");
@@ -65,58 +65,52 @@ function handleNav() {
   const mobileNav = document.querySelector(".mobile");
 
   const setHomeMenu = () => {
-    shopLink.classList.remove("active");
-    aboutLink.classList.remove("active");
-    ourWayLink.classList.remove("active");
-    contactLink.classList.remove("active");
+    shopLinks.forEach(link => link.classList.remove("active"));
+    aboutLinks.forEach(link => link.classList.remove("active"));
+    ourWayLinks.forEach(link => link.classList.remove("active"));
+    contactLinks.forEach(link => link.classList.remove("active"));
     mobileNav.classList.add("hidden");
     mobileNavOpen = false;
   };
 
   const setAboutMenu = () => {
-    shopLink.classList.remove("active");
-    aboutLink.classList.add("active");
-    ourWayLink.classList.remove("active");
-    contactLink.classList.remove("active");
+    shopLinks.forEach(link => link.classList.remove("active"));
+    aboutLinks.forEach(link => link.classList.add("active"));
+    ourWayLinks.forEach(link => link.classList.remove("active"));
+    contactLinks.forEach(link => link.classList.remove("active"));
     mobileNav.classList.add("hidden");
     mobileNavOpen = false;
   };
 
   const setOurWayMenu = () => {
-    shopLink.classList.remove("active");
-    aboutLink.classList.remove("active");
-    ourWayLink.classList.add("active");
-    contactLink.classList.remove("active");
+    shopLinks.forEach(link => link.classList.remove("active"));
+    aboutLinks.forEach(link => link.classList.remove("active"));
+    ourWayLinks.forEach(link => link.classList.add("active"));
+    contactLinks.forEach(link => link.classList.remove("active"));
     mobileNav.classList.add("hidden");
     mobileNavOpen = false;
   };
 
   const setShopMenu = () => {
-    shopLink.classList.add("active");
-    ourWayLink.classList.remove("active");
-    aboutLink.classList.remove("active");
-    contactLink.classList.remove("active");
+    shopLinks.forEach(link => link.classList.add("active"));
+    ourWayLinks.forEach(link => link.classList.remove("active"));
+    aboutLinks.forEach(link => link.classList.remove("active"));
+    contactLinks.forEach(link => link.classList.remove("active"));
     mobileNav.classList.add("hidden");
     mobileNavOpen = false;
   };
 
   const setContactMenu = () => {
-    shopLink.classList.remove("active");
-    contactLink.classList.add("active");
-    aboutLink.classList.remove("active");
-    ourWayLink.classList.remove("active");
+    shopLinks.forEach(link => link.classList.remove("active"));
+    contactLinks.forEach(link => link.classList.add("active"));
+    aboutLinks.forEach(link => link.classList.remove("active"));
+    ourWayLinks.forEach(link => link.classList.remove("active"));
     mobileNav.classList.add("hidden");
     mobileNavOpen = false;
   };
 
   // Anchor navigation with smooth scroll
   // Use querySelectorAll to get all links (desktop and mobile)
-  const homeLinks = document.querySelectorAll(".home-link");
-  const aboutLinks = document.querySelectorAll(".about-link");
-  const ourWayLinks = document.querySelectorAll(".how-we-work-link");
-  const shopLinks = document.querySelectorAll(".shop-link");
-  const contactLinks = document.querySelectorAll(".contact-link");
-
   if (homeLinks.length > 0 && homeEl) {
     homeLinks.forEach((link) => {
       link.addEventListener("click", (e) => {

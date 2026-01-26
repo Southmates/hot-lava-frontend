@@ -1,6 +1,9 @@
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
+
 /**
  * Create a parallax effect on an element
  * @param {HTMLElement|string} target - Element to animate (selector string or HTMLElement)

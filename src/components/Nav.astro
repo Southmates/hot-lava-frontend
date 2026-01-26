@@ -96,6 +96,9 @@ const contactInfo = {
   import gsap from "gsap";
   import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
   // Navbar animation
   const navbar = document.querySelector(".navbar");
   const slogan = document.querySelector(".slogan");
