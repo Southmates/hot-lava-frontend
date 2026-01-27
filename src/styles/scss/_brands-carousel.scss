@@ -14,13 +14,14 @@
 } 
 
 .brands-carousel {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10vh;
   width: 100%; 
 
   @media (max-width: ($landscape - 1px)) {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
     gap: 10vh;
   } 
 
@@ -32,7 +33,7 @@
     line-height: 1.2;
     
     max-width: 480px;
-    margin: 0 auto 5% auto;
+    margin: 0 auto;
   }
 
   &__container {

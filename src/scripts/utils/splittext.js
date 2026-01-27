@@ -5,10 +5,11 @@ import { SplitText } from "gsap/SplitText";
  * Initialize SplitText animation for an element using Intersection Observer
  * @param {Element} element - The element to animate
  * @param {Object} [options] - Configuration options
- * @param {string} [options.type='words'] - Split type: 'words' or 'lines'
+ * @param {string} [options.type='words'] - Split type: 'words', 'lines', or 'character'
  * @param {string|HTMLElement} [options.trigger] - Intersection Observer trigger element (default: parent .container)
  * @param {string} [options.start] - Start position: '50%' or '80%' (default: "50%")
  * @param {number} [options.delay=1000] - Delay before destroying SplitText in ms
+ * @param {number} [options.stagger=0.05] - Delay between each element animation (lower = more overlap)
  */
 export function initSplitText(element, options = {}) {
   if (!element || !(element instanceof HTMLElement)) return;
@@ -24,19 +25,46 @@ export function initSplitText(element, options = {}) {
   const startPosition = options.start || (isFooter ? "80%" : "50%");
   const threshold = parseFloat(startPosition.replace("%", "")) / 100;
 
-  const splitType = options.type || "words";
+  let splitType = options.type || "words";
+  
+  // Map user-friendly type names to SplitText types
+  const typeMap = {
+    "character": "chars",
+    "char": "chars",
+    "chars": "chars",
+    "words": "words",
+    "word": "words",
+    "lines": "lines",
+    "line": "lines",
+  };
+  
+  const splitTextType = typeMap[splitType] || "words";
 
   // Clonar el elemento completo antes de modificarlo
   // const originalElement = element.cloneNode(true);
 
   // Split text by type
-  const split = new SplitText(element, {
-    type: splitType,
-    ...(splitType === "words" ? { wordsClass: "word" } : { linesClass: "line" }),
-  });
+  const splitConfig = {
+    type: splitTextType,
+  };
+
+  // Add class configuration based on type
+  if (splitTextType === "words") {
+    splitConfig.wordsClass = "word";
+  } else if (splitTextType === "lines") {
+    splitConfig.linesClass = "line";
+  } else if (splitTextType === "chars") {
+    splitConfig.charsClass = "char";
+  }
+
+  const split = new SplitText(element, splitConfig);
 
   // Get the split elements based on type
-  const splitElements = splitType === "words" ? split.words : split.lines;
+  const splitElements = 
+    splitTextType === "words" ? split.words : 
+    splitTextType === "lines" ? split.lines : 
+    splitTextType === "chars" ? split.chars : 
+    split.words;
 
   // Set initial state
   gsap.set(splitElements, {
@@ -62,7 +90,7 @@ export function initSplitText(element, options = {}) {
             opacity: 1,
             y: 0,
             duration: 0.8,
-            stagger: 0.05,
+            stagger: options.stagger !== undefined ? options.stagger : 0.05,
             ease: "power2.out",
             // onComplete: () => {
             //   setTimeout(() => {

@@ -50,6 +50,7 @@ const {
 
 <script>
   import gsap from 'gsap';
+  import { initSplitText } from '../scripts/utils/splittext.js'; 
 
   /**
    * Initializes the infinite logo carousel
@@ -128,5 +129,13 @@ const {
     } else {
       window.addEventListener('load', () => initBrandsCarousel(carouselDuration));
     }
+  }
+
+  const title = document.querySelector('h3.brands-carousel__title') as HTMLElement;
+  if (title) {
+    initSplitText(title, { 
+      type: 'words',
+      stagger: 0.05  // More overlap between characters
+    });
   }
 </script>
