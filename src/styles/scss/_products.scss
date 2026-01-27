@@ -172,6 +172,7 @@
   width: 100%;
   height: 100%; 
   padding: 0 0 1rem 0; 
+  z-index: 2;
 
   display: flex;
   flex-direction: column;
@@ -234,8 +235,8 @@
   }
 
   span {
-    display: inline-block; 
-    transform: rotate(-45deg);
+    display: inline-block;  
+    transform: rotate(-45deg) 
   }
 }
 
@@ -243,6 +244,14 @@
 .product__card:hover .product__view-text {
   opacity: 1;
   transform: translateY(0);
+  transition-delay: .15s;
+}
+.product__card:hover .product__view-text {
+  transition-delay: .3s;
+
+  span {  
+    transition-delay: .35s;
+  }
 }
 
 .product__card--dark .product__name,

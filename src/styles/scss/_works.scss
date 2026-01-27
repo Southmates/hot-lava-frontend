@@ -72,8 +72,13 @@
     display: inline-block;
     width: 250px;
     font-size: 14px;
-    // text-align: right;
     opacity: 0.5;
+    margin: 0 0 .5rem 0;
+
+    @media (min-width: $change-layout) {
+      margin: 0;
+      text-align: right;
+    }
   }
 
   >* {

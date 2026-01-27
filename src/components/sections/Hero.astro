@@ -33,40 +33,117 @@ const logoSvg = {
 <section id="hero" class="hero">
   <div class="wrapper"></div>
 
-  <div class="logo">
-    <svg
-      width={logoSvg.width}
-      height={logoSvg.height}
-      viewBox={logoSvg.viewBox}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-label={logoSvg.ariaLabel}
-      role="img"
-    >
-      {logoSvg.paths.map((path) => (
-        <path d={path} fill="white" />
-      ))}
-    </svg>
-  </div>
+  <div class="hero-content">
+    <div class="logo">
+      <svg
+        width={logoSvg.width}
+        height={logoSvg.height}
+        viewBox={logoSvg.viewBox}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-label={logoSvg.ariaLabel}
+        role="img"
+      >
+        {logoSvg.paths.map((path) => (
+          <path d={path} fill="white" />
+        ))}
+      </svg>
+    </div>
 
-  <div class="video">
-    <video
-      autoplay={videoConfig.settings.autoplay}
-      muted={videoConfig.settings.muted}
-      loop={videoConfig.settings.loop}
-      playsinline={videoConfig.settings.playsinline}  
-      preload={videoConfig.settings.preload}
-      poster={videoConfig.poster}
-      aria-label={videoConfig.ariaLabel}
-    >
-      <source src={videoConfig.source.src} type={videoConfig.source.type} />
-    </video>
+    <div class="video">
+      <video
+        autoplay={videoConfig.settings.autoplay}
+        muted={videoConfig.settings.muted}
+        loop={videoConfig.settings.loop}
+        playsinline={videoConfig.settings.playsinline}  
+        preload={videoConfig.settings.preload}
+        poster={videoConfig.poster}
+        aria-label={videoConfig.ariaLabel}
+      >
+        <source src={videoConfig.source.src} type={videoConfig.source.type} />
+      </video>
+    </div>
   </div>
 </section>
 
 <script>
   import gsap from 'gsap';
   import { initParallax } from '../../scripts/utils/parallax.js';
+
+  // Get elements
+  const heroContent = document.querySelector('.hero .hero-content');
+  const heroVideo = document.querySelector('.hero .video video');
+  const heroLogo = document.querySelector('.hero .logo');
+  const navbar = document.querySelector('.navbar');
+
+  // Set initial states - all opacity 0
+  if (heroVideo) {
+    gsap.set(heroVideo, { opacity: 0 });
+  }
+  if (heroLogo) {
+    gsap.set(heroLogo, { opacity: 0 });
+  }
+  if (navbar) {
+    gsap.set(navbar, { opacity: 0 });
+  }
+
+  // Hero entrance timeline - synchronized with loader
+  function initHeroTimeline() {
+    const tl = gsap.timeline({
+      defaults: { ease: 'power2.out' },
+    });
+
+    // Hero content mask and opacity animation: 0s
+    if (heroContent) {
+      tl.to(heroContent, {
+        opacity: 1,
+        clipPath: 'inset(0 0 0 0)', // Reveal mask
+        duration: 2.5,
+        ease: 'power3.out', // Smoother easing for mask
+      }, 0);
+    }
+
+    // Video animation: 0s - 2s
+    if (heroVideo) {
+      tl.to(heroVideo, {
+        opacity: 1,
+        duration: .8,
+      }, 0);
+    }
+
+    // Logo animation: starts at 1s (halfway through video), duration 2s
+    if (heroLogo) {
+      tl.to(heroLogo, {
+        opacity: 1,
+        duration: 1.5,
+      }, .25);
+    }
+
+    // Nav animation: starts at 2.5s (halfway through logo), duration 2s
+    if (navbar) {
+      tl.to(navbar, {
+        opacity: 1,
+        duration: .8,
+      }, .5);
+    }
+
+    return tl;
+  }
+
+  // Listen for loader completion
+  window.addEventListener('loaderComplete', () => {
+    initHeroTimeline();
+  });
+
+  // Fallback: if loader already completed
+  if (document.readyState === 'complete') {
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (!loader || loader.classList.contains('loader--hidden')) {
+        initHeroTimeline();
+      }
+    }, 100);
+  }
 
   // Animación de rotación continua para el asterisco
   const asterisk = document.querySelector('#asterisk-hero') as SVGPathElement;

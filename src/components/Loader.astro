@@ -104,8 +104,9 @@
       window.dispatchEvent(new CustomEvent('fontsReady'));
       window.dispatchEvent(new CustomEvent('assetsReady'));
       
-      // Remove loader from DOM after animation
+      // Dispatch event when loader animation completes (after transition)
       setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('loaderComplete'));
         loader.remove();
       }, 500);
       
@@ -120,7 +121,10 @@
         (window as any).fontsReadyDispatched = true;
         window.dispatchEvent(new CustomEvent('fontsReady'));
         window.dispatchEvent(new CustomEvent('assetsReady'));
-        setTimeout(() => loader.remove(), 500);
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('loaderComplete'));
+          loader.remove();
+        }, 500);
       }, remaining);
     }
   }
