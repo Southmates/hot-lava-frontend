@@ -115,6 +115,7 @@ const {
   import { waitForAssets } from '../../scripts/utils/images-ready.js';
   import { initParallax } from '../../scripts/utils/parallax.js';
   import { initUkiyo } from '../../scripts/utils/ukiyo.js';
+  import { initFadeIn } from '../../scripts/utils/fade-in.js';
   import gsap from 'gsap';
   import { SplitText } from 'gsap/SplitText';
 
@@ -170,6 +171,14 @@ const {
           ease: 'power2.in',
         });
       });
+    });
+
+    // Initialize fade-in for team cards
+    initFadeIn('.team__card', {
+      start: '50%',
+      duration: 2.4,
+      y: 50,
+      ease: 'power4.out',
     });
   });
 

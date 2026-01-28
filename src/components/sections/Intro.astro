@@ -193,6 +193,7 @@ const asteriskLinesImage = config.asteriskLinesImage;
   import { waitForAssets } from '../../scripts/utils/images-ready.js';
   import { initParallax } from '../../scripts/utils/parallax.js';
   import { initUkiyo } from '../../scripts/utils/ukiyo.js';
+  import { initFadeIn } from '../../scripts/utils/fade-in.js';
 
   // Animation configurations - can be moved to CMS if needed
   const parallaxConfigs = [
@@ -222,6 +223,21 @@ const asteriskLinesImage = config.asteriskLinesImage;
     const paragraphs = document.querySelectorAll('.intro__section .paragraph');
     paragraphs.forEach((paragraph) => {
       initSplitText(paragraph as HTMLElement, { type: 'lines' });
+    });
+
+    // Initialize fade-in for intro images
+    initFadeIn('.image-phrase img', {
+      start: '50%',
+      duration: 2.4,
+      y: 40,
+      ease: 'power4.out',
+    });
+
+    initFadeIn('.image-ideas img', {
+      start: '50%',
+      duration: 2.4,
+      y: 40,
+      ease: 'power4.out',
     });
   });
 
