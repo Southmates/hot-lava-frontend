@@ -76,7 +76,9 @@
     position: relative;
     
     width: min(65vw, 480px);
-    height: 100%; 
+    height: 100%;
+
+    transition: transform 1s ease-out;
 
     @media (max-width: ($change-layout - 1px)) {
       width: min(80vw, 480px);
@@ -105,6 +107,11 @@
   }
 
   &:hover {
+
+    picture {
+      transform: scale(1.1);
+    }
+
     .team__overlay {
       opacity: 0.75;
     }
