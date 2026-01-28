@@ -2,60 +2,69 @@
 // Loader.astro
 ---
 
-<div class="loader" id="loader">
-  <div class="loader__wrapper">
-    <img src="/logo.svg" alt="Hot Lava" class="loader__logo" />
-    <div class="loader__content">
-      <div class="loader__spinner"></div>
-      <div class="loader__status" id="loader-status">
-        <span class="loader__status-text">Starting</span>
+<div id="loader" class="loader">
+  <div class="count-wrapper">
+    <div class="count">
+      <div class="digit">
+        <h1>9</h1>
+      </div>
+      <div class="digit">
+        <h1>8</h1>
+      </div>
+      <div class="digit">
+        <h1>7</h1>
+      </div>
+      <div class="digit">
+        <h1>4</h1>
+      </div>
+      <div class="digit">
+        <h1>2</h1>
+      </div>
+      <div class="digit">
+        <h1>0</h1>
       </div>
     </div>
   </div>
+
+  <div class="count-wrapper">
+    <div class="count">
+      <div class="digit">
+        <h1>9</h1>
+      </div>
+      <div class="digit">
+        <h1>5</h1>
+      </div>
+      <div class="digit">
+        <h1>9</h1>
+      </div>
+      <div class="digit">
+        <h1>7</h1>
+      </div>
+      <div class="digit">
+        <h1>4</h1>
+      </div>
+      <div class="digit">
+        <h1>0</h1>
+      </div>
+    </div>
+  </div>
+
+  
 </div>
 
 <script>
   import { waitForCriticalImages } from '../scripts/utils/images-ready.js';
-
-  // Function to update loader status with animation
-  function updateLoaderStatus(statusElement: HTMLElement, text: string, minDisplayTime: number = 500) {
-    return new Promise<void>((resolve) => {
-      // Fade out current text
-      statusElement.classList.add('loader__status--fade-out');
-      
-      setTimeout(() => {
-        // Update text
-        const textElement = statusElement.querySelector('.loader__status-text');
-        if (textElement) {
-          textElement.textContent = text;
-        }
-        
-        // Fade in new text
-        statusElement.classList.remove('loader__status--fade-out');
-        statusElement.classList.add('loader__status--fade-in');
-        
-        // Wait minimum display time
-        setTimeout(() => {
-          statusElement.classList.remove('loader__status--fade-in');
-          resolve();
-        }, minDisplayTime);
-      }, 200); // Fade out duration
-    });
-  }
+  import gsap from 'gsap';
 
   // Wait for fonts and critical images to load before removing loader
   async function initLoader() {
     const loader = document.getElementById('loader');
-    const statusElement = document.getElementById('loader-status');
-    if (!loader || !statusElement) return;
+    if (!loader) return;
 
     const startTime = Date.now();
     const minDisplayTime = 1500; // 1.5 segundos mínimo total
 
     try {
-      // Step 1: Show text and wait for fonts
-      await updateLoaderStatus(statusElement, 'Loading Fonts', 500);
-      
       // Wait for fonts
       await new Promise<void>((resolve) => {
         const handleFontsReady = () => {
@@ -73,9 +82,6 @@
           }, 100);
         });
       });
-      
-      // Step 2: Show text and wait for images
-      await updateLoaderStatus(statusElement, 'Getting images', 500);
       
       // Wait for critical images
       await new Promise<void>((resolve) => {
@@ -96,19 +102,79 @@
         await new Promise(resolve => setTimeout(resolve, remaining));
       }
       
-      // Remove loader
-      loader.classList.add('loader--hidden');
+      // Start the countdown animation
+      const countElements = document.querySelectorAll(".count");
+      const wrapperElements = document.querySelectorAll(".count-wrapper");
       
-      // Mark that assets are ready and dispatch custom events
-      (window as any).fontsReadyDispatched = true;
-      window.dispatchEvent(new CustomEvent('fontsReady'));
-      window.dispatchEvent(new CustomEvent('assetsReady'));
+      if (countElements.length === 0 || wrapperElements.length === 0) {
+        console.warn('Loader: Count elements not found');
+        // Fallback: animate loader exit
+        gsap.to(loader, {
+          clipPath: 'inset(0 0 100% 0)',
+          duration: 1,
+          ease: 'power3.inOut',
+          onComplete: () => {
+            window.dispatchEvent(new CustomEvent('loaderComplete'));
+            loader.remove();
+          }
+        });
+        return;
+      }
+
+      const windowWidth = window.innerWidth;
+      const wrapperWidth = 180;
+      const finalPosition = windowWidth - wrapperWidth;
+      const stepDistance = finalPosition / 6;
       
-      // Dispatch event when loader animation completes (after transition)
-      setTimeout(() => {
-        window.dispatchEvent(new CustomEvent('loaderComplete'));
-        loader.remove();
-      }, 500);
+      let animationCompleted = false;
+      
+      const tl = gsap.timeline({
+        delay: 0.5,
+        repeat: 0, // No repeat
+        onComplete: () => {
+          if (animationCompleted) return; // Prevent multiple calls
+          animationCompleted = true;
+          
+          // Mark that assets are ready and dispatch custom events
+          (window as any).fontsReadyDispatched = true;
+          window.dispatchEvent(new CustomEvent('fontsReady'));
+          window.dispatchEvent(new CustomEvent('assetsReady'));
+          
+          // Animate loader exit as curtain going up
+          gsap.to(loader, {
+            clipPath: 'inset(0 0 100% 0)', // Reveal from bottom (curtain going up)
+            duration: 1,
+            ease: 'power3.inOut',
+            onComplete: () => {
+              // Dispatch event when loader animation completes
+              window.dispatchEvent(new CustomEvent('loaderComplete'));
+              loader.remove();
+            }
+          });
+        }
+      });
+
+      tl.to(".count", {
+        x: -900,
+        duration: 0.85,
+        ease: "power4.inOut",
+      });
+
+      for (let i = 1; i <= 6; i++) {
+        const xPosition = -900 + i * 180;
+        tl.to(".count", {
+          x: xPosition,
+          duration: 0.85,
+          ease: "power4.inOut",
+        });
+        
+        // Animate wrapper at the same time
+        tl.to(".count-wrapper", {
+          x: stepDistance * i,
+          duration: 0.85,
+          ease: "power4.inOut",
+        }, "<"); // Start at the same time as previous animation
+      }
       
     } catch (error) {
       console.warn('Asset loading error:', error);
@@ -117,14 +183,20 @@
       const remaining = Math.max(0, minDisplayTime - elapsed);
       
       setTimeout(() => {
-        loader.classList.add('loader--hidden');
         (window as any).fontsReadyDispatched = true;
         window.dispatchEvent(new CustomEvent('fontsReady'));
         window.dispatchEvent(new CustomEvent('assetsReady'));
-        setTimeout(() => {
-          window.dispatchEvent(new CustomEvent('loaderComplete'));
-          loader.remove();
-        }, 500);
+        
+        // Animate loader exit as curtain going up
+        gsap.to(loader, {
+          clipPath: 'inset(0 0 100% 0)',
+          duration: .5,
+          ease: 'power4.inOut',
+          onComplete: () => {
+            window.dispatchEvent(new CustomEvent('loaderComplete'));
+            loader.remove();
+          }
+        });
       }, remaining);
     }
   }
@@ -136,109 +208,58 @@
     initLoader();
   }
 </script>
+ 
 
 <style>
   .loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    background-color: var(--color-darkBlue, #103B60);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #032746;
+  color: #fff;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0); /* Initial state - fully visible */
+  will-change: clip-path;
+  z-index: 9999;
+}
 
-  .loader--hidden {
-    opacity: 0;
-    transform: translateY(-100%);
-    transition: opacity 0.95s ease-out, transform 0.5s ease-out;
-    pointer-events: none;
-  }
+.count-wrapper {
+  position: relative;
+  width: 180px;
+  height: 360px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  will-change: transform;
+}
 
-  .loader__wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4rem;
-    width: 100%;
-    height: 100vh; 
-  }
+.count {
+  position: relative;
+  width: 1080px;
+  height: 360px;
+  display: flex;
+  justify-content: space-between;
+  transform: translateX(-1080px);
+  will-change: transform;
+}
 
-  .loader__content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 1rem;
+.digit {
+  position: relative;
+  width: 180px;
+  height: 360px;
+}
 
-    width: 100%;
-    height: 100%;   
-    padding-bottom: 10vh;
-  }
+.digit h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  font-size: 300px;
+  font-weight: 700;
+  line-height: 1;
+}
 
-  .loader__logo {
-    width: min(100%, 90px);
-    height: auto; 
-    display: block;
-  }
-
-  .loader__spinner {
-    width: 32px;
-    height: 32px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-top-color: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-
-  .loader__status { 
-    min-height: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .loader__status-text {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.875rem;
-    font-weight: 500;  
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  }
-
-  .loader__status--fade-out .loader__status-text {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-
-  .loader__status--fade-in .loader__status-text {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeInUp 0.3s ease-out forwards;
-  }
-
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
 </style>
-
