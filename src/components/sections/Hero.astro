@@ -75,16 +75,23 @@ const logoSvg = {
   const heroVideo = document.querySelector('.hero .video video');
   const heroLogo = document.querySelector('.hero .logo');
   const navbar = document.querySelector('.navbar');
+  const navItems = document.querySelectorAll('.navbar li');
 
-  // Set initial states - all opacity 0
+  // Set initial states
   if (heroVideo) {
     gsap.set(heroVideo, { opacity: 0 });
   }
   if (heroLogo) {
-    gsap.set(heroLogo, { opacity: 0 });
+    gsap.set(heroLogo, { 
+      opacity: 0,
+      y: 50, // Start below
+    });
   }
-  if (navbar) {
-    gsap.set(navbar, { opacity: 0 });
+  if (navItems.length > 0) {
+    gsap.set(navItems, {
+      opacity: 0,
+      y: 30, // Start below
+    });
   }
 
   // Hero entrance timeline - synchronized with loader
@@ -112,18 +119,25 @@ const logoSvg = {
     }
 
     // Logo animation: starts at 1s (halfway through video), duration 2s
+    // Logo with vertical movement
     if (heroLogo) {
       tl.to(heroLogo, {
         opacity: 1,
+        y: 0, // Move to original position
         duration: 1.5,
+        ease: 'power3.out',
       }, .25);
     }
 
-    // Nav animation: starts at 2.5s (halfway through logo), duration 2s
-    if (navbar) {
-      tl.to(navbar, {
+    // Nav items animation: starts at 2.5s (halfway through logo), duration 2s
+    // Each nav item enters with stagger
+    if (navItems.length > 0) {
+      tl.to(navItems, {
         opacity: 1,
-        duration: .8,
+        y: 0, // Move to original position
+        duration: 0.8,
+        stagger: 0.1, // 0.1s delay between each item
+        ease: 'power2.out',
       }, .5);
     }
 
