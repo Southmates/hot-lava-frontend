@@ -149,3 +149,24 @@ const { products = defaultProducts } = Astro.props;
     </div>
   </div>
 </section>
+
+<script>
+  import { initCustomCursor } from '../../scripts/utils/custom-cursor.js';
+
+  // Initialize custom cursor for product cards
+  if (typeof window !== 'undefined') {
+    if (document.readyState === 'complete') {
+      initCustomCursor('.product__card', {
+        text: 'View more',
+        cursorId: 'shop-cursor',
+      });
+    } else {
+      window.addEventListener('load', () => {
+        initCustomCursor('.product__card', {
+          text: 'View more',
+          cursorId: 'shop-cursor',
+        });
+      });
+    }
+  }
+</script>

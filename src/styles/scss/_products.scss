@@ -218,8 +218,9 @@
 
 .product__view-text {
   position: relative;
-  font-size: clamp(13px, 1.5vw, 16px);
-  font-weight: 500;
+  // font-size: clamp(13px, 1.5vw, 16px);
+  font-size: 12px;
+  font-weight: 800;
   line-height: 1.2;
   color: #000;
   pointer-events: none;

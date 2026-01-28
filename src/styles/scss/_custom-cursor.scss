@@ -1,0 +1,50 @@
+@use './vars' as *;
+
+/* Custom cursor - reusable component */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  display: none;
+
+  @media (min-width: 1024px) {
+    display: block;
+  }
+}
+
+.custom-cursor__circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  // border: 1px solid #fff;
+  background: rgba(255, 255, 255, .95);
+  background: rgba(236, 83, 44, .9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.custom-cursor__text {
+  font-family: var(--font-title);
+  font-size: 12px;
+  font-weight: 800;
+  color: $color-darkBlue;
+  color: $color-orange;
+  color: #fff;
+// filter: invert(1);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+  line-height: 1;
+
+  display: block;
+  max-width: 48px;
+}

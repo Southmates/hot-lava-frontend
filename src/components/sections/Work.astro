@@ -86,6 +86,7 @@ const {
 
 <script>
   import { initSplitText } from '../../scripts/utils/splittext.js';
+  import { initCustomCursor } from '../../scripts/utils/custom-cursor.js';
   import gsap from 'gsap';
 
   // Initialize underline animation on hover
@@ -172,6 +173,23 @@ const {
       type: 'character',
       stagger: 0.02  // More overlap between characters
     });
+  }
+
+  // Initialize custom cursor for work items
+  if (typeof window !== 'undefined') {
+    if (document.readyState === 'complete') {
+      initCustomCursor('.work__item', {
+        text: 'View',
+        cursorId: 'work-cursor',
+      });
+    } else {
+      window.addEventListener('load', () => {
+        initCustomCursor('.work__item', {
+          text: 'View',
+          cursorId: 'work-cursor',
+        });
+      });
+    }
   }
  
 </script>
