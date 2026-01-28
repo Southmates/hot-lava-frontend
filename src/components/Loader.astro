@@ -3,6 +3,11 @@
 ---
 
 <div id="loader" class="loader">
+
+  <svg class="loader__image" viewBox="0 0 48 47" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <path d="M31.2817 13.5478L42.1955 8.50565L48 22.3584L36.8776 27.2609L44.8023 37.2579L33.1586 46.6093L24 35.0247L14.8414 46.6093L3.30195 37.3625L11.4352 27.3656L0 22.3584L6.11729 8.50565L16.701 13.3384L16.5967 0.829102H31.386L31.2817 13.5478Z" stroke="#fff" stroke-width="1" fill="none" vector-effect="non-scaling-stroke"/>
+  </svg>
+  
   <div class="count-wrapper">
     <div class="count">
       <div class="digit">
@@ -102,6 +107,9 @@
         await new Promise(resolve => setTimeout(resolve, remaining));
       }
       
+      // Get loader image
+      const loaderImage = document.querySelector('.loader__image') as HTMLElement;
+      
       // Start the countdown animation
       const countElements = document.querySelectorAll(".count");
       const wrapperElements = document.querySelectorAll(".count-wrapper");
@@ -109,6 +117,14 @@
       if (countElements.length === 0 || wrapperElements.length === 0) {
         console.warn('Loader: Count elements not found');
         // Fallback: animate loader exit
+        if (loaderImage) {
+          gsap.to(loaderImage, {
+            y: '-100vh',
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.inOut',
+          });
+        }
         gsap.to(loader, {
           clipPath: 'inset(0 0 100% 0)',
           duration: 1,
@@ -139,6 +155,16 @@
           (window as any).fontsReadyDispatched = true;
           window.dispatchEvent(new CustomEvent('fontsReady'));
           window.dispatchEvent(new CustomEvent('assetsReady'));
+          
+          // Animate image exit (up and out, no scale)
+          if (loaderImage) {
+            gsap.to(loaderImage, {
+              y: '-100vh',
+              opacity: 0,
+              duration: 1,
+              ease: 'power3.inOut',
+            });
+          }
           
           // Animate loader exit as curtain going up
           gsap.to(loader, {
@@ -187,11 +213,22 @@
         window.dispatchEvent(new CustomEvent('fontsReady'));
         window.dispatchEvent(new CustomEvent('assetsReady'));
         
+        // Animate image exit
+        const loaderImage = document.querySelector('.loader__image') as HTMLElement;
+        if (loaderImage) {
+          gsap.to(loaderImage, {
+            y: '-100vh',
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.inOut',
+          });
+        }
+        
         // Animate loader exit as curtain going up
         gsap.to(loader, {
           clipPath: 'inset(0 0 100% 0)',
-          duration: .5,
-          ease: 'power4.inOut',
+          duration: 1,
+          ease: 'power3.inOut',
           onComplete: () => {
             window.dispatchEvent(new CustomEvent('loaderComplete'));
             loader.remove();
@@ -201,10 +238,27 @@
     }
   }
 
+  // Initialize loader image rotation
+  function initLoaderImageRotation() {
+    const loaderImage = document.querySelector('.loader__image') as HTMLElement;
+    if (loaderImage) {
+      gsap.to(loaderImage, {
+        rotation: 360,
+        duration: 8, // Slower rotation
+        ease: 'none',
+        repeat: -1,
+      });
+    }
+  }
+
   // Initialize loader when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLoader);
+    document.addEventListener('DOMContentLoaded', () => {
+      initLoaderImageRotation();
+      initLoader();
+    });
   } else {
+    initLoaderImageRotation();
     initLoader();
   }
 </script>
@@ -260,6 +314,18 @@
   font-size: 300px;
   font-weight: 700;
   line-height: 1;
+}
+
+.loader__image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120vh;
+  height: 120vh;
+  opacity: 0.15;
+  z-index: 10;
+  will-change: transform, opacity;
 }
 
 </style>
