@@ -11,5 +11,5 @@
     "checkJs": false
   },
   "include": ["src/**/*", "src/**/*.d.ts"],
-  "exclude": ["node_modules", ".astro"]
+  "exclude": ["node_modules", ".astro", "src/**/ProductsVideo.astro"]
 }
