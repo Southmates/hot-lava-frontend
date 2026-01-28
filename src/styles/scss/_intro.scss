@@ -70,8 +70,9 @@
   .container { 
     flex-direction: row;
     align-items: flex-end;
-    justify-content: flex-end; 
-    margin-bottom: 33vh; 
+    justify-content: flex-end;
+    padding-bottom: 15vh;
+    min-height: 100vh;
   } 
 
   .title {
@@ -123,13 +124,14 @@
 .image-phrase {
   position: absolute; 
   top: 15%;
-  left: 0%;
+  left: 0;
   width: 50vw;
   height: auto;
   aspect-ratio: 3/2;
   
   @media (max-width: 1023px) {
-    top: -1%;
+    top: 10%;
+    left: -10%;
     width: 100%;
     // aspect-ratio: 1/1;
   }
@@ -144,7 +146,7 @@
 .image-ideas {
   position: absolute;
   top: 15%;
-  right: 0;
+  right: -20%;
   width: 52.5vw;
   height: auto;
   aspect-ratio: 5/3;
@@ -152,6 +154,7 @@
   @media (max-width: 1023px) {
     width: 100%;
     top: -25%;
+    right: -17%;
     // aspect-ratio: 1/1;
   }
 
