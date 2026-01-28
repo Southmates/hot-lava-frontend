@@ -79,8 +79,14 @@ function _initSplitText(element, options = {}) {
   // const originalElement = element.cloneNode(true);
 
   // Split text by type
+  // For chars, use "words,chars" to keep words intact while splitting into characters
+  let actualSplitType = splitTextType;
+  if (splitTextType === "chars") {
+    actualSplitType = "words,chars";
+  }
+  
   const splitConfig = {
-    type: splitTextType,
+    type: actualSplitType,
   };
 
   // Add class configuration based on type
@@ -89,12 +95,15 @@ function _initSplitText(element, options = {}) {
   } else if (splitTextType === "lines") {
     splitConfig.linesClass = "line";
   } else if (splitTextType === "chars") {
+    // When using words,chars, configure both
+    splitConfig.wordsClass = "word";
     splitConfig.charsClass = "char";
   }
 
   const split = new SplitText(element, splitConfig);
 
   // Get the split elements based on type
+  // For chars with words,chars, we still want to animate the chars
   const splitElements = 
     splitTextType === "words" ? split.words : 
     splitTextType === "lines" ? split.lines : 

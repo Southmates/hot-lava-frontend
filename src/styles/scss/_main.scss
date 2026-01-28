@@ -95,3 +95,16 @@
     margin: 0 0 0 5%;
   }
 }
+
+// SplitText styles - prevent word breaking in mobile when using chars
+.word {
+  // Keep words intact when they contain chars (SplitText with words,chars)
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.char {
+  display: inline-block;
+  // Prevent individual chars from breaking
+  word-break: keep-all;
+}
