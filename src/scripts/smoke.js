@@ -1,21 +1,11 @@
 // put the animation on load, otherwise it bugs out
-// #region agent log
-let smokeInitCount = 0;
 window.addEventListener("load", () => {
-    smokeInitCount++;
-    fetch('http://127.0.0.1:7242/ingest/b4e86b0f-0d07-4623-afa3-dd0be25c8cef',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'smoke.js:2',message:'window.load event fired',data:{count:smokeInitCount,readyState:document.readyState},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
     initFluid();
   });
   
   const initFluid = () => {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/b4e86b0f-0d07-4623-afa3-dd0be25c8cef',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'smoke.js:6',message:'initFluid called',data:{callCount:smokeInitCount},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-    // #endregion
     // anim setup || in an active project you can set this to the html body. however ive found a bound box to the viewport looks + performs better
     const canvas = document.getElementById("fluid");
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/b4e86b0f-0d07-4623-afa3-dd0be25c8cef',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'smoke.js:9',message:'canvas element check',data:{canvasExists:!!canvas,canvasId:canvas?.id},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-    // #endregion
     resizeCanvas();
   
     let config = {

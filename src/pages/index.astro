@@ -65,9 +65,6 @@ import '../styles/global.scss';
   <Canvas />
 
   <script>
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/b4e86b0f-0d07-4623-afa3-dd0be25c8cef',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.astro:67',message:'Script imports starting',data:{readyState:document.readyState},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-    // #endregion
     import '../scripts/main.js';
     import '../scripts/smoke.js';
   </script>

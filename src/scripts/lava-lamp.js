@@ -1,19 +1,9 @@
 // Lava Lamp Effect with WebGL
-// #region agent log
-let lavaLampInitCount = 0;
-// #endregion
 export function initLavaLamp() {
-  // #region agent log
-  lavaLampInitCount++;
-  fetch('http://127.0.0.1:7242/ingest/b4e86b0f-0d07-4623-afa3-dd0be25c8cef',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lava-lamp.js:2',message:'initLavaLamp called',data:{initCount:lavaLampInitCount},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-  // #endregion
   const canvas = document.getElementById('lava-lamp-canvas');
   if (!canvas) return;
 
   const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-  // #region agent log
-  fetch('http://127.0.0.1:7242/ingest/b4e86b0f-0d07-4623-afa3-dd0be25c8cef',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lava-lamp.js:6',message:'WebGL context check',data:{glExists:!!gl,isTouchDevice:('ontouchstart' in window || navigator.maxTouchPoints > 0)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-  // #endregion
   if (!gl) {
     console.error('WebGL not supported');
     return;

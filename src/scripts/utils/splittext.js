@@ -14,6 +14,41 @@ import { SplitText } from "gsap/SplitText";
 export function initSplitText(element, options = {}) {
   if (!element || !(element instanceof HTMLElement)) return;
 
+  // Wait for fonts to be loaded before initializing SplitText
+  const initWhenFontsReady = () => {
+    // Small delay to ensure fonts are fully rendered
+    setTimeout(() => {
+      _initSplitText(element, options);
+    }, 100);
+  };
+
+  // Check if fontsReady event has already been dispatched
+  if (window.fontsReadyDispatched) {
+    // Fonts are already loaded, initialize immediately
+    initWhenFontsReady();
+  } else {
+    // Wait for fontsReady event
+    const handleFontsReady = () => {
+      initWhenFontsReady();
+    };
+    
+    window.addEventListener('fontsReady', handleFontsReady, { once: true });
+    
+    // Fallback: check if fonts are already loaded via document.fonts.ready
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        setTimeout(() => {
+          if (!window.fontsReadyDispatched) {
+            window.removeEventListener('fontsReady', handleFontsReady);
+            initWhenFontsReady();
+          }
+        }, 100);
+      });
+    }
+  }
+}
+
+function _initSplitText(element, options = {}) {
   const container = element.closest(".container") || options.trigger || element.parentElement;
   if (!container) return;
 

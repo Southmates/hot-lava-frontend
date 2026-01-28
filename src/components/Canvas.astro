@@ -30,21 +30,9 @@
     return [r, g, b];
   }
 
-  // #region agent log
-  let canvasInitCount = 0;
-  let canvasRetryCount = 0;
-  // #endregion
   function initCanvas() {
-    // #region agent log
-    canvasInitCount++;
-    fetch('http://127.0.0.1:7242/ingest/b4e86b0f-0d07-4623-afa3-dd0be25c8cef',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Canvas.astro:33',message:'initCanvas called',data:{initCount:canvasInitCount,retryCount:canvasRetryCount},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-    // #endregion
     const gradientCanvas = document.querySelector(".gradient-canvas");
     if (!gradientCanvas) {
-      // #region agent log
-      canvasRetryCount++;
-      fetch('http://127.0.0.1:7242/ingest/b4e86b0f-0d07-4623-afa3-dd0be25c8cef',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Canvas.astro:37',message:'Canvas retry scheduled',data:{retryCount:canvasRetryCount},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-      // #endregion
       console.warn("Canvas element not found, retrying...");
       setTimeout(initCanvas, 100);
       return;
@@ -213,16 +201,10 @@
 
     animate();
    
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/b4e86b0f-0d07-4623-afa3-dd0be25c8cef',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Canvas.astro:204',message:'Canvas initialized successfully',data:{initCount:canvasInitCount},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-    // #endregion
     // console.log("WebGL canvas initialized successfully");
   }
 
   // Wait for DOM to be ready
-  // #region agent log
-  fetch('http://127.0.0.1:7242/ingest/b4e86b0f-0d07-4623-afa3-dd0be25c8cef',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Canvas.astro:208',message:'Canvas initialization setup',data:{readyState:document.readyState},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-  // #endregion
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initCanvas);
   } else {
