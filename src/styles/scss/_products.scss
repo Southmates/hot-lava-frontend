@@ -234,6 +234,7 @@
   color: #000;
   pointer-events: none;
   z-index: 2;
+  text-transform: uppercase;
 
   @media (min-width: $change-layout) {
     position: absolute;
