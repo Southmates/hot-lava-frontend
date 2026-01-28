@@ -157,13 +157,13 @@ const { products = defaultProducts } = Astro.props;
   if (typeof window !== 'undefined') {
     if (document.readyState === 'complete') {
       initCustomCursor('.product__card', {
-        text: 'View more',
+        text: 'View',
         cursorId: 'shop-cursor',
       });
     } else {
       window.addEventListener('load', () => {
         initCustomCursor('.product__card', {
-          text: 'View more',
+          text: 'View',
           cursorId: 'shop-cursor',
         });
       });
