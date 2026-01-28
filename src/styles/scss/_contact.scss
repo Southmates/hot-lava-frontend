@@ -31,6 +31,10 @@
   bottom: 0%;
   max-width: 400px;
 
+  @media (min-width: $change-layout) {
+    transform: translateY(-90px);
+  }
+
   p { 
     color: var(--color-orange); 
   }
@@ -56,7 +60,7 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 1.5em;
+  gap: 4em;
 
   a {
     display: inline-flex;
@@ -71,8 +75,8 @@
   }
 
   svg {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     fill: white;
   }
 }

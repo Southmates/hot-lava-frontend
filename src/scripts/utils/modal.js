@@ -13,13 +13,14 @@ export function createModal(lenis) {
   function open(videoUrl, workName, workBrand, targetSlide) {
     if (!modalTarget) return;
 
-    // Set brand
+    // Set brand with "Client: " prefix
     if (videoBrand) {
-      if (workBrand) {
-        videoBrand.textContent = workBrand;
+      const brandName = videoBrand.querySelector('.vimeo-player__brand-name');
+      if (workBrand && brandName) {
+        brandName.textContent = workBrand;
         videoBrand.style.display = 'block';
       } else {
-        videoBrand.textContent = '';
+        if (brandName) brandName.textContent = '';
         videoBrand.style.display = 'none';
       }
     }

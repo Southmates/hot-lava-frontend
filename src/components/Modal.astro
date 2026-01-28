@@ -1,0 +1,42 @@
+---
+// Modal.astro
+---
+
+<div class="modal">
+  <div class="modal__close js-close">
+    <div class="ui-close"></div>
+  </div>
+  <div class="modal__content">
+    <div class="modal__video-container">
+      <iframe 
+        id="work-video" 
+        class="modal__video"
+        src=""
+        frameborder="0" 
+        allow="autoplay; fullscreen; picture-in-picture"  
+      ></iframe>
+      
+      <div class="vimeo-player__overlay">
+        <div class="vimeo-player__header">
+          <div class="vimeo-player__brand" id="work-video-brand">
+            <span class="vimeo-player__brand-label">Client:</span>
+            <span class="vimeo-player__brand-name"></span>
+          </div>
+          <div class="vimeo-player__title" id="work-video-title"></div>
+        </div>
+        
+        <div class="vimeo-player__controls">
+          <button class="vimeo-player__play-pause" id="work-video-play-pause">Play</button>
+          
+          <div class="vimeo-player__progress-container">
+            <div class="vimeo-player__progress-track">
+              <div class="vimeo-player__progress-bar" id="work-video-progress"></div>
+            </div>
+          </div>
+          
+          <div class="vimeo-player__time" id="work-video-time">0:00 / 0:00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
