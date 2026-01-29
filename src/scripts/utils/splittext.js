@@ -110,11 +110,22 @@ function _initSplitText(element, options = {}) {
     splitTextType === "chars" ? split.chars : 
     split.words;
 
+  // If there's an asterisk element inside the title, animate it in sync
+  // so we don't get a gap where only the asterisk is visible.
+  const asteriskEl = element.querySelector(":scope > .asterisk, .asterisk");
+
   // Set initial state
   gsap.set(splitElements, {
     opacity: 0,
     y: 50,
   });
+
+  if (asteriskEl instanceof HTMLElement) {
+    gsap.set(asteriskEl, {
+      opacity: 0,
+      y: 50,
+    });
+  }
 
   let hasAnimated = false;
 
@@ -137,6 +148,15 @@ function _initSplitText(element, options = {}) {
             stagger: options.stagger !== undefined ? options.stagger : 0.05,
             ease: "power2.out",
           });
+
+          if (asteriskEl instanceof HTMLElement) {
+            gsap.to(asteriskEl, {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power2.out",
+            });
+          }
         }
       });
     },
