@@ -220,10 +220,105 @@ const {
     speed: 7  
   });   
 
-  initUkiyo('.about .team__card img', {
-    scale: 1.15,
-    speed: 1.1
-  });
+  // Ukiyo sets inline styles/wrappers; on resize (responsive preview) those can get stale
+  // and break layout. Approach: debounce resize and refresh/teardown + re-init as needed.
+  const UKIYO_WRAPPER_CLASS = 'ukiyo-wrapper';
+  const DESKTOP_BREAKPOINT = 780; // matches menu breakpoint
+  let teamUkiyoInstances: any[] = [];
+
+  function cleanupAboutInlineStyles() {
+    // Clear inline transforms that can override responsive CSS
+    const cards = document.querySelectorAll('.about .team__card') as NodeListOf<HTMLElement>;
+    const pictures = document.querySelectorAll('.about .team__card picture') as NodeListOf<HTMLElement>;
+    const imgs = document.querySelectorAll('.about .team__card img') as NodeListOf<HTMLElement>;
+
+    gsap.set(cards, { clearProps: 'transform' });
+    gsap.set(pictures, { clearProps: 'transform' });
+    gsap.set(imgs, { clearProps: 'transform' });
+
+    imgs.forEach((img) => {
+      img.style.willChange = '';
+    });
+  }
+
+  function unwrapUkiyo() {
+    // Unwrap ukiyo wrappers if present
+    document.querySelectorAll(`.about .${UKIYO_WRAPPER_CLASS}`).forEach((wrapper) => {
+      const img = wrapper.querySelector('img');
+      if (!img || !wrapper.parentNode) return;
+      wrapper.parentNode.insertBefore(img, wrapper);
+      wrapper.remove();
+    });
+  }
+
+  function destroyTeamUkiyo() {
+    teamUkiyoInstances.forEach((inst) => {
+      try {
+        if (!inst) return;
+        // Try common teardown APIs across versions
+        if (typeof inst.destroy === 'function') inst.destroy();
+        else if (typeof inst.disable === 'function') inst.disable();
+        else if (typeof inst.stop === 'function') inst.stop();
+      } catch {
+        // ignore
+      }
+    });
+    teamUkiyoInstances = [];
+    unwrapUkiyo();
+    cleanupAboutInlineStyles();
+  }
+
+  function initTeamUkiyo() {
+    // Ensure no double-wrapping
+    destroyTeamUkiyo();
+    teamUkiyoInstances = initUkiyo('.about .team__card img', {
+      scale: 1.15,
+      speed: 1.1,
+    }) as any[];
+  }
+
+  function refreshTeamUkiyo() {
+    const isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT;
+
+    if (!isDesktop) {
+      // On mobile, disable ukiyo so layout stacks correctly
+      destroyTeamUkiyo();
+      return;
+    }
+
+    // Desktop: prefer lightweight refresh if API exists
+    if (teamUkiyoInstances.length) {
+      let refreshed = false;
+      teamUkiyoInstances.forEach((inst) => {
+        try {
+          if (!inst) return;
+          if (typeof inst.update === 'function') {
+            inst.update();
+            refreshed = true;
+          } else if (typeof inst.resize === 'function') {
+            inst.resize();
+            refreshed = true;
+          }
+        } catch {
+          // ignore
+        }
+      });
+      if (refreshed) return;
+    }
+
+    // Fallback: re-init
+    initTeamUkiyo();
+  }
+
+  // Init + refresh on resize (debounced)
+  refreshTeamUkiyo();
+  let ukiyoResizeTimer: number | undefined;
+  window.addEventListener('resize', () => {
+    window.clearTimeout(ukiyoResizeTimer);
+    ukiyoResizeTimer = window.setTimeout(() => {
+      refreshTeamUkiyo();
+    }, 200);
+  }, { passive: true });
 </script>
 
 <style>
