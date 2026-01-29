@@ -14,21 +14,15 @@
     align-items: center;
     justify-content: center;
 
-    background-image: url('/shop/bg.png');
+    background-image: url('/shop/bg-shop-mobile.jpg');
     background-size: cover;
-    background-position: bottom center;
+    background-position: center center;
     background-repeat: no-repeat;
 
-    // img {
-    //   width: 100%;
-    //   height: 100%;
-    //   object-fit: contain;
-    //   object-position: bottom center;
-
-    //   @media (min-width: $change-layout) {
-    //     object-fit: cover;
-    //   }
-    // }
+      @media (min-width: $change-layout) {
+        background-image: url('/shop/bg-shop.jpg');
+        background-position: bottom center;
+      }
   }
 
   .wrapper {
