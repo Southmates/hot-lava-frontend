@@ -41,10 +41,12 @@
   transform: translate(-120%, 15%);
   color: transparent;
 
-  background-image: url("/asterisk.svg");
-  background-size: contain;
-  background-repeat: no-repeat; 
-  background-position: top;
+  .word {
+    background-image: url("/asterisk.svg");
+    background-size: contain;
+    background-repeat: no-repeat; 
+    background-position: top;
+  }
 }
 
 .--fullvh {

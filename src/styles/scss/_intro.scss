@@ -69,10 +69,14 @@
   
   .container { 
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-end;
     padding-bottom: 15vh;
     min-height: 100vh;
+
+    @media (max-width: ($change-layout - 1px)) {
+      align-items: flex-end;
+    }
   } 
 
   .title {
@@ -123,7 +127,7 @@
 
 .image-phrase {
   position: absolute; 
-  top: 15%;
+  top: 0%;
   left: 0;
   width: 50vw;
   height: auto;
