@@ -30,6 +30,14 @@
     return [r, g, b];
   }
 
+  function isIOSLike(): boolean {
+    const ua = navigator.userAgent || '';
+    const iOS = /iP(hone|od|ad)/.test(ua);
+    // iPadOS reports as Mac; detect touch-capable "MacIntel"
+    const iPadOS = navigator.platform === 'MacIntel' && (navigator.maxTouchPoints || 0) > 1;
+    return iOS || iPadOS;
+  }
+
   function initCanvas() {
     const gradientCanvas = document.querySelector(".gradient-canvas");
     if (!gradientCanvas) {
@@ -40,11 +48,23 @@
     
     // console.log("Initializing WebGL canvas...");
 
+    // iOS Safari is prone to WebGL memory/context crashes with float render targets + high DPR.
+    // Prefer stability: cap DPR and avoid FloatType on iOS-like devices.
+    const ios = isIOSLike();
+    const maxDpr = ios ? 1.5 : 2;
+    const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
+    const renderScale = ios ? 0.5 : 1; // lower internal resolution on iOS
+    const textureType = ios ? THREE.UnsignedByteType : THREE.HalfFloatType;
+
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new THREE.WebGLRenderer({
+      antialias: !ios,
+      powerPreference: ios ? 'low-power' : 'high-performance',
+      alpha: true,
+    });
     
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(dpr);
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
     renderer.domElement.style.display = 'block';
@@ -52,25 +72,52 @@
    
     // console.log("Canvas element added to DOM:", renderer.domElement);
 
+    let rafId = 0;
+    let stopped = false;
+
+    // If the WebGL context is lost (common on iOS under memory pressure), stop animating
+    // so the browser can recover instead of crashing/reloading.
+    renderer.domElement.addEventListener(
+      'webglcontextlost',
+      (e: WebGLContextEvent) => {
+        e.preventDefault();
+        stopped = true;
+        if (rafId) cancelAnimationFrame(rafId);
+      },
+      { passive: false }
+    );
+
+    // Compute offscreen target size (smaller on iOS to reduce memory).
+    const getTargetSize = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      return {
+        width: Math.max(2, Math.floor(width * renderScale)),
+        height: Math.max(2, Math.floor(height * renderScale)),
+      };
+    };
+
+    const { width: targetW, height: targetH } = getTargetSize();
+
     const fluidTarget1 = new THREE.WebGLRenderTarget(
-      window.innerWidth,
-      window.innerHeight,
+      targetW,
+      targetH,
       {
         minFilter: THREE.LinearFilter,
         magFilter: THREE.LinearFilter,
         format: THREE.RGBAFormat,
-        type: THREE.FloatType,
+        type: textureType,
       }
     );
 
     const fluidTarget2 = new THREE.WebGLRenderTarget(
-      window.innerWidth,
-      window.innerHeight,
+      targetW,
+      targetH,
       {
         minFilter: THREE.LinearFilter,
         magFilter: THREE.LinearFilter,
         format: THREE.RGBAFormat,
-        type: THREE.FloatType,
+        type: textureType,
       }
     );
 
@@ -82,7 +129,7 @@
       uniforms: {
         iTime: { value: 0 },
         iResolution: {
-          value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+          value: new THREE.Vector2(targetW, targetH),
         },
         iMouse: { value: new THREE.Vector4(0, 0, 0, 0) },
         iFrame: { value: 0 },
@@ -101,7 +148,7 @@
       uniforms: {
         iTime: { value: 0 },
         iResolution: {
-          value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+          value: new THREE.Vector2(targetW, targetH),
         },
         iFluid: { value: null },
         uDistortionAmount: { value: config.distortionAmount },
@@ -146,7 +193,8 @@
     });
 
     function animate() {
-      requestAnimationFrame(animate);
+      if (stopped) return;
+      rafId = requestAnimationFrame(animate);
 
       const time = performance.now() * 0.001;
       fluidMaterial.uniforms.iTime.value = time;
@@ -189,17 +237,28 @@
     window.addEventListener("resize", () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
+      const { width: tw, height: th } = getTargetSize();
 
       renderer.setSize(width, height);
-      fluidMaterial.uniforms.iResolution.value.set(width, height);
-      displayMaterial.uniforms.iResolution.value.set(width, height);
+      renderer.setPixelRatio(dpr);
+      fluidMaterial.uniforms.iResolution.value.set(tw, th);
+      displayMaterial.uniforms.iResolution.value.set(tw, th);
 
-      fluidTarget1.setSize(width, height);
-      fluidTarget2.setSize(width, height);
+      fluidTarget1.setSize(tw, th);
+      fluidTarget2.setSize(tw, th);
       frameCount = 0;
     });
 
-    animate();
+    // Start animation; if anything throws (e.g. unsupported RT formats), fail softly.
+    try {
+      animate();
+    } catch (err) {
+      stopped = true;
+      if (rafId) cancelAnimationFrame(rafId);
+      console.warn('Gradient canvas disabled due to WebGL error:', err);
+      renderer.dispose();
+      if (renderer.domElement?.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
+    }
    
     // console.log("WebGL canvas initialized successfully");
   }

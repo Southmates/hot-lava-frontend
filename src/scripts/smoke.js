@@ -6,20 +6,31 @@ window.addEventListener("load", () => {
   const initFluid = () => {
     // anim setup || in an active project you can set this to the html body. however ive found a bound box to the viewport looks + performs better
     const canvas = document.getElementById("fluid");
+    if (!canvas) return;
+
+    // iOS Safari can reload/blank the page when WebGL allocations are too large.
+    // Clamp DPR and lower simulation buffers on iOS-like devices for stability.
+    const isIOSLike = (() => {
+      const ua = navigator.userAgent || "";
+      const iOS = /iP(hone|od|ad)/.test(ua);
+      const iPadOS = navigator.platform === "MacIntel" && (navigator.maxTouchPoints || 0) > 1;
+      return iOS || iPadOS;
+    })();
+
     resizeCanvas();
   
     let config = {
-      SIM_RESOLUTION: 128, // (128)
-      DYE_RESOLUTION: 1440, // (1440)
+      SIM_RESOLUTION: isIOSLike ? 64 : 128, // (128)
+      DYE_RESOLUTION: isIOSLike ? 512 : 1440, // (1440)
       CAPTURE_RESOLUTION: 512, // (512)
       DENSITY_DISSIPATION: 1.2, // (1.2) Reducido para que el humo dure más y sea más persistente
       VELOCITY_DISSIPATION: 0.9, // (0.9) Reducido para movimiento más fluido y persistente
       PRESSURE: 0.1, // (0.1)
-      PRESSURE_ITERATIONS: 32, // Aumentado para más fluidez
+      PRESSURE_ITERATIONS: isIOSLike ? 16 : 32, // Aumentado para más fluidez
       CURL: 6, // (8) Aumentado para más rotación y movimiento orgánico
       SPLAT_RADIUS: 0.45, // Aumentado para trazos más suaves y amplios
       SPLAT_FORCE: 2500, // (3500) Reducido para movimientos más suaves y naturales
-      SHADING: true,  
+      SHADING: isIOSLike ? false : true,  
       COLOR_UPDATE_SPEED: 100, // (10)
       PAUSED: false, // (false)
       BACK_COLOR: { r: 0, g: 0, b: 0 }, // (0, 0, 0)
@@ -42,7 +53,38 @@ window.addEventListener("load", () => {
     let pointers = [];
     pointers.push(new pointerPrototype());
   
-    const { gl, ext } = getWebGLContext(canvas);
+    let gl, ext;
+    try {
+      ({ gl, ext } = getWebGLContext(canvas));
+    } catch (e) {
+      console.warn("Smoke: WebGL init failed, disabling effect.", e);
+      return;
+    }
+    if (!gl || !ext) {
+      console.warn("Smoke: WebGL not available, disabling effect.");
+      return;
+    }
+    // If formats are not supported, we can't safely create FBOs.
+    if (!ext.formatRGBA || !ext.formatRG || !ext.formatR) {
+      console.warn("Smoke: Required render texture formats not supported, disabling effect.");
+      return;
+    }
+
+    // Stop rendering if context is lost (prevents iOS crash/reload loops).
+    let _stopped = false;
+    let _rafId = 0;
+    canvas.addEventListener(
+      "webglcontextlost",
+      (e) => {
+        e.preventDefault();
+        _stopped = true;
+        if (_rafId) cancelAnimationFrame(_rafId);
+      },
+      { passive: false }
+    );
+    canvas.addEventListener("webglcontextrestored", () => {
+      // Best-effort: don't auto-reinit; user interaction / reload can restore cleanly.
+    });
   
     if (!ext.supportLinearFiltering) {
       config.DYE_RESOLUTION = 512;
@@ -64,6 +106,9 @@ window.addEventListener("load", () => {
         gl =
           canvas.getContext("webgl", params) ||
           canvas.getContext("experimental-webgl", params);
+      if (!gl) {
+        return { gl: null, ext: null };
+      }
   
       let halfFloat;
       let supportLinearFiltering;
@@ -79,7 +124,10 @@ window.addEventListener("load", () => {
   
       const halfFloatTexType = isWebGL2
         ? gl.HALF_FLOAT
-        : halfFloat.HALF_FLOAT_OES;
+        : (halfFloat ? halfFloat.HALF_FLOAT_OES : null);
+      if (!halfFloatTexType) {
+        return { gl: null, ext: null };
+      }
       let formatRGBA;
       let formatRG;
       let formatR;
@@ -927,7 +975,8 @@ window.addEventListener("load", () => {
       applyInputs();
       step(dt);
       render(null);
-      requestAnimationFrame(update);
+      if (_stopped) return;
+      _rafId = requestAnimationFrame(update);
     }
   
     function calcDeltaTime() {
@@ -1452,7 +1501,9 @@ window.addEventListener("load", () => {
     }
   
     function scaleByPixelRatio(input) {
-      let pixelRatio = window.devicePixelRatio || 1;
+      // Clamp DPR to reduce GPU memory pressure on mobile/iOS.
+      const maxDpr = isIOSLike ? 1.5 : 2;
+      let pixelRatio = Math.min(window.devicePixelRatio || 1, maxDpr);
       return Math.floor(input * pixelRatio);
     }
   

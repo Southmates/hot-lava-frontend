@@ -7,7 +7,7 @@
   width: 100vw;
   height: 100vh;
   height: 100dvh;
-  z-index: 9990;
+  z-index: 9999;
   background-color: #000;
 
   transform: translateX(100vw);
@@ -27,8 +27,8 @@
 .modal__close {
   position: fixed;
   z-index: 9992;
-  top: 1.5rem;
-  right: 16px;
+  top: 1.2rem;
+  right: .5rem;
   cursor: pointer;
   width: 60px;
   height: 60px;
@@ -131,6 +131,7 @@
   display: flex;
   flex-direction: column-reverse;
   gap: 0.875rem;
+  width: calc(100% - 2.5rem);
 }
 
 .vimeo-player__brand {

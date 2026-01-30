@@ -110,7 +110,10 @@
 
     .team__name {
       color: $color-orange;
-      opacity: 1 !important;
+
+      @media (min-width: $change-layout) {
+        opacity: 1 !important;
+      }
     }
 
     picture {

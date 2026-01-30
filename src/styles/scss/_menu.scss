@@ -127,7 +127,7 @@
     gap: 10vh;
 
     position: fixed;
-    z-index: 9992;
+    z-index: 999;
     height: 100vh;
     width: 100%;
     padding: 15vh 2rem 0 2rem;
@@ -261,11 +261,11 @@
 
 .burger {
   position: fixed;
-  top: 8px;
-  right: 30px;
+  top: 1rem;
+  right: .5rem;
   width: 60px;
   height: 60px;
-  z-index: 9999;
+  z-index: 9990;
 
   @media (min-width: 780px) {
     display: none;
