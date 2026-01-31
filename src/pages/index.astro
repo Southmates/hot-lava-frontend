@@ -1,5 +1,15 @@
 ---
 // index.astro
+import { sanity } from '../lib/sanity'
+const query = `
+  *[_id == "siteSettings"]{
+    siteTitle,  
+    contactInfo,
+    socialLinks
+  }[0]
+`
+
+const settings = await sanity.fetch(query)
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Loader from '../components/Loader.astro';
 import Header from '../components/Header.astro';
@@ -17,7 +27,7 @@ import '../styles/global.scss';
 ---
 
 <BaseLayout
-title = 'Hot Lava Agency | Full-Service Advertising Agency',
+  title = `${settings.siteTitle} | Full-Service Advertising Agency`,
   description="Hot Lava Agency delivers innovative, non-toxic advertising solutions. We specialize in creative strategy, digital marketing, and brand development for forward-thinking companies."
   canonical="/"
   includeVimeo={true}
@@ -36,18 +46,18 @@ title = 'Hot Lava Agency | Full-Service Advertising Agency',
   <Modal />
 
   <Header />
-  <Nav />
+  <Nav siteSettings={settings}/>
   <Copyright />
 
   <main id="main-content">
-    <h1 class="sr-only">Hot Lava Agency — Full‑Service Advertising</h1>
+    <h1 class="sr-only">{settings.siteTitle}</h1>
     <Hero />
     <Intro />
     <About /> 
     <Work />
     <Products />
   </main>
-  <Footer /> 
+  <Footer siteSettings={settings}/> 
   <Canvas />
 
   <script>

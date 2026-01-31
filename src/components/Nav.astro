@@ -1,6 +1,21 @@
 ---
 // Nav.astro
 
+interface ContactInfo {
+  text?: string;
+  textAfterBreak?: string;
+  email?: string;
+}
+
+interface SiteSettings {
+  contactInfo?: ContactInfo;
+}
+
+const siteSettings = Astro.props.siteSettings as SiteSettings;
+
+const { contactInfo = { text: "", textAfterBreak: "", email: "" } } = siteSettings ?? {};
+ 
+
 const navItems = [
   {
     label: "Home",
@@ -11,34 +26,25 @@ const navItems = [
     label: "About",
     href: "#about",
     mobileHref: "#about-us",
-    class: "about-link",
-    mobileLabel: "About",
+    class: "about-link", 
   },
   {
     label: "Work",
     href: "#work",
-    class: "how-we-work-link",
-    mobileLabel: "Work",
+    class: "how-we-work-link", 
   },
   {
     label: "Shop",
     href: "#shop",
-    class: "shop-link",
-    mobileLabel: "Shop",
+    class: "shop-link", 
   },
   {
     label: "Contact",
     href: "#contact",
-    class: "contact-link",
-    mobileLabel: "Contact",
+    class: "contact-link", 
   },
 ];
-
-const contactInfo = {
-  text: "Hot Lava! We'd love to show you what we can do.",
-  textAfterBreak: "For inquiries, contact:",
-  email: "info@hotlavaagency.com",
-};
+ 
 ---
 
 <nav class="menu" id="home">
@@ -76,14 +82,14 @@ const contactInfo = {
           .map((item) => (
             <li>
               <a class={item.class} href={item.mobileHref || item.href}>
-                {item.mobileLabel || item.label}
+                {item.label}
               </a>
             </li>
           ))}
       </ul>
     </div>
     <div class="contact">
-      <p>
+      <p>        
         {contactInfo.text} <br />
         {contactInfo.textAfterBreak}
       </p>

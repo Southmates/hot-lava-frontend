@@ -11,6 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@sanity/client": "^7.14.1",
     "astro": "^4.16.19",
     "gsap": "^3.13.0",
     "lenis": "^1.1.4",
