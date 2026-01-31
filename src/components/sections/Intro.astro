@@ -18,11 +18,10 @@ interface IntroTitle {
 interface IntroSection {
   id: string;
   class?: string;
-  title: IntroTitle;
-  paragraph?: string | null;
-  paragraphClass?: string | null;
+  title?: IntroTitle;
+  paragraph?: string | null; 
   image?: IntroImage | null;
-  layout?: "row" | "default"; // Determina si usa intro__row o no
+  layout?: "row" | "default";
 }
 
 interface IntroConfig {
@@ -35,19 +34,12 @@ interface IntroConfig {
   };
 }
 
-// Default data - will be replaced by CMS data
 const defaultConfig: IntroConfig = {
   asterisk: "*",
   sections: [
     {
       id: "intro-first",
-      class: "intro__section--first",
-      title: {
-        line1: "Hot Lava is our phrase for epiphany. We had one and that's why we're here...",
-        line2: null,
-      },
-      paragraph: null,
-      paragraphClass: null,
+      class: "intro__section--first",      
       image: {
         src: "/images/phrase.jpg",
         alt: "Hot Lava is our phrase for epiphany.",
@@ -60,14 +52,7 @@ const defaultConfig: IntroConfig = {
     },
     {
       id: "intro-second",
-      class: "intro__section--second",
-      title: {
-        line1: "Ideas need to",
-        line2: "flow more freely.",
-      },
-      paragraph:
-        "It's never been more important. With the complexities of todays marketing challenges, ideas need to flow freely to be effective across audiences, platforms and cultures.",
-      paragraphClass: "paragraph-intro",
+      class: "intro__section--second", 
       image: {
         src: "/images/flow.jpg",
         alt: "Ideas need to flow more freely.",
@@ -80,27 +65,13 @@ const defaultConfig: IntroConfig = {
     },
     {
       id: "intro-third",
-      class: "intro__section--third",
-      title: {
-        line1: "Flow starts with",
-        line2: "the way we work.",
-      },
-      paragraph:
-        "We're a full-service advertising agency that gives clients direct access to award-winning creators and doers. Our team is simply an extension of yours – with personal service, an agile approach, and effective, defining work.",
-      paragraphClass: null,
+      class: "intro__section--third",  
       image: null,
       layout: "default",
     },
     {
       id: "intro-fourth",
-      class: "intro__section--fourth",
-      title: {
-        line1: "The best ideas",
-        line2: "know no bounds.",
-      },
-      paragraph:
-        "They flood our thoughts, ignite our emotions and build enough momentum to change the way we act. Ideas that flow are what the modern marketer needs to thrive.",
-      paragraphClass: null,
+      class: "intro__section--fourth",      
       image: null,
       layout: "default",
     },
@@ -112,16 +83,28 @@ const defaultConfig: IntroConfig = {
   },
 };
 
-// Accept props from CMS or use defaults
 interface Props {
-  config?: IntroConfig;
+  config?: any;
 }
 
-const { config = defaultConfig } = Astro.props;
+const { config } = Astro.props;
 
-const asterisk = config.asterisk || "*";
-const sections = config.sections;
-const asteriskLinesImage = config.asteriskLinesImage;
+const sections = defaultConfig.sections.map((section, index) => {
+  const key = `section${index + 1}`;
+  const cms = config?.[key];
+
+  if (!cms) return section;
+
+  return {
+    ...section,
+    title: cms.title ?? section.title,
+    paragraph: cms.paragraph ?? section.paragraph,
+  };
+});
+
+const asterisk = config?.asterisk ?? defaultConfig.asterisk;
+const asteriskLinesImage =
+  config?.asteriskLinesImage ?? defaultConfig.asteriskLinesImage;
 ---
 
 <section class="intro asterisk-lines-container" id="intro">
@@ -131,7 +114,7 @@ const asteriskLinesImage = config.asteriskLinesImage;
       id={section.id}
     >
       <div class="wrapper">
-        {section.image && section.image.position === "top" && (
+        {section.image?.position === "top" && section.image?.src && (
           <div class={section.image.class || ""}>
             <img
               src={section.image.src}
@@ -141,20 +124,24 @@ const asteriskLinesImage = config.asteriskLinesImage;
             />
           </div>
         )}
+
         <div class="container">
-          <h3 class="title">
-            <span class="asterisk">{asterisk}</span>
-            {section.title.line1}
-            {section.title.line2 && (
-              <>
-                <br />
-                {section.title.line2}
-              </>
-            )}
-          </h3>
+          {section.title?.line1 && (
+            <h3 class="title">
+              <span class="asterisk">{asterisk}</span>
+              {section.title.line1}
+              {section.title.line2 && (
+                <>
+                  <br />
+                  {section.title.line2}
+                </>
+              )}
+            </h3>
+          )}
+
           {section.layout === "row" && section.paragraph ? (
             <div class="intro__row">
-              {section.image && section.image.position === "row" && (
+              {section.image?.position === "row" && section.image?.src && (
                 <div class={section.image.class || ""}>
                   <img
                     src={section.image.src}
@@ -164,13 +151,13 @@ const asteriskLinesImage = config.asteriskLinesImage;
                   />
                 </div>
               )}
-              <p class={`paragraph ${section.paragraphClass || ""}`.trim()}>
+              <p class="paragraph">
                 {section.paragraph}
               </p>
             </div>
           ) : (
             section.paragraph && (
-              <p class={`paragraph ${section.paragraphClass || ""}`.trim()}>
+              <p class="paragraph">
                 {section.paragraph}
               </p>
             )
@@ -179,7 +166,8 @@ const asteriskLinesImage = config.asteriskLinesImage;
       </div>
     </section>
   ))}
-  {asteriskLinesImage && (
+
+  {asteriskLinesImage?.src && (
     <img
       src={asteriskLinesImage.src}
       alt={asteriskLinesImage.alt}
@@ -195,60 +183,69 @@ const asteriskLinesImage = config.asteriskLinesImage;
   import { initUkiyo } from '../../scripts/utils/ukiyo.js';
   import { initFadeIn } from '../../scripts/utils/fade-in.js';
 
-  // Animation configurations - can be moved to CMS if needed
-  const parallaxConfigs = [
-    { selector: '.intro__section--first h3.title', speed: -.5 },
-    { selector: '.image-phrase', speed: 1.75 },
-    { selector: '.intro__section--second h3.title', speed: -.5 }, 
-    { selector: '.intro__section--second .paragraph-intro', speed: -.75 },
-    { selector: '.image-ideas', speed: 1.75 },
-    { selector: '.asterisk-lines', speed: 2.5 },
-    { selector: '.intro__section--third h3.title', speed: -.5 },
-    { selector: '.intro__section--third .paragraph', speed: -.75 },
-    { selector: '.intro__section--fourth h3.title', speed: -.5 },
-    { selector: '.intro__section--fourth .paragraph', speed: -.75 },
-  ];
+const safe = (
+  selector: string,
+  cb: (el: HTMLElement) => void
+) => {
+  const el = document.querySelector(selector) as HTMLElement | null;
+  if (el) cb(el);
+};
 
-  const ukiyoConfigs = [
-    { selector: '.intro__section--first .image-phrase img', scale: 1.25, speed: 1 },
-    { selector: '.intro__section--second .image-ideas img', scale: 1.25, speed: 1 },
-  ];
+
 
   waitForAssets(() => {
-    const titles = document.querySelectorAll('.intro__section h3.title');
-    titles.forEach((title) => {
-      initSplitText(title as HTMLElement, { type: 'words' });
-    });
+    document
+      .querySelectorAll('.intro__section h3.title')
+      .forEach((el) => initSplitText(el, { type: 'words' }));
 
-    const paragraphs = document.querySelectorAll('.intro__section .paragraph');
-    paragraphs.forEach((paragraph) => {
-      initSplitText(paragraph as HTMLElement, { type: 'lines' });
-    });
+    document
+      .querySelectorAll('.intro__section .paragraph')
+      .forEach((el) => initSplitText(el, { type: 'lines' }));
 
-    // Initialize fade-in for intro images
-    initFadeIn('.image-phrase img', {
-      start: '50%',
-      duration: 2.4,
-      y: 40,
-      ease: 'power4.out',
-    });
+    safe('.image-phrase img', (el) =>
+      initFadeIn(el, { start: '50%', duration: 2.4, y: 40, ease: 'power4.out' })
+    );
 
-    initFadeIn('.image-ideas img', {
-      start: '50%',
-      duration: 2.4,
-      y: 40,
-      ease: 'power4.out',
-    });
+    safe('.image-ideas img', (el) =>
+      initFadeIn(el, { start: '50%', duration: 2.4, y: 40, ease: 'power4.out' })
+    );
   });
 
-  parallaxConfigs.forEach((config) => {
-    initParallax(config.selector, { speed: config.speed });
-  });
+  safe('.intro__section--first h3.title', (el) =>
+    initParallax(el, { speed: -0.5 })
+  );
+  safe('.image-phrase', (el) =>
+    initParallax(el, { speed: 1.75 })
+  );
+  safe('.intro__section--second h3.title', (el) =>
+    initParallax(el, { speed: -0.5 })
+  );
+  safe('.intro__section--second .paragraph-intro', (el) =>
+    initParallax(el, { speed: -0.75 })
+  );
+  safe('.image-ideas', (el) =>
+    initParallax(el, { speed: 1.75 })
+  );
+  safe('.asterisk-lines', (el) =>
+    initParallax(el, { speed: 2.5 })
+  );
+  safe('.intro__section--third h3.title', (el) =>
+    initParallax(el, { speed: -0.5 })
+  );
+  safe('.intro__section--third .paragraph', (el) =>
+    initParallax(el, { speed: -0.75 })
+  );
+  safe('.intro__section--fourth h3.title', (el) =>
+    initParallax(el, { speed: -0.5 })
+  );
+  safe('.intro__section--fourth .paragraph', (el) =>
+    initParallax(el, { speed: -0.75 })
+  );
 
-  ukiyoConfigs.forEach((config) => {
-    initUkiyo(config.selector, {
-      scale: config.scale,
-      speed: config.speed,
-    });
-  });
+  safe('.intro__section--first .image-phrase img', (el) =>
+    initUkiyo(el, { scale: 1.25, speed: 1 })
+  );
+  safe('.intro__section--second .image-ideas img', (el) =>
+    initUkiyo(el, { scale: 1.25, speed: 1 })
+  );
 </script>
