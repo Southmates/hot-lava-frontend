@@ -190,9 +190,7 @@ const safe = (
   const el = document.querySelector(selector) as HTMLElement | null;
   if (el) cb(el);
 };
-
-
-
+ 
   waitForAssets(() => {
     document
       .querySelectorAll('.intro__section h3.title')
@@ -220,7 +218,7 @@ const safe = (
   safe('.intro__section--second h3.title', (el) =>
     initParallax(el, { speed: -0.5 })
   );
-  safe('.intro__section--second .paragraph-intro', (el) =>
+  safe('.intro__section--second .paragraph', (el) =>
     initParallax(el, { speed: -0.75 })
   );
   safe('.image-ideas', (el) =>
