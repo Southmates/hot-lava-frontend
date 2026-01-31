@@ -1,39 +1,70 @@
 ---
 // BaseLayout.astro
+const {
+  title = 'Hot Lava Agency - Full Service Advertising Agency | Non-toxic Creative Solutions',
+  description = 'Hot Lava Agency delivers innovative, non-toxic advertising solutions. We specialize in creative strategy, digital marketing, and brand development for forward-thinking companies.',
+  canonical,
+  image = '/share-hot-lava-agency.jpg',
+  lang = 'en',
+  robots = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+  includeVimeo = false,
+  preloadImages = [] as string[],
+} = Astro.props;
+
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(canonical ?? Astro.url.pathname, siteUrl).toString();
+const ogImageUrl = new URL(image, siteUrl).toString();
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Hot Lava Agency',
+    url: siteUrl.toString(),
+    logo: new URL('/logo.svg', siteUrl).toString(),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Hot Lava Agency',
+    url: siteUrl.toString(),
+  },
+];
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/logo.svg" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="language" content="English" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={robots} />
     
     <!-- Primary Meta Tags -->
-    <title>Hot Lava Agency - Full Service Advertising Agency | Non-toxic Creative Solutions</title>
-    <meta name="title" content="Hot Lava Agency - Full Service Advertising Agency | Non-toxic Creative Solutions">
-    <meta name="description" content="Hot Lava Agency delivers innovative, non-toxic advertising solutions. We specialize in creative strategy, digital marketing, and brand development for forward-thinking companies." />
-    <link rel="canonical" href="https://www.hotlavaagency.com/" />
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Hot Lava Agency" />
-    <meta property="og:title" content="Hot Lava Agency - Full Service Advertising Agency | Non-toxic Creative Solutions" />
-    <meta property="og:description" content="Hot Lava Agency delivers innovative, non-toxic advertising solutions. We specialize in creative strategy, digital marketing, and brand development for forward-thinking companies." />
-    <meta property="og:url" content="https://www.hotlavaagency.com/" />
-    <meta property="og:image" content="https://www.hotlavaagency.com/share-hot-lava-agency.jpg" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Hot Lava Agency" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:site" content="@hotlavaagency" />
-    <meta property="twitter:title" content="Hot Lava Agency - Full Service Advertising Agency | Non-toxic Creative Solutions" />
-    <meta property="twitter:description" content="Hot Lava Agency delivers innovative, non-toxic advertising solutions. We specialize in creative strategy, digital marketing, and brand development for forward-thinking companies." />
-    <meta property="twitter:image" content="https://www.hotlavaagency.com/share-hot-lava-agency.jpg" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content="Hot Lava Agency" />
 
     <!-- Mobile App Meta -->
     <!-- <meta name="apple-mobile-web-app-capable" content="yes" /> -->
@@ -41,16 +72,13 @@
     <meta name="theme-color" content="#ffffff" />
     
     <!-- Preload critical images -->
-    <!-- <link rel="preload" as="image" href="/hero/Ultrarealistic_cinematic_video_1080p_2026011.jpg" /> -->
-    <link rel="preload" as="image" href="/images/phrase.jpg" />
-    <link rel="preload" as="image" href="/images/flow.jpg" />
-    <link rel="preload" as="image" href="/team/kristi.jpg" />
-    <link rel="preload" as="image" href="/team/phil.jpg" />
-    <link rel="preload" as="image" href="/team/nik.jpg" />
-    <link rel="preload" as="image" href="/team/ben.jpg" />
+    {preloadImages.map((href: string) => (
+      <link rel="preload" as="image" href={href} />
+    ))}
     
-    <!-- Vimeo Player API -->
-    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    
+    {includeVimeo ? <script src="https://player.vimeo.com/api/player.js"></script> : null}
   </head>
 
   <body class="main">

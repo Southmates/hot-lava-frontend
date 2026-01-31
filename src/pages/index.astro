@@ -17,7 +17,20 @@ import Canvas from '../components/Canvas.astro';
 import '../styles/global.scss';
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Hot Lava Agency - Full Service Advertising Agency | Non-toxic Creative Solutions"
+  description="Hot Lava Agency delivers innovative, non-toxic advertising solutions. We specialize in creative strategy, digital marketing, and brand development for forward-thinking companies."
+  canonical="/"
+  includeVimeo={true}
+  preloadImages={[
+    '/images/phrase.jpg',
+    '/images/flow.jpg',
+    '/team/kristi.jpg',
+    '/team/phil.jpg',
+    '/team/nik.jpg',
+    '/team/ben.jpg',
+  ]}
+>
   <Loader />
   <canvas id="fluid"></canvas>
   <Modal />
@@ -38,8 +51,6 @@ import '../styles/global.scss';
     import '../scripts/main.js';
     import '../scripts/smoke.js';
   </script>
-  
-  <script src="https://player.vimeo.com/api/player.js"></script>
 
 </BaseLayout>
 
