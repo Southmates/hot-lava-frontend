@@ -2,26 +2,31 @@
 // BrandsCarousel.astro
 // Reusable component for infinite logo carousel in a single row
 
-interface Props {
-  brands?: Array<{ src: string; alt: string }>;
-  duration?: number;
-  title?: string;
+import { urlFor } from '@/lib/sanity' 
+
+interface SanityImage {
+  asset: {
+    _ref: string
+  }
 }
 
-const {
-  brands = [
-    { src: "/brands/Arrow.png", alt: "Arrow" },
-    { src: "/brands/Dehnco.png", alt: "Dehnco" },
-    { src: "/brands/Dole.png", alt: "Dole" },
-    { src: "/brands/EZ-Pawn.png", alt: "EZ-Pawn" },
-    { src: "/brands/Knudsen.png", alt: "Knudsen" },
-    { src: "/brands/P&G.png", alt: "P&G" },
-    { src: "/brands/REW.png", alt: "REW" },
-    { src: "/brands/SpartanNash.png", alt: "SpartanNash" },
-  ],
+interface Brand {
+  image: SanityImage
+  alt: string
+}
+
+interface Props {
+  brands: Brand[]
+  duration?: number
+  title?: string
+}
+
+const { 
+  brands = [],
   duration = 40,
   title = "Our expertise flows across CPG, B2B and retail.",
 } = Astro.props;
+
 ---
 
 <div class="brands-carousel" data-duration={duration}>
@@ -34,13 +39,19 @@ const {
       <div class="brands-carousel__track">
         <div class="brands-carousel__brands"> 
           {brands.map((brand) => (
-            <img src={brand.src} alt={brand.alt} />
+            <img
+              src={urlFor(brand.image).width(300).auto('format').url()}
+              alt={brand.alt}
+            />
           ))}
         </div>
         <!-- Duplicate for infinite loop -->
         <div class="brands-carousel__brands"> 
-          {brands.map((brand) => (
-            <img src={brand.src} alt={brand.alt} />
+          {brands.map(b => (
+            <img
+              src={urlFor(b.image).width(300).auto('format').url()}
+              alt={b.alt}
+            />
           ))}
         </div>
       </div>
