@@ -15,19 +15,52 @@ const siteUrl = Astro.site ?? new URL(Astro.url.origin);
 const canonicalUrl = new URL(canonical ?? Astro.url.pathname, siteUrl).toString();
 const ogImageUrl = new URL(image, siteUrl).toString();
 
+const orgId = new URL('#organization', siteUrl).toString();
+const websiteId = new URL('#website', siteUrl).toString();
+const webpageId = `${canonicalUrl}#webpage`;
+
 const structuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': orgId,
     name: 'Hot Lava Agency',
     url: siteUrl.toString(),
+    description,
     logo: new URL('/logo.svg', siteUrl).toString(),
+    email: 'info@hotlavaagency.com',
+    sameAs: [
+      'https://www.linkedin.com/company/hot-lava/',
+      'https://www.instagram.com/hotlavaagency/',
+      'https://www.youtube.com/@hotlavaagency',
+      'https://www.tiktok.com/@itshotlava',
+    ],
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        email: 'info@hotlavaagency.com',
+      },
+    ],
   },
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': websiteId,
     name: 'Hot Lava Agency',
     url: siteUrl.toString(),
+    publisher: { '@id': orgId },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': webpageId,
+    url: canonicalUrl,
+    name: title,
+    description,
+    isPartOf: { '@id': websiteId },
+    about: { '@id': orgId },
+    primaryImageOfPage: ogImageUrl,
   },
 ];
 ---

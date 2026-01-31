@@ -31,6 +31,7 @@ import '../styles/global.scss';
     '/team/ben.jpg',
   ]}
 >
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <Loader />
   <canvas id="fluid"></canvas>
   <Modal />
@@ -39,11 +40,14 @@ import '../styles/global.scss';
   <Nav />
   <Copyright />
 
-  <Hero />
-  <Intro />
-  <About /> 
-  <Work />
-  <Products />
+  <main id="main-content">
+    <h1 class="sr-only">Hot Lava Agency — Full Service Advertising Agency</h1>
+    <Hero />
+    <Intro />
+    <About /> 
+    <Work />
+    <Products />
+  </main>
   <Footer /> 
   <Canvas />
 

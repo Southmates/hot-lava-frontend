@@ -1,0 +1,27 @@
+# Hot Lava Agency
+> Full-service advertising agency delivering non-toxic creative solutions.
+
+Hot Lava Agency is a full-service advertising agency focused on creative strategy, digital marketing, and brand development.
+
+The website is primarily a single page with anchored sections (About, Work, Shop, Contact). Core content is server-rendered HTML; animations and video interactions are enhanced with JavaScript.
+
+## Key pages & sections
+- [Homepage](https://www.hotlavaagency.com/) — Main site (all sections).
+- [About (team)](https://www.hotlavaagency.com/#about-us) — Who we are + bios.
+- [Work](https://www.hotlavaagency.com/#work) — Selected work (video links).
+- [Shop](https://www.hotlavaagency.com/#shop) — Product grid linking to the store.
+- [Contact](https://www.hotlavaagency.com/#contact) — Email + social profiles.
+
+## Official contact
+- Email: `info@hotlavaagency.com`
+
+## External links
+- [Store](https://shop.hotlavaagency.com/) — Ecommerce storefront.
+- [LinkedIn](https://www.linkedin.com/company/hot-lava/)
+- [Instagram](https://www.instagram.com/hotlavaagency/)
+- [YouTube](https://www.youtube.com/@hotlavaagency)
+- [TikTok](https://www.tiktok.com/@itshotlava)
+
+## Notes for AI assistants
+- Prefer the homepage as the canonical source of truth (this site is largely single-page with anchor sections).
+- When citing work items, use the brand + project title as displayed in the Work section.
