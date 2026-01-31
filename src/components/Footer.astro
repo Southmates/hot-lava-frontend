@@ -16,6 +16,12 @@ interface ContactInfo {
 interface SiteSettings {
   contactInfo?: ContactInfo;
   socialLinks?: SocialLink[];
+  footerTitle?: FooterTitle;
+}
+
+interface FooterTitle {
+  line1?: string;
+  line2?: string;
 }
 
 const siteSettings = Astro.props.siteSettings as SiteSettings;
@@ -23,13 +29,9 @@ const siteSettings = Astro.props.siteSettings as SiteSettings;
 const {
   contactInfo = { text: "", textAfterBreak: "", email: "" },
   socialLinks = [],
+  footerTitle = { line1: "", line2: "" },
 } = siteSettings ?? {};
- 
-const footerTitle = { 
-  line1: "Ready to go",
-  line2: "with the flow?",
-};
-
+  
 ---
 
 <footer id="contact" class="contact">
