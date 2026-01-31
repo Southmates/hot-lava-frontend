@@ -12,6 +12,32 @@ The website is primarily a single page with anchored sections (About, Work, Shop
 - [Shop](https://www.hotlavaagency.com/#shop) — Product grid linking to the store.
 - [Contact](https://www.hotlavaagency.com/#contact) — Email + social profiles.
 
+## Team (key people)
+- Ben Kline — Strategy leader (ex Ogilvy CMO; Leo Burnett CSO).
+- Nik Traxler — Award-winning producer + operations.
+- Phil Jungmann — Creative/art direction + leadership.
+- Kristi Neitzel — Creative leader + writer (Fortune 500 experience).
+
+## Work highlights (selected)
+- Dehnco — The Most Classic Design ([video](https://vimeo.com/1088839478))
+- Arrow Electronics — The Speed of Arrow ([video](https://vimeo.com/1111855559))
+- Dole Packaged Foods — Dolemates ([video](https://vimeo.com/1154846381))
+- Max Pawn Luxury — We Know Real ([video](https://vimeo.com/1154847059))
+
+## Shop (featured items)
+The shop catalog lives on the store; use the store as the source of truth for pricing/availability.
+
+- [Flow Generator Lamp](https://shop.hotlavaagency.com/products/hot-lava-boxed-lava-lamp)
+- [Ember Thinking Cap](https://shop.hotlavaagency.com/products/hot-lava-hat)
+- [Lava Scented Candle](https://shop.hotlavaagency.com/products/concrete-candle-lava-scent)
+- [Volcanic Hoodie](https://shop.hotlavaagency.com/products/hot-lava-hoodie)
+- [Ember Key Charm](https://shop.hotlavaagency.com/products/hot-lava-keychain)
+- [Hot Sauce Triple Burn](https://shop.hotlavaagency.com/products/hot-lava-trio-hot-sauce-box-2025)
+- [Make it Hot Hoodie](https://shop.hotlavaagency.com/products/hot-lava-make-it-hot-hoodie)
+- [Non-Toxic Tee](https://shop.hotlavaagency.com/products/hot-lava-non-toxic-t-shirt)
+- [Lava Lamp Thinking Cap](https://shop.hotlavaagency.com/products/lava-lamp-hat)
+- [Molten Oven Mitten](https://shop.hotlavaagency.com/products/hot-lava-mitts)
+
 ## Official contact
 - Email: `info@hotlavaagency.com`
 
