@@ -3,14 +3,42 @@
 import { sanity } from '../lib/sanity'
 const query = `
   *[_id == "siteSettings"]{
-    siteTitle,  
-    contactInfo,
-    socialLinks,
-    footerTitle
+    siteTitle,
+    siteTagline,
+    seo {
+      metaTitle,
+      metaDescription
+    },
+    footerTitle {
+      line1,
+      line2
+    },
+    contactInfo {
+      text,
+      textAfterBreak,
+      email
+    },
+    socialLinks[]{
+      url,
+      ariaLabel,
+      svgPath
+    }
   }[0]
-`
+`;
 
-const settings = await sanity.fetch(query)
+const settings = await sanity.fetch(query);
+
+const baseTitle = settings.siteTagline
+  ? `${settings.siteTitle} | ${settings.siteTagline}`
+  : settings.siteTitle;
+
+const pageTitle =
+  settings?.seo?.metaTitle ?? baseTitle;
+
+const pageDescription =
+  settings?.seo?.metaDescription ??
+  'Hot Lava Agency delivers innovative, non-toxic advertising solutions. We specialize in creative strategy, digital marketing, and brand development for forward-thinking companies.';
+
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Loader from '../components/Loader.astro';
 import Header from '../components/Header.astro';
@@ -28,8 +56,8 @@ import '../styles/global.scss';
 ---
 
 <BaseLayout
-  title = `${settings.siteTitle} | Full-Service Advertising Agency`,
-  description="Hot Lava Agency delivers innovative, non-toxic advertising solutions. We specialize in creative strategy, digital marketing, and brand development for forward-thinking companies."
+  title={pageTitle},
+  description={pageDescription},
   canonical="/"
   includeVimeo={true}
   preloadImages={[
