@@ -28,14 +28,7 @@ interface Props {
   works?: WorkItem[];
   carouselTitle?: string;
   carouselDuration?: number;
-}
-
-// const defaultWorks: WorkItem[] = [ 
-//   { brand: 'Dehnco', name: 'The Most Classic Design', slide: 'The Most Classic Design', image: '/work/dehnco--the-most-classic-design.jpg', videoUrl: 'https://vimeo.com/1088839478' },
-//   { brand: 'Arrow Electronics', name: 'The Speed of Arrow', slide: 'The Speed of Arrow', image: '/work/arrow--the-speed-of-arrow.jpg', videoUrl: 'https://vimeo.com/1111855559' },
-//   { brand: 'Dole Packaged Foods', name: 'Dolemates', slide: 'Dolemates', image: '/work/dole--dolemates.jpg', videoUrl: 'https://vimeo.com/1154846381' },
-//   { brand: 'Max Pawn Luxury', name: 'We Know Real', slide: 'We Know Real', image: '/work/max-pawn--luxury-we-know-real.jpg', videoUrl: 'https://vimeo.com/1154847059' }, 
-// ];
+} 
 
 const {
   asterisk = '*',
@@ -45,11 +38,8 @@ const {
   carouselDuration = 40,
 } = Astro.props;
 
-// if (!works?.length) return null
-
-if (!works) {
-  throw new Error('Works data is required')
-}
+if (!works?.length) return null
+ 
 ---
 
 <section id="work" class="works">   
