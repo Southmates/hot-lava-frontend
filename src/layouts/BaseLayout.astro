@@ -11,10 +11,12 @@ const {
   preloadImages = [] as string[],
 } = Astro.props;
 
+const ORG_NAME = 'Hot Lava Agency'
+const ORG_EMAIL = 'info@hotlavaagency.com'
 const siteUrl = Astro.site ?? new URL(Astro.url.origin);
-const canonicalUrl = new URL(canonical ?? Astro.url.pathname, siteUrl).toString();
+const canonicalPath = canonical ?? Astro.url.pathname ?? '/'
+const canonicalUrl = new URL(canonicalPath, siteUrl).toString()
 const ogImageUrl = new URL(image, siteUrl).toString();
-
 const orgId = new URL('#organization', siteUrl).toString();
 const websiteId = new URL('#website', siteUrl).toString();
 const webpageId = `${canonicalUrl}#webpage`;
@@ -24,11 +26,11 @@ const structuredData = [
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': orgId,
-    name: 'Hot Lava Agency',
+    name: ORG_NAME,
     url: siteUrl.toString(),
     description,
     logo: new URL('/logo.svg', siteUrl).toString(),
-    email: 'info@hotlavaagency.com',
+    email: ORG_EMAIL,
     sameAs: [
       'https://www.linkedin.com/company/hot-lava/',
       'https://www.instagram.com/hotlavaagency/',
@@ -39,7 +41,7 @@ const structuredData = [
       {
         '@type': 'ContactPoint',
         contactType: 'sales',
-        email: 'info@hotlavaagency.com',
+        email: ORG_EMAIL,
       },
     ],
   },
@@ -47,7 +49,7 @@ const structuredData = [
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     '@id': websiteId,
-    name: 'Hot Lava Agency',
+    name: ORG_NAME,
     url: siteUrl.toString(),
     publisher: { '@id': orgId },
   },
@@ -62,7 +64,8 @@ const structuredData = [
     about: { '@id': orgId },
     primaryImageOfPage: ogImageUrl,
   },
-];
+]
+
 ---
 
 <!DOCTYPE html>
@@ -106,12 +109,12 @@ const structuredData = [
     
     <!-- Preload critical images -->
     {preloadImages.map((href: string) => (
-      <link rel="preload" as="image" href={href} />
+      <link rel="preload" as="image" href={href} fetchpriority="high" />
     ))}
     
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     
-    {includeVimeo ? <script src="https://player.vimeo.com/api/player.js"></script> : null}
+    {includeVimeo ? <script src="https://player.vimeo.com/api/player.js" defer></script> : null}
   </head>
 
   <body class="main">
