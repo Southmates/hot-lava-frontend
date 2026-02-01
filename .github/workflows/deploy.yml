@@ -39,3 +39,4 @@ jobs:
           remote_user: ${{ secrets.SITEGROUND_USER }}
           remote_port: ${{ secrets.SITEGROUND_PORT }}
           remote_key: ${{ secrets.SITEGROUND_SSH_KEY }}
+          rsh: ssh -p ${{ secrets.SITEGROUND_PORT }}
