@@ -1,39 +1,39 @@
 # Hot Lava Agency — Frontend (Astro)
 
-Este repositorio contiene el **frontend** del sitio de Hot Lava Agency, construido con **Astro** y consumiendo contenido desde **Sanity** (headless CMS).
+This repository contains the **frontend** for the Hot Lava Agency website, built with **Astro** and consuming content from **Sanity** (headless CMS).
 
-El foco de este README es **desarrollo local y estructura del frontend** (no el modelado/operación editorial del CMS).
-
----
-
-## Requisitos
-
-- **Node.js**: recomendado LTS (p. ej. 20+)
-- **npm** (este repo incluye `package-lock.json`)
+The focus of this README is **local development and frontend structure** (not CMS modeling/editorial operations).
 
 ---
 
-## Primeros pasos (desarrollo local)
+## Requirements
 
-Instalar dependencias:
+- **Node.js**: LTS recommended (e.g. 20+)
+- **npm** (this repo includes `package-lock.json`)
+
+---
+
+## Getting started (local development)
+
+Install dependencies:
 
 ```bash
 npm ci
 ```
 
-Levantar el servidor de desarrollo:
+Start the dev server:
 
 ```bash
 npm run dev
 ```
 
-Build de producción (estático):
+Production build (static):
 
 ```bash
 npm run build
 ```
 
-Previsualizar el build:
+Preview the build:
 
 ```bash
 npm run preview
@@ -41,84 +41,84 @@ npm run preview
 
 ---
 
-## Stack (frontend)
+## Frontend stack
 
 - **Framework**: Astro (`astro@4`)
-- **Estilos**: SCSS (`sass`) vía Vite
-- **Animación**: GSAP (+ ScrollTrigger)
+- **Styling**: SCSS (`sass`) via Vite
+- **Animation**: GSAP (+ ScrollTrigger)
 - **UI/UX libs**: Swiper, Lenis, Ukiyo
 - **3D**: Three.js
-- **Contenido**: Sanity (headless, consumido desde el frontend)
+- **Content**: Sanity (headless, consumed by the frontend)
 
 ---
 
-## Estructura del proyecto
+## Project structure
 
 ```text
 /
 ├── .github/workflows/     # CI/CD (build + deploy)
-├── docs/                  # Documentación de arquitectura/deploy
-├── public/                # Assets estáticos no gestionados por CMS
+├── docs/                  # Architecture/deployment documentation
+├── public/                # Static assets not managed by the CMS
 └── src/
-    ├── pages/             # Rutas Astro (entrada principal: index.astro)
+    ├── pages/             # Astro routes (entry point: index.astro)
     ├── layouts/           # Layouts (SEO, OG, schema.org, canonical)
     ├── components/        # Componentes Astro
-    │   └── sections/      # Secciones del home (Hero/Intro/About/Work/Products)
-    ├── data/              # Capa de datos (queries/fetch a Sanity por dominio)
-    ├── lib/               # Integraciones (cliente Sanity, helpers)
-    ├── scripts/           # JS de comportamiento (GSAP/Three/efectos)
-    └── styles/            # SCSS (global.scss + parciales)
+    │   └── sections/      # Homepage sections (Hero/Intro/About/Work/Products)
+    ├── data/              # Data layer (Sanity queries/fetchers by domain)
+    ├── lib/               # Integrations (Sanity client, helpers)
+    ├── scripts/           # Client-side behavior (GSAP/Three/effects)
+    └── styles/            # SCSS (global.scss + partials)
 ```
 
-Alias de imports:
-- `@/*` apunta a `src/*` (ver `tsconfig.json`).
+Import alias:
+- `@/*` maps to `src/*` (see `tsconfig.json`).
 
 ---
 
-## Dónde tocar qué (guía rápida)
+## Where to change what (quick guide)
 
-- **Composición/render del home**: `src/pages/index.astro`
-- **Secciones**: `src/components/sections/*.astro`
+- **Homepage composition/rendering**: `src/pages/index.astro`
+- **Sections**: `src/components/sections/*.astro`
 - **Layout/SEO/canonical/OG/JSON-LD**: `src/layouts/BaseLayout.astro`
-- **Estilos globales**: `src/styles/global.scss`
-- **Animaciones/efectos**: `src/scripts/*` y `src/scripts/utils/*`
+- **Global styles**: `src/styles/global.scss`
+- **Animations/effects**: `src/scripts/*` and `src/scripts/utils/*`
 
 ---
 
-## Contenido (Sanity) en el frontend
+## Sanity content in the frontend
 
-El frontend consume contenido vía `@sanity/client`, configurado en `src/lib/sanity.ts`, y expone “fetchers” por dominio en `src/data/*`.
+The frontend consumes content via `@sanity/client`, configured in `src/lib/sanity.ts`, and exposes domain fetchers in `src/data/*`.
 
-Composición típica en `src/pages/index.astro`:
-- carga `siteSettings`, `hero`, `intro`, `team`, `works`, `products`
-- renderiza secciones con esos props
+Typical composition in `src/pages/index.astro`:
+- loads `siteSettings`, `hero`, `intro`, `team`, `works`, `products`
+- renders sections using those props
 
-Nota: hoy el `projectId/dataset` están definidos en código (ver `src/lib/sanity.ts`).  
-En CI existen secretos `SANITY_PROJECT_ID` y `SANITY_DATASET` (ver workflow) por si se quiere migrar a configuración por entorno.
+Note: today the `projectId/dataset` are defined in code (see `src/lib/sanity.ts`).  
+In CI there are secrets `SANITY_PROJECT_ID` and `SANITY_DATASET` (see the workflow) in case you want to migrate to environment-based configuration.
 
 ---
 
-## Deploy (resumen)
+## Deployment (summary)
 
-El deploy es **event-driven**: un publish en Sanity dispara un flujo que construye y despliega el build estático.
+Deployments are **event-driven**: publishing in Sanity triggers a flow that builds and deploys the static frontend.
 
-Documentación relevante:
+Relevant docs:
 - `docs/architecture-overview.md`
 - `docs/deployment-flow.md`
 - Workflow: `.github/workflows/deploy.yml`
 
 ---
 
-## Notas operativas / troubleshooting
+## Operational notes / troubleshooting
 
-- **Cache en hosting**: el hosting aplica cache a nivel HTML; tras un deploy puede requerirse **purga manual** en SiteGround para ver cambios inmediatamente (ver `docs/deployment-flow.md`).
-- **Assets**: assets “no-CMS” viven en `public/`. Media gestionada por Sanity se sirve desde el CDN de Sanity.
+- **Hosting cache**: the hosting environment applies HTML-level caching; after a deploy, **manual cache invalidation** in SiteGround may be required to see HTML changes immediately (see `docs/deployment-flow.md`).
+- **Assets**: non-CMS assets live in `public/`. Media managed via Sanity is served from Sanity’s CDN.
 
 ---
 
 ## License
 
-Proyecto privado — todos los derechos reservados.
+Private project — all rights reserved.
 
 ---
 
