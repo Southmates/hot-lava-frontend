@@ -1,114 +1,125 @@
-# Hot Lava Agency — Website
+# Hot Lava Agency — Frontend (Astro)
 
-This repository contains the official Hot Lava Agency website.
+Este repositorio contiene el **frontend** del sitio de Hot Lava Agency, construido con **Astro** y consumiendo contenido desde **Sanity** (headless CMS).
 
-The project is built with **Astro** and uses **Sanity** as a headless CMS, following a build-time content strategy and a fully automated deployment pipeline.
-
----
-
-## Core Principles
-
-* **Build-time only** content consumption (no runtime CMS dependency)
-* **CMS-driven editorial content**, code-driven infrastructure
-* **Global content lives in a singleton (`siteSettings`)**
-* **Each section owns its own content domain**
-* **Publish in Sanity = Production update**
-
-The CMS scope is intentionally limited to prevent SEO, performance, or infrastructure regressions.
+El foco de este README es **desarrollo local y estructura del frontend** (no el modelado/operación editorial del CMS).
 
 ---
 
-## Tech Stack
+## Requisitos
 
-* **Framework:** Astro
-* **CMS:** Sanity (headless)
-* **Hosting:** SiteGround (static)
-* **Automation:** GitHub Actions
-* **Content delivery:** Sanity CDN (assets)
+- **Node.js**: recomendado LTS (p. ej. 20+)
+- **npm** (este repo incluye `package-lock.json`)
 
 ---
 
-## Project Structure (High Level)
+## Primeros pasos (desarrollo local)
 
+Instalar dependencias:
+
+```bash
+npm ci
 ```
+
+Levantar el servidor de desarrollo:
+
+```bash
+npm run dev
+```
+
+Build de producción (estático):
+
+```bash
+npm run build
+```
+
+Previsualizar el build:
+
+```bash
+npm run preview
+```
+
+---
+
+## Stack (frontend)
+
+- **Framework**: Astro (`astro@4`)
+- **Estilos**: SCSS (`sass`) vía Vite
+- **Animación**: GSAP (+ ScrollTrigger)
+- **UI/UX libs**: Swiper, Lenis, Ukiyo
+- **3D**: Three.js
+- **Contenido**: Sanity (headless, consumido desde el frontend)
+
+---
+
+## Estructura del proyecto
+
+```text
 /
-├── docs/              # Architecture & decision documentation
-├── src/               # Astro source code
-├── public/            # Static assets
-├── sanity/            # Sanity Studio & schemas
-├── README.md
-└── package.json
+├── .github/workflows/     # CI/CD (build + deploy)
+├── docs/                  # Documentación de arquitectura/deploy
+├── public/                # Assets estáticos no gestionados por CMS
+└── src/
+    ├── pages/             # Rutas Astro (entrada principal: index.astro)
+    ├── layouts/           # Layouts (SEO, OG, schema.org, canonical)
+    ├── components/        # Componentes Astro
+    │   └── sections/      # Secciones del home (Hero/Intro/About/Work/Products)
+    ├── data/              # Capa de datos (queries/fetch a Sanity por dominio)
+    ├── lib/               # Integraciones (cliente Sanity, helpers)
+    ├── scripts/           # JS de comportamiento (GSAP/Three/efectos)
+    └── styles/            # SCSS (global.scss + parciales)
 ```
 
----
-
-## CMS Overview
-
-Sanity is used **only for editorial and brand content**.
-
-### Global Content
-
-Global, shared content lives in the `siteSettings` singleton:
-
-* Site title and tagline
-* Global SEO (meta title & description)
-* Footer title
-* Contact information
-* Social links
-
-### Section Content
-
-Each section (Intro, About, Work, Products, Team, etc.) owns its own schema and title.
-
-Titles are **not centralized**.
+Alias de imports:
+- `@/*` apunta a `src/*` (ver `tsconfig.json`).
 
 ---
 
-## SEO Strategy (Summary)
+## Dónde tocar qué (guía rápida)
 
-* Global SEO values are editable via CMS
-* Canonical logic, Open Graph configuration, robots directives, and structured data remain in code
-* Layout components never construct SEO content — they only render provided values
-
----
-
-## Deployment Flow
-
-Publishing content in Sanity automatically triggers a production deployment.
-
-High-level flow:
-
-```
-Sanity Publish → Webhook → CI Build → Deploy
-```
-
-No manual steps are required.
+- **Composición/render del home**: `src/pages/index.astro`
+- **Secciones**: `src/components/sections/*.astro`
+- **Layout/SEO/canonical/OG/JSON-LD**: `src/layouts/BaseLayout.astro`
+- **Estilos globales**: `src/styles/global.scss`
+- **Animaciones/efectos**: `src/scripts/*` y `src/scripts/utils/*`
 
 ---
 
-## Documentation
+## Contenido (Sanity) en el frontend
 
-Detailed architecture and decision documentation lives in `/docs`:
+El frontend consume contenido vía `@sanity/client`, configurado en `src/lib/sanity.ts`, y expone “fetchers” por dominio en `src/data/*`.
 
-* `architecture-overview.md`
-* `cms-architecture.md`  
-* `deployment-flow.md`
-* `decisions.md`
+Composición típica en `src/pages/index.astro`:
+- carga `siteSettings`, `hero`, `intro`, `team`, `works`, `products`
+- renderiza secciones con esos props
 
-These documents explain **why** the system is built this way.
-These documents define architectural rules and guardrails.
-Changes to CMS scope or SEO behavior should be reflected there.
+Nota: hoy el `projectId/dataset` están definidos en código (ver `src/lib/sanity.ts`).  
+En CI existen secretos `SANITY_PROJECT_ID` y `SANITY_DATASET` (ver workflow) por si se quiere migrar a configuración por entorno.
 
 ---
 
-## Notes
+## Deploy (resumen)
 
-Due to hosting-level dynamic caching, HTML updates may require manual cache invalidation in SiteGround to become immediately visible.
+El deploy es **event-driven**: un publish en Sanity dispara un flujo que construye y despliega el build estático.
 
-Infrastructure-level files (e.g. `llm.txt`, `robots.txt`) are intentionally **not managed via CMS** and are versioned in code.
+Documentación relevante:
+- `docs/architecture-overview.md`
+- `docs/deployment-flow.md`
+- Workflow: `.github/workflows/deploy.yml`
+
+---
+
+## Notas operativas / troubleshooting
+
+- **Cache en hosting**: el hosting aplica cache a nivel HTML; tras un deploy puede requerirse **purga manual** en SiteGround para ver cambios inmediatamente (ver `docs/deployment-flow.md`).
+- **Assets**: assets “no-CMS” viven en `public/`. Media gestionada por Sanity se sirve desde el CDN de Sanity.
 
 ---
 
 ## License
 
-Private project — all rights reserved.
+Proyecto privado — todos los derechos reservados.
+
+---
+
+ 
