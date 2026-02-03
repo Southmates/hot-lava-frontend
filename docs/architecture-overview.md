@@ -52,8 +52,7 @@ This file intentionally does not describe:
 
 Those topics are covered in:
 - `cms-architecture.md`
-- `deployment-flow.md`
-- `decisions.md`
+- `deployment-flow.md` 
 
 ---
 
