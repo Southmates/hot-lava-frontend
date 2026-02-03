@@ -1,11 +1,9 @@
 ---
-// About.astro 
+// About.astro
 import { urlFor } from '../../lib/sanity'
 
 interface SanityImage {
-  asset: {
-    _ref: string;
-  };
+  asset?: { _ref?: string };
 }
 
 type TeamImage = string | SanityImage;
@@ -13,7 +11,7 @@ type TeamImage = string | SanityImage;
 interface TeamMember {
   name: string;
   surname: string;
-  image: SanityImage;
+  image: TeamImage;
   bio: string;
 }
 
@@ -21,18 +19,21 @@ function resolveTeamImage(image: TeamImage): string {
   if (typeof image === 'string') {
     return image;
   }
-
   return urlFor(image).width(600).auto('format').url();
 }
 
-interface AboutIntro {
-  title: string;
-  // paragraph: string;
+interface AboutIntroTitle {
+  line1: string;
+  line2?: string | null;
 }
 
-interface Props { 
+interface AboutIntro {
+  title: string | AboutIntroTitle;
+}
+
+interface Props {
   intro?: AboutIntro;
-  team: TeamMember[]; 
+  team: TeamMember[];
   logo?: {
     src: string;
     alt: string;
@@ -40,32 +41,39 @@ interface Props {
   };
 }
 
-// Default data - will be replaced by CMS data
 const defaultIntro: AboutIntro = {
-  title: 'Who we are', 
+  title: 'Who we are',
 };
 
- 
 const defaultLogo = {
   src: '/logo-hot-lava-outline.svg',
   alt: 'Hot Lava',
   style: 'opacity: .25; filter: invert(1) saturate(10);',
 };
 
-const { 
-  intro = defaultIntro,
-  team,
-  logo = defaultLogo,
-} = Astro.props;
+const { intro = defaultIntro, team, logo = defaultLogo } = Astro.props;
+
+const titleText =
+  typeof intro.title === 'string'
+    ? intro.title
+    : intro.title?.line1 ?? defaultIntro.title as string;
+const titleLine2 =
+  typeof intro.title === 'object' ? intro.title?.line2 : null;
 
 ---
 
 <section id="about-us" class="about">
   <div class="wrapper">
-    <div class="container about__intro"> 
+    <div class="container about__intro">
       <h3 class="title">
-        <span class="asterisk">*</span>{intro.title}
-      </h3> 
+        <span class="asterisk">*</span>{titleText}
+        {titleLine2 && (
+          <>
+            <br />
+            {titleLine2}
+          </>
+        )}
+      </h3>
     </div> 
     
     <div class="container about__team">

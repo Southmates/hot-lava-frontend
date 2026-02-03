@@ -95,10 +95,17 @@ const sections = defaultConfig.sections.map((section, index) => {
 
   if (!cms) return section;
 
+  // section1 from CMS is a string; section2–4 are { title, paragraph }
+  const title =
+    typeof cms === 'string'
+      ? { line1: cms, line2: null as string | null }
+      : (cms.title ? { line1: cms.title.line1, line2: cms.title.line2 ?? null } : section.title);
+  const paragraph = typeof cms === 'string' ? section.paragraph : (cms.paragraph ?? section.paragraph);
+
   return {
     ...section,
-    title: cms.title ?? section.title,
-    paragraph: cms.paragraph ?? section.paragraph,
+    title,
+    paragraph,
   };
 });
 
